@@ -1,6 +1,6 @@
 
 import type { Metadata } from 'next';
-import { Space_Grotesk, Exo_2 } from 'next/font/google';
+import { Space_Grotesk, Exo_2, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import NavBar from '@/components/NavBar';
@@ -23,6 +23,12 @@ const exo2 = Exo_2({
   display: 'swap',
 });
 
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
   title: 'Zubair Murshid | Portfolio',
   description: 'Computer Science Undergraduate Portfolio',
@@ -34,7 +40,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className={cn(spaceGrotesk.variable, exo2.variable)}>
+    <html lang="en" suppressHydrationWarning className={cn(spaceGrotesk.variable, exo2.variable, jetbrainsMono.variable)}>
       <body className="bg-bg-primary text-text-primary antialiased font-sans transition-colors duration-300 min-h-screen flex flex-col selection:bg-accent-blue/30 selection:text-accent-blue">
         <ThemeProvider>
           <ScrollProgress />

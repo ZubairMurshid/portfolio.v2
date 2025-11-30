@@ -1,3 +1,8 @@
+
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Hero from '@/components/Hero';
 import AboutSnapshot from '@/components/AboutSnapshot';
 import VisualMap from '@/components/VisualMap';
@@ -15,7 +20,91 @@ const mainSkills = [
   { name: 'Teamwork', value: 90 }
 ];
 
+const loaderMessages = [
+  "Assembling pixels…",
+  "Convincing CSS to behave…",
+  "Bribing the layout engine…",
+  "Importing unnecessary dependencies…",
+  "Optimizing the part no one sees…",
+  "De-hardcoding hardcoded values…",
+  "Rebasing reality onto main…",
+  "Teaching JavaScript some manners…",
+  "Aligning divs (again)…",
+  "Running 'just one more' build…"
+];
+
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [progress, setProgress] = useState(0);
+  const [messageIndex, setMessageIndex] = useState(0);
+
+  useEffect(() => {
+    // Total loading time approx 8 seconds
+    const duration = 8000; 
+    const interval = 100; // Update every 100ms
+    const steps = duration / interval;
+    const increment = 100 / steps;
+    
+    // Change message every ~800ms
+    const messageIntervalTime = duration / loaderMessages.length;
+
+    let currentProgress = 0;
+    
+    const timer = setInterval(() => {
+      currentProgress += increment;
+      
+      if (currentProgress >= 100) {
+        currentProgress = 100;
+        clearInterval(timer);
+        setTimeout(() => setIsLoading(false), 500); // Small delay at 100%
+      }
+      
+      setProgress(currentProgress);
+      
+      // Calculate which message to show based on progress
+      const msgIdx = Math.min(
+        Math.floor((currentProgress / 100) * loaderMessages.length),
+        loaderMessages.length - 1
+      );
+      setMessageIndex(msgIdx);
+
+    }, interval);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="fixed inset-0 z-[9999] bg-bg-primary flex flex-col items-center justify-center font-mono text-text-primary">
+        <div className="w-full max-w-md px-6">
+          <motion.div 
+            key={messageIndex}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="h-8 mb-2 text-sm md:text-base text-accent-blue"
+          >
+            {loaderMessages[messageIndex]}
+          </motion.div>
+          
+          <div className="flex items-center gap-4">
+            <div className="flex-grow h-1 bg-bg-tertiary rounded-full overflow-hidden">
+              <motion.div 
+                className="h-full bg-accent-blue"
+                initial={{ width: 0 }}
+                animate={{ width: `${progress}%` }}
+                transition={{ ease: "linear", duration: 0.1 }}
+              />
+            </div>
+            <div className="w-12 text-right font-bold text-sm">
+              {Math.round(progress)}%
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="overflow-hidden">
       <Hero />

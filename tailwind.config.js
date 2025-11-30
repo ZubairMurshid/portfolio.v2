@@ -1,3 +1,4 @@
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -12,6 +13,7 @@ module.exports = {
       fontFamily: {
         sans: ['var(--font-space)', 'sans-serif'],
         display: ['var(--font-exo)', 'sans-serif'],
+        mono: ['var(--font-mono)', 'monospace'],
       },
       colors: {
         bg: {
