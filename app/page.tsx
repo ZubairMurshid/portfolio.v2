@@ -10,6 +10,7 @@ import ProjectSpotlight from '@/components/ProjectSpotlight';
 import RadarChart from '@/components/RadarChart';
 import GithubPulse from '@/components/GithubPulse';
 import BlogPreview from '@/components/BlogPreview';
+import { ReviewFeed } from '@/components/ReviewSystem';
 
 const mainSkills = [
   { name: 'Java', value: 85 },
@@ -152,6 +153,9 @@ export default function Home() {
         <GithubPulse />
         
         <BlogPreview />
+
+        {/* Review Feed - Just above footer */}
+        <ReviewFeed />
       </div>
     </div>
   );

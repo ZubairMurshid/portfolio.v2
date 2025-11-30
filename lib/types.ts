@@ -1,3 +1,4 @@
+
 export interface Project {
   slug: string;
   title: string;
@@ -33,4 +34,14 @@ export interface Education {
   description: string;
   modules?: { name: string; grade: string }[];
   simpleModules?: string[];
+}
+
+export interface Review {
+  id: string;
+  name: string;
+  profession: string;
+  rating: number; // 1-5
+  comment: string;
+  tags: string[];
+  date: string;
 }

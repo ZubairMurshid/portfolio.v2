@@ -1,3 +1,4 @@
+
 import React from 'react';
 import type { Metadata } from 'next';
 import { Space_Grotesk, Exo_2, JetBrains_Mono } from 'next/font/google';
@@ -8,6 +9,7 @@ import Footer from '@/components/Footer';
 import CustomCursor from '@/components/CustomCursor';
 import ScrollProgress from '@/components/ScrollProgress';
 import CommandPalette from '@/components/CommandPalette';
+import { ReviewFloatingButton } from '@/components/ReviewSystem';
 import { cn } from '@/lib/utils';
 
 // Configure fonts via Next.js optimization system
@@ -51,6 +53,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <ReviewFloatingButton />
         </ThemeProvider>
       </body>
     </html>
