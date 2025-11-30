@@ -13,7 +13,6 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>('dark');
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') as Theme;
@@ -23,8 +22,10 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
       setTheme('dark');
       document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      // Default fallback
+      document.documentElement.setAttribute('data-theme', 'dark');
     }
-    setMounted(true);
   }, []);
 
   const toggleTheme = () => {
@@ -33,10 +34,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem('theme', newTheme);
     document.documentElement.setAttribute('data-theme', newTheme);
   };
-
-  if (!mounted) {
-    return <>{children}</>;
-  }
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>

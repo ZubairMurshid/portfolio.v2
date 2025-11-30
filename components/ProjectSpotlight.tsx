@@ -4,9 +4,11 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
 
+const MotionDiv = motion.div as any;
+
 export default function ProjectSpotlight() {
   return (
-    <motion.div 
+    <MotionDiv 
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       className="relative rounded-3xl overflow-hidden border border-accent-blue/30 bg-bg-secondary/50 backdrop-blur-md p-8 md:p-12 my-20 group"
@@ -50,6 +52,6 @@ export default function ProjectSpotlight() {
              </div>
         </div>
       </div>
-    </motion.div>
+    </MotionDiv>
   );
 }

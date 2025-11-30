@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
+const MotionDiv = motion.div as any;
+
 const projects = [
   {
     slug: 'eventlk',
@@ -57,7 +59,7 @@ export default function ProjectsPage() {
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredProjects.map((project, i) => (
-          <motion.div
+          <MotionDiv
             key={project.slug}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -84,7 +86,7 @@ export default function ProjectsPage() {
             >
               View Details →
             </Link>
-          </motion.div>
+          </MotionDiv>
         ))}
       </div>
     </div>

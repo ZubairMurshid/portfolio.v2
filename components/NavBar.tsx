@@ -8,6 +8,8 @@ import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 import { cn } from '@/lib/utils';
 
+const MotionDiv = motion.div as any;
+
 const navLinks = [
   { name: 'Home', path: '/' },
   { name: 'About', path: '/about' },
@@ -22,8 +24,10 @@ export default function NavBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
@@ -58,7 +62,7 @@ export default function NavBar() {
             >
               {link.name}
               {pathname === link.path && (
-                <motion.div
+                <MotionDiv
                   layoutId="underline"
                   className="absolute left-0 right-0 -bottom-1 h-0.5 bg-accent-blue"
                 />
@@ -69,8 +73,13 @@ export default function NavBar() {
           <button
             onClick={toggleTheme}
             className="p-2 rounded-full border border-accent-blue/30 hover:bg-accent-blue/10 transition-colors"
+            aria-label="Toggle theme"
           >
-            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            {mounted ? (
+              theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />
+            ) : (
+              <div className="w-[18px] h-[18px]" /> // Placeholder to prevent layout shift
+            )}
           </button>
         </div>
 
@@ -80,7 +89,11 @@ export default function NavBar() {
             onClick={toggleTheme}
             className="p-2 rounded-full border border-accent-blue/30"
           >
-            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            {mounted ? (
+               theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />
+            ) : (
+               <div className="w-[18px] h-[18px]" />
+            )}
           </button>
           <button onClick={() => setMobileMenuOpen(true)}>
             <Menu size={24} />
@@ -91,7 +104,7 @@ export default function NavBar() {
       {/* Mobile Drawer */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
+          <MotionDiv
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
@@ -119,7 +132,7 @@ export default function NavBar() {
                 </Link>
               ))}
             </div>
-          </motion.div>
+          </MotionDiv>
         )}
       </AnimatePresence>
     </nav>

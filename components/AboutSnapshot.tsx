@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion';
 
+const MotionDiv = motion.div as any;
+
 const cards = [
   { title: "Current Role", content: "CS Undergraduate @ IIT" },
   { title: "Building", content: "EventLK Platform" },
@@ -13,7 +15,7 @@ export default function AboutSnapshot() {
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 my-12">
       {cards.map((card, i) => (
-        <motion.div
+        <MotionDiv
           key={i}
           initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -22,7 +24,7 @@ export default function AboutSnapshot() {
         >
           <div className="text-text-muted text-xs uppercase tracking-wider mb-2">{card.title}</div>
           <div className="font-bold text-accent-blue font-display">{card.content}</div>
-        </motion.div>
+        </MotionDiv>
       ))}
     </div>
   );
