@@ -1,4 +1,4 @@
-
+import React from 'react';
 import type { Metadata } from 'next';
 import { Space_Grotesk, Exo_2, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
