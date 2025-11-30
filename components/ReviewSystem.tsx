@@ -1,7 +1,7 @@
 
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, X, MessageSquarePlus, User, Briefcase, Send, ThumbsUp } from 'lucide-react';
 import { Review } from '@/lib/types';
@@ -34,7 +34,7 @@ export function ReviewFloatingButton() {
       >
         <button
           onClick={() => setIsOpen(true)}
-          className="p-4 rounded-full bg-bg-secondary/80 backdrop-blur-md border border-yellow-500/30 text-yellow-500 shadow-lg hover:shadow-[0_0_20px_rgba(234,179,8,0.3)] transition-all group"
+          className="p-3 rounded-full bg-bg-secondary/80 backdrop-blur-md border border-yellow-500/20 text-yellow-500 shadow-lg hover:border-yellow-500 hover:shadow-[0_0_15px_rgba(234,179,8,0.3)] transition-all group"
           aria-label="Rate my website"
         >
           <Star className="w-6 h-6 fill-current group-hover:rotate-12 transition-transform" />
@@ -47,7 +47,6 @@ export function ReviewFloatingButton() {
 }
 
 export function ReviewModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
-  const [step, setStep] = useState(1);
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [comment, setComment] = useState('');
@@ -98,7 +97,6 @@ export function ReviewModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
   useEffect(() => {
     if (!isOpen) {
       setTimeout(() => {
-        setStep(1);
         setRating(0);
         setComment('');
         setName('');
@@ -136,26 +134,31 @@ export function ReviewModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
 
               <form onSubmit={handleSubmit}>
                 {/* Star Rating Section */}
-                <div className="flex justify-center gap-2 mb-8">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <button
-                      key={star}
-                      type="button"
-                      onMouseEnter={() => setHoverRating(star)}
-                      onMouseLeave={() => setHoverRating(0)}
-                      onClick={() => setRating(star)}
-                      className="p-1 transition-transform hover:scale-110 focus:outline-none"
-                    >
-                      <Star 
-                        size={32} 
-                        className={`transition-colors ${
-                          star <= (hoverRating || rating) 
-                            ? 'fill-yellow-500 text-yellow-500' 
-                            : 'text-text-muted/30'
-                        }`} 
-                      />
-                    </button>
-                  ))}
+                <div className="flex flex-col items-center mb-6">
+                  <div className="flex justify-center gap-2">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <button
+                        key={star}
+                        type="button"
+                        onMouseEnter={() => setHoverRating(star)}
+                        onMouseLeave={() => setHoverRating(0)}
+                        onClick={() => setRating(star)}
+                        className="p-1 transition-transform hover:scale-110 focus:outline-none"
+                      >
+                        <Star 
+                          size={32} 
+                          className={`transition-colors ${
+                            star <= (hoverRating || rating) 
+                              ? 'fill-yellow-500 text-yellow-500' 
+                              : 'text-text-muted/30'
+                          }`} 
+                        />
+                      </button>
+                    ))}
+                  </div>
+                  <p className="text-xs text-text-muted mt-2 font-medium opacity-70">
+                    Doesn't require sign-in :)
+                  </p>
                 </div>
 
                 {rating > 0 && (
@@ -193,8 +196,7 @@ export function ReviewModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
                       <textarea
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
-                        placeholder="Share your thoughts..."
-                        required
+                        placeholder="Share your thoughts... (Optional)"
                         rows={comment.length > 50 ? 4 : 2}
                         className="w-full pl-10 pr-4 py-3 bg-bg-tertiary rounded-xl border border-white/10 focus:border-yellow-500/50 outline-none resize-none transition-all"
                       />
@@ -227,7 +229,7 @@ export function ReviewModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
 
                     <button
                       type="submit"
-                      disabled={isSubmitting || !comment || !name}
+                      disabled={isSubmitting || !name}
                       className="w-full py-3 bg-yellow-500 text-black font-bold rounded-xl hover:bg-yellow-400 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? 'Publishing...' : <><Send size={18} /> Publish Review</>}
@@ -259,11 +261,36 @@ export function ReviewFeed() {
 
   if (loading) return null;
 
+  const totalReviews = reviews.length;
+  const averageRating = totalReviews > 0 
+    ? (reviews.reduce((acc, r) => acc + r.rating, 0) / totalReviews).toFixed(1)
+    : "0.0";
+
   return (
     <section className="py-20 border-t border-white/5">
-      <div className="flex items-center gap-3 mb-12 justify-center">
-        <ThumbsUp className="text-yellow-500" size={28} />
-        <h2 className="text-3xl font-display font-bold">What People Say</h2>
+      <div className="flex flex-col items-center gap-4 mb-12 justify-center text-center">
+        <div className="flex items-center gap-2">
+           <ThumbsUp className="text-yellow-500" size={28} />
+           <h2 className="text-3xl font-display font-bold">Feedback</h2>
+        </div>
+        
+        {totalReviews > 0 && (
+          <div className="glass-panel px-6 py-2 rounded-full border-yellow-500/20 flex items-center gap-3">
+             <span className="text-2xl font-bold text-yellow-500">{averageRating}</span>
+             <div className="flex gap-0.5">
+                  {[...Array(5)].map((_, i) => (
+                    <Star 
+                      key={i} 
+                      size={14} 
+                      className={i < Math.round(Number(averageRating)) ? "fill-yellow-500 text-yellow-500" : "text-bg-tertiary"} 
+                    />
+                  ))}
+             </div>
+             <span className="text-text-muted text-sm border-l border-white/10 pl-3">
+               {totalReviews} review{totalReviews !== 1 ? 's' : ''}
+             </span>
+          </div>
+        )}
       </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -291,7 +318,9 @@ export function ReviewFeed() {
               </div>
             </div>
 
-            <p className="text-text-secondary mb-4 italic">"{review.comment}"</p>
+            {review.comment && (
+              <p className="text-text-secondary mb-4 italic">"{review.comment}"</p>
+            )}
 
             <div className="flex flex-wrap gap-2">
               {review.tags.map(tag => (

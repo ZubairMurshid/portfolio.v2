@@ -3,7 +3,6 @@ import { NextResponse } from 'next/server';
 import { Review } from '@/lib/types';
 
 // In-memory storage for demonstration (resets on server restart)
-// In a real app, you would use a database like MongoDB or PostgreSQL
 let reviews: Review[] = [
   {
     id: '1',
@@ -34,7 +33,8 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { name, profession, rating, comment, tags } = body;
 
-    if (!name || !rating || !comment) {
+    // Comment is now optional
+    if (!name || !rating) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
@@ -43,7 +43,7 @@ export async function POST(request: Request) {
       name,
       profession: profession || 'Visitor',
       rating,
-      comment,
+      comment: comment || '', // Allow empty comments
       tags: tags || [],
       date: new Date().toISOString(),
     };
