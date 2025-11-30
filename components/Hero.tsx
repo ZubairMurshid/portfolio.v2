@@ -1,3 +1,4 @@
+
 'use client';
 
 import React from 'react';
@@ -15,8 +16,9 @@ export default function Hero() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4">
       <ParticleCanvas />
       
-      <div className="container mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <div className="lg:col-span-10 lg:col-start-2 text-center">
+      <div className="container mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center h-full">
+        {/* Main Content - Centered (Spans 10 cols) */}
+        <div className="lg:col-span-10 lg:col-start-2 text-center pt-20">
           
           <MotionDiv 
             initial={{ opacity: 0, y: 20 }}
@@ -66,18 +68,19 @@ export default function Hero() {
           </MotionDiv>
         </div>
 
-        {/* Vertical Socials (Desktop) - Moved Up */}
+        {/* Vertical Socials (Desktop) - Placed in the 12th column for proper alignment */}
         <MotionDiv 
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.8 }}
-          className="hidden lg:flex flex-col gap-6 absolute right-0 top-[40%] -translate-y-1/2"
+          className="hidden lg:flex flex-col gap-6 justify-center items-center h-full absolute right-6 top-0 bottom-0"
         >
-          <SocialLink href="https://github.com/ZubairMurshid" icon={<Github />} />
-          <SocialLink href="https://linkedin.com/in/itszubairmurshid" icon={<Linkedin />} />
-          <SocialLink href="mailto:zubairmurshid@icloud.com" icon={<Mail />} />
-          <SocialLink href="#" icon={<Globe />} />
-          <div className="h-24 w-px bg-accent-blue/30 mx-auto mt-4" />
+          <div className="h-full flex flex-col justify-center gap-6">
+            <SocialLink href="https://github.com/ZubairMurshid" icon={<Github size={20} />} />
+            <SocialLink href="https://linkedin.com/in/itszubairmurshid" icon={<Linkedin size={20} />} />
+            <SocialLink href="mailto:zubairmurshid@icloud.com" icon={<Mail size={20} />} />
+            <SocialLink href="#" icon={<Globe size={20} />} />
+          </div>
         </MotionDiv>
       </div>
 
@@ -85,10 +88,10 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-text-muted text-sm animate-bounce"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-text-muted text-xs animate-bounce"
       >
-        <div className="w-px h-10 bg-gradient-to-b from-accent-blue to-transparent" />
         <span>Scroll</span>
+        <div className="w-px h-8 bg-gradient-to-b from-accent-blue to-transparent" />
       </MotionDiv>
     </section>
   );
@@ -100,7 +103,7 @@ function SocialLink({ href, icon }: { href: string; icon: React.ReactNode }) {
       href={href} 
       target="_blank" 
       rel="noopener noreferrer"
-      className="p-3 rounded-full bg-bg-secondary/50 border border-accent-blue/20 hover:border-accent-blue hover:text-accent-blue hover:shadow-neon transition-all"
+      className="p-3 rounded-full bg-bg-secondary/80 border border-accent-blue/20 hover:border-accent-blue hover:text-accent-blue hover:shadow-neon transition-all"
     >
       {icon}
     </a>
