@@ -167,6 +167,31 @@ export function ReviewModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
                     animate={{ opacity: 1, height: 'auto' }}
                     className="space-y-4"
                   >
+                    {/* User Info - Moved to Top */}
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="relative">
+                        <User className="absolute top-3 left-3 text-text-muted" size={18} />
+                        <input
+                          type="text"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                          placeholder="Name"
+                          required
+                          className="w-full pl-10 pr-4 py-3 bg-bg-tertiary rounded-xl border border-white/10 focus:border-yellow-500/50 outline-none transition-all"
+                        />
+                      </div>
+                      <div className="relative">
+                        <Briefcase className="absolute top-3 left-3 text-text-muted" size={18} />
+                        <input
+                          type="text"
+                          value={profession}
+                          onChange={(e) => setProfession(e.target.value)}
+                          placeholder="Profession"
+                          className="w-full pl-10 pr-4 py-3 bg-bg-tertiary rounded-xl border border-white/10 focus:border-yellow-500/50 outline-none transition-all"
+                        />
+                      </div>
+                    </div>
+
                     {/* What did you like tags */}
                     <div>
                       <label className="text-xs font-bold text-text-muted uppercase tracking-wider mb-2 block">
@@ -200,31 +225,6 @@ export function ReviewModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
                         rows={comment.length > 50 ? 4 : 2}
                         className="w-full pl-10 pr-4 py-3 bg-bg-tertiary rounded-xl border border-white/10 focus:border-yellow-500/50 outline-none resize-none transition-all"
                       />
-                    </div>
-
-                    {/* User Info */}
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="relative">
-                        <User className="absolute top-3 left-3 text-text-muted" size={18} />
-                        <input
-                          type="text"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                          placeholder="Name"
-                          required
-                          className="w-full pl-10 pr-4 py-3 bg-bg-tertiary rounded-xl border border-white/10 focus:border-yellow-500/50 outline-none transition-all"
-                        />
-                      </div>
-                      <div className="relative">
-                        <Briefcase className="absolute top-3 left-3 text-text-muted" size={18} />
-                        <input
-                          type="text"
-                          value={profession}
-                          onChange={(e) => setProfession(e.target.value)}
-                          placeholder="Profession"
-                          className="w-full pl-10 pr-4 py-3 bg-bg-tertiary rounded-xl border border-white/10 focus:border-yellow-500/50 outline-none transition-all"
-                        />
-                      </div>
                     </div>
 
                     <button
@@ -265,6 +265,9 @@ export function ReviewFeed() {
   const averageRating = totalReviews > 0 
     ? (reviews.reduce((acc, r) => acc + r.rating, 0) / totalReviews).toFixed(1)
     : "0.0";
+  
+  // Filter reviews to only show those with comments for the display feed
+  const commentedReviews = reviews.filter(r => r.comment && r.comment.trim().length > 0);
 
   return (
     <section className="py-20 border-t border-white/5">
@@ -294,7 +297,7 @@ export function ReviewFeed() {
       </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {reviews.slice(0, 3).map((review, i) => (
+        {commentedReviews.slice(0, 3).map((review, i) => (
           <MotionDiv
             key={review.id}
             initial={{ opacity: 0, y: 20 }}
@@ -318,9 +321,7 @@ export function ReviewFeed() {
               </div>
             </div>
 
-            {review.comment && (
-              <p className="text-text-secondary mb-4 italic">"{review.comment}"</p>
-            )}
+            <p className="text-text-secondary mb-4 italic">"{review.comment}"</p>
 
             <div className="flex flex-wrap gap-2">
               {review.tags.map(tag => (
