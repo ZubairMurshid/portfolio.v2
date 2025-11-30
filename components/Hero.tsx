@@ -66,12 +66,12 @@ export default function Hero() {
           </MotionDiv>
         </div>
 
-        {/* Vertical Socials (Desktop) */}
+        {/* Vertical Socials (Desktop) - Moved Up */}
         <MotionDiv 
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.8 }}
-          className="hidden lg:flex flex-col gap-6 absolute right-0 top-1/2 -translate-y-1/2"
+          className="hidden lg:flex flex-col gap-6 absolute right-0 top-[40%] -translate-y-1/2"
         >
           <SocialLink href="https://github.com/ZubairMurshid" icon={<Github />} />
           <SocialLink href="https://linkedin.com/in/itszubairmurshid" icon={<Linkedin />} />

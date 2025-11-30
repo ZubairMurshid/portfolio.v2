@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Github, Linkedin, Mail, Twitter } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -9,6 +10,13 @@ export default function Footer() {
         <div className="text-center md:text-left">
           <h3 className="text-2xl font-display font-bold mb-1">ZUBAIR MURSHID</h3>
           <p className="text-text-muted">Computer Science Undergraduate</p>
+        </div>
+
+        <div className="flex items-center gap-4">
+            <SocialIcon href="https://github.com/ZubairMurshid" icon={<Github size={20} />} />
+            <SocialIcon href="https://linkedin.com/in/itszubairmurshid" icon={<Linkedin size={20} />} />
+            <SocialIcon href="mailto:zubairmurshid@icloud.com" icon={<Mail size={20} />} />
+            <SocialIcon href="https://x.com/zubairmurshid_" icon={<Twitter size={20} />} />
         </div>
 
         <Link 
@@ -24,5 +32,18 @@ export default function Footer() {
         &copy; {new Date().getFullYear()} Zubair Murshid. Built with Next.js & Tailwind.
       </div>
     </footer>
+  );
+}
+
+function SocialIcon({ href, icon }: { href: string; icon: React.ReactNode }) {
+  return (
+    <a 
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="p-2 text-text-muted hover:text-accent-blue transition-colors hover:scale-110 transform"
+    >
+      {icon}
+    </a>
   );
 }

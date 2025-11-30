@@ -3,7 +3,6 @@ import { Space_Grotesk, Exo_2 } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import NavBar from '@/components/NavBar';
-import ContactDock from '@/components/ContactDock';
 import Footer from '@/components/Footer';
 import { cn } from '@/lib/utils';
 
@@ -38,7 +37,6 @@ export default function RootLayout({
           <main className="flex-grow">
             {children}
           </main>
-          <ContactDock />
           <Footer />
         </ThemeProvider>
       </body>

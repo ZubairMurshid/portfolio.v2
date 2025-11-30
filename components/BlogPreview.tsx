@@ -13,7 +13,8 @@ const posts = [
     excerpt: 'Deep dive into how artificial intelligence is transforming event planning and management systems through predictive analytics.',
     date: 'Upcoming',
     readTime: '5 min read',
-    category: 'AI & Tech'
+    category: 'AI & Tech',
+    image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=800'
   },
   {
     slug: 'security-best-practices',
@@ -21,7 +22,8 @@ const posts = [
     excerpt: 'Essential security principles every developer should implement in their applications to prevent common vulnerabilities.',
     date: 'Upcoming',
     readTime: '8 min read',
-    category: 'Security'
+    category: 'Security',
+    image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&q=80&w=800'
   },
   {
     slug: 'student-developer-journey',
@@ -29,7 +31,8 @@ const posts = [
     excerpt: 'Lessons learned, challenges overcome, and insights gained during my computer science journey at IIT.',
     date: 'Upcoming',
     readTime: '6 min read',
-    category: 'Career'
+    category: 'Career',
+    image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800'
   }
 ];
 
@@ -55,9 +58,14 @@ export default function BlogPreview() {
             transition={{ delay: i * 0.1 }}
             className="group"
           >
-            <div className="aspect-[16/9] mb-6 rounded-2xl bg-gradient-to-br from-bg-tertiary to-bg-secondary border border-white/5 overflow-hidden relative">
-              <div className="absolute inset-0 bg-accent-blue/5 group-hover:bg-accent-blue/10 transition-colors" />
-              <div className="absolute top-4 left-4 px-3 py-1 bg-bg-primary/80 backdrop-blur rounded-full text-xs font-bold border border-white/10">
+            <div className="aspect-[16/9] mb-6 rounded-2xl border border-white/5 overflow-hidden relative">
+              <img 
+                src={post.image} 
+                alt={post.title}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-accent-blue/10 group-hover:bg-accent-blue/0 transition-colors" />
+              <div className="absolute top-4 left-4 px-3 py-1 bg-bg-primary/80 backdrop-blur rounded-full text-xs font-bold border border-white/10 z-10">
                 {post.category}
               </div>
             </div>
