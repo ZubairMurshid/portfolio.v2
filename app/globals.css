@@ -3,29 +3,36 @@
 @tailwind utilities;
 
 :root {
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8fafc;
-  --bg-tertiary: #f1f5f9;
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #64748b;
-  --accent-blue: #0ea5e9;
-  --accent-dark-blue: #0369a1;
-  --accent-navy: #1e3a8a;
-  --neon-glow: 0 0 20px rgba(14, 165, 233, 0.3);
+  /* RGB Channels for Tailwind Opacity Support */
+  --bg-primary: 255 255 255;     /* #ffffff */
+  --bg-secondary: 248 250 252;   /* #f8fafc */
+  --bg-tertiary: 241 245 249;    /* #f1f5f9 */
+  
+  --text-primary: 15 23 42;      /* #0f172a */
+  --text-secondary: 71 85 105;   /* #475569 */
+  --text-muted: 100 116 139;     /* #64748b */
+  
+  --accent-blue: 14 165 233;     /* #0ea5e9 */
+  --accent-dark-blue: 3 105 161; /* #0369a1 */
+  --accent-navy: 30 58 138;      /* #1e3a8a */
+  
+  --neon-glow: 0 0 20px rgb(14 165 233 / 0.3);
 }
 
 [data-theme="dark"] {
-  --bg-primary: #0d1117;
-  --bg-secondary: #161b22;
-  --bg-tertiary: #1f2937;
-  --text-primary: #f8fafc;
-  --text-secondary: #cbd5e1;
-  --text-muted: #94a3b8;
-  --accent-blue: #0ea5e9;
-  --accent-dark-blue: #0369a1;
-  --accent-navy: #1e3a8a;
-  --neon-glow: 0 0 30px rgba(14, 165, 233, 0.5);
+  --bg-primary: 13 17 23;        /* #0d1117 */
+  --bg-secondary: 22 27 34;      /* #161b22 */
+  --bg-tertiary: 31 41 55;       /* #1f2937 */
+  
+  --text-primary: 248 250 252;   /* #f8fafc */
+  --text-secondary: 203 213 225; /* #cbd5e1 */
+  --text-muted: 148 163 184;     /* #94a3b8 */
+  
+  --accent-blue: 14 165 233;     /* #0ea5e9 */
+  --accent-dark-blue: 3 105 161; /* #0369a1 */
+  --accent-navy: 30 58 138;      /* #1e3a8a */
+  
+  --neon-glow: 0 0 30px rgb(14 165 233 / 0.5);
 }
 
 @layer base {

@@ -4,31 +4,30 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/**/*.{js,ts,jsx,tsx,mdx}', // Safety fallback
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   darkMode: ['class', '[data-theme="dark"]'],
   theme: {
     extend: {
       fontFamily: {
-        // Map to variables defined in app/layout.tsx
         sans: ['var(--font-space)', 'sans-serif'],
         display: ['var(--font-exo)', 'sans-serif'],
       },
       colors: {
         bg: {
-          primary: 'var(--bg-primary)',
-          secondary: 'var(--bg-secondary)',
-          tertiary: 'var(--bg-tertiary)',
+          primary: 'rgb(var(--bg-primary) / <alpha-value>)',
+          secondary: 'rgb(var(--bg-secondary) / <alpha-value>)',
+          tertiary: 'rgb(var(--bg-tertiary) / <alpha-value>)',
         },
         text: {
-          primary: 'var(--text-primary)',
-          secondary: 'var(--text-secondary)',
-          muted: 'var(--text-muted)',
+          primary: 'rgb(var(--text-primary) / <alpha-value>)',
+          secondary: 'rgb(var(--text-secondary) / <alpha-value>)',
+          muted: 'rgb(var(--text-muted) / <alpha-value>)',
         },
         accent: {
-          blue: 'var(--accent-blue)',
-          darkBlue: 'var(--accent-dark-blue)',
-          navy: 'var(--accent-navy)',
+          blue: 'rgb(var(--accent-blue) / <alpha-value>)',
+          darkBlue: 'rgb(var(--accent-dark-blue) / <alpha-value>)',
+          navy: 'rgb(var(--accent-navy) / <alpha-value>)',
         },
       },
       boxShadow: {
@@ -42,4 +41,10 @@ module.exports = {
     },
   },
   plugins: [],
+  safelist: [
+    'from-blue-500', 'to-cyan-500',
+    'from-emerald-500', 'to-teal-500',
+    'from-violet-500', 'to-purple-500',
+    'group-hover:opacity-10'
+  ]
 };
