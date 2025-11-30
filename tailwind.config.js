@@ -2,14 +2,17 @@
 module.exports = {
   content: [
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/**/*.{js,ts,jsx,tsx,mdx}', // Safety fallback
   ],
   darkMode: ['class', '[data-theme="dark"]'],
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Space Grotesk"', 'sans-serif'],
-        display: ['"Exo 2"', 'sans-serif'],
+        // Map to variables defined in app/layout.tsx
+        sans: ['var(--font-space)', 'sans-serif'],
+        display: ['var(--font-exo)', 'sans-serif'],
       },
       colors: {
         bg: {

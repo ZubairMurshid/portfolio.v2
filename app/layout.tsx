@@ -1,9 +1,24 @@
 import type { Metadata } from 'next';
+import { Space_Grotesk, Exo_2 } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import NavBar from '@/components/NavBar';
 import ContactDock from '@/components/ContactDock';
 import Footer from '@/components/Footer';
+import { cn } from '@/lib/utils';
+
+// Configure fonts via Next.js optimization system
+const spaceGrotesk = Space_Grotesk({ 
+  subsets: ['latin'],
+  variable: '--font-space',
+  display: 'swap',
+});
+
+const exo2 = Exo_2({ 
+  subsets: ['latin'],
+  variable: '--font-exo',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'Zubair Murshid | Portfolio',
@@ -16,11 +31,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body>
+    <html lang="en" suppressHydrationWarning className={cn(spaceGrotesk.variable, exo2.variable)}>
+      <body className="bg-bg-primary text-text-primary antialiased font-sans transition-colors duration-300 min-h-screen flex flex-col">
         <ThemeProvider>
           <NavBar />
-          <main className="min-h-screen">
+          <main className="flex-grow">
             {children}
           </main>
           <ContactDock />

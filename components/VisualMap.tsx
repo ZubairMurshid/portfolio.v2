@@ -12,21 +12,24 @@ const nodes = [
     title: 'Software Dev',
     icon: <Code size={32} />,
     desc: 'Java, Python, OOP',
-    color: 'from-blue-500 to-cyan-500',
+    gradientClass: 'from-blue-500 to-cyan-500',
+    hoverBgClass: 'group-hover:opacity-10'
   },
   {
     id: 'sec',
     title: 'Cybersecurity',
     icon: <Shield size={32} />,
     desc: 'Network Security, Ethical Hacking',
-    color: 'from-emerald-500 to-teal-500',
+    gradientClass: 'from-emerald-500 to-teal-500',
+    hoverBgClass: 'group-hover:opacity-10'
   },
   {
     id: 'web',
     title: 'Web Engineering',
     icon: <Globe size={32} />,
     desc: 'Next.js, React, Tailwind',
-    color: 'from-violet-500 to-purple-500',
+    gradientClass: 'from-violet-500 to-purple-500',
+    hoverBgClass: 'group-hover:opacity-10'
   },
 ];
 
@@ -44,10 +47,11 @@ export default function VisualMap() {
             onMouseEnter={() => setActiveNode(node.id)}
             onMouseLeave={() => setActiveNode(null)}
           >
-            <div className={`absolute inset-0 opacity-0 group-hover:opacity-10 bg-gradient-to-br ${node.color} transition-opacity duration-300`} />
+            {/* Explicitly using style for dynamic gradients if classes fail, but classes are preferred */}
+            <div className={`absolute inset-0 opacity-0 ${node.hoverBgClass} bg-gradient-to-br ${node.gradientClass} transition-opacity duration-300`} />
             
             <div className="flex flex-col items-center text-center relative z-10">
-              <div className={`p-4 rounded-full bg-gradient-to-br ${node.color} text-white mb-4 shadow-lg`}>
+              <div className={`p-4 rounded-full bg-gradient-to-br ${node.gradientClass} text-white mb-4 shadow-lg`}>
                 {node.icon}
               </div>
               <h3 className="text-xl font-bold font-display mb-2">{node.title}</h3>
