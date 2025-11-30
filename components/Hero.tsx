@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail, Globe } from 'lucide-react';
 import ParticleCanvas from './ParticleCanvas';
+import GlitchText from './GlitchText';
 
 const MotionDiv = motion.div as any;
 const MotionH1 = motion.h1 as any;
@@ -35,7 +36,7 @@ export default function Hero() {
             transition={{ delay: 0.2, duration: 0.8 }}
             className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-6"
           >
-            ZUBAIR <span className="gradient-text">MURSHID</span>
+            ZUBAIR <GlitchText text="MURSHID" />
           </MotionH1>
 
           <MotionP 
@@ -73,9 +74,9 @@ export default function Hero() {
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.8 }}
-          className="hidden lg:flex flex-col gap-6 justify-center items-center h-full absolute right-6 top-0 bottom-0"
+          className="hidden lg:grid grid-rows-1 place-items-center h-full absolute right-6 top-0 bottom-0"
         >
-          <div className="h-full flex flex-col justify-center gap-6">
+          <div className="flex flex-col justify-center gap-6 p-4 rounded-full bg-bg-primary/30 backdrop-blur-sm border border-white/5">
             <SocialLink href="https://github.com/ZubairMurshid" icon={<Github size={20} />} />
             <SocialLink href="https://linkedin.com/in/itszubairmurshid" icon={<Linkedin size={20} />} />
             <SocialLink href="mailto:zubairmurshid@icloud.com" icon={<Mail size={20} />} />

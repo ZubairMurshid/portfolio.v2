@@ -5,6 +5,9 @@ import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
+import CustomCursor from '@/components/CustomCursor';
+import ScrollProgress from '@/components/ScrollProgress';
+import CommandPalette from '@/components/CommandPalette';
 import { cn } from '@/lib/utils';
 
 // Configure fonts via Next.js optimization system
@@ -32,8 +35,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning className={cn(spaceGrotesk.variable, exo2.variable)}>
-      <body className="bg-bg-primary text-text-primary antialiased font-sans transition-colors duration-300 min-h-screen flex flex-col">
+      <body className="bg-bg-primary text-text-primary antialiased font-sans transition-colors duration-300 min-h-screen flex flex-col selection:bg-accent-blue/30 selection:text-accent-blue">
         <ThemeProvider>
+          <ScrollProgress />
+          <CustomCursor />
+          <CommandPalette />
           <NavBar />
           <main className="flex-grow">
             {children}
