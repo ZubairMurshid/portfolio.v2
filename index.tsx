@@ -1,1 +1,0 @@
-// This file should be deleted. Next.js uses app/page.tsx
