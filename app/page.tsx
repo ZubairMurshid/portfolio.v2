@@ -3,6 +3,8 @@ import AboutSnapshot from '@/components/AboutSnapshot';
 import VisualMap from '@/components/VisualMap';
 import ProjectSpotlight from '@/components/ProjectSpotlight';
 import RadarChart from '@/components/RadarChart';
+import GithubPulse from '@/components/GithubPulse';
+import BlogPreview from '@/components/BlogPreview';
 
 const mainSkills = [
   { name: 'Java', value: 85 },
@@ -46,6 +48,10 @@ export default function Home() {
             <RadarChart skills={mainSkills} />
           </div>
         </section>
+
+        <GithubPulse />
+        
+        <BlogPreview />
       </div>
     </div>
   );
