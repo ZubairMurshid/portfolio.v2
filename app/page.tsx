@@ -39,15 +39,20 @@ export default function Home() {
   const [messageIndex, setMessageIndex] = useState(0);
 
   useEffect(() => {
-    // Total loading time approx 8 seconds
-    const duration = 8000; 
-    const interval = 100; // Update every 100ms
+    // Check if user has already seen the splash screen in this session
+    const hasSeenSplash = sessionStorage.getItem('hasSeenSplash');
+    
+    if (hasSeenSplash) {
+      setIsLoading(false);
+      return;
+    }
+
+    // Faster loading time (2.5 seconds)
+    const duration = 2500; 
+    const interval = 50; // Update faster for smoother animation
     const steps = duration / interval;
     const increment = 100 / steps;
     
-    // Change message every ~800ms
-    const messageIntervalTime = duration / loaderMessages.length;
-
     let currentProgress = 0;
     
     const timer = setInterval(() => {
@@ -56,12 +61,17 @@ export default function Home() {
       if (currentProgress >= 100) {
         currentProgress = 100;
         clearInterval(timer);
+        
+        // Mark as seen in session storage
+        sessionStorage.setItem('hasSeenSplash', 'true');
+        
         setTimeout(() => setIsLoading(false), 500); // Small delay at 100%
       }
       
       setProgress(currentProgress);
       
       // Calculate which message to show based on progress
+      // Cycle through messages faster given the shorter duration
       const msgIdx = Math.min(
         Math.floor((currentProgress / 100) * loaderMessages.length),
         loaderMessages.length - 1
@@ -82,7 +92,8 @@ export default function Home() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="h-8 mb-2 text-sm md:text-base text-accent-blue"
+            transition={{ duration: 0.2 }}
+            className="h-8 mb-2 text-sm md:text-base text-accent-blue font-bold"
           >
             {loaderMessages[messageIndex]}
           </motion.div>
