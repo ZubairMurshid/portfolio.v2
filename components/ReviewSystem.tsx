@@ -3,7 +3,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, X, MessageSquarePlus, User, Briefcase, Send, ThumbsUp } from 'lucide-react';
+import { Star, X, MessageSquarePlus, User, Briefcase, Send, ThumbsUp, PenLine } from 'lucide-react';
 import { Review } from '@/lib/types';
 
 const MotionDiv = motion.div as any;
@@ -50,6 +50,8 @@ export function ReviewFloatingButton({ className, isNav = false }: ReviewFloatin
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isNav]);
 
+  // Force hidden on mobile if not isNav (which is no longer used for mobile nav)
+  // This effectively makes the floating button Desktop Only
   const containerClass = className || "fixed bottom-6 right-6 z-50 hidden md:block";
 
   return (
@@ -57,7 +59,7 @@ export function ReviewFloatingButton({ className, isNav = false }: ReviewFloatin
       <div className={isNav ? "relative" : containerClass}>
         {/* Smart CTA Tooltip */}
         <AnimatePresence>
-          {showCTA && !isOpen && (
+          {showCTA && !isOpen && !isNav && (
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -294,6 +296,7 @@ export function ReviewModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
 export function ReviewFeed() {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     fetch('/api/reviews')
@@ -318,7 +321,7 @@ export function ReviewFeed() {
 
   return (
     <section className="py-20 border-t border-white/5">
-      <div className="flex flex-col items-center gap-4 mb-12 justify-center text-center">
+      <div className="flex flex-col items-center gap-6 mb-12 justify-center text-center">
         <div className="flex items-center gap-2">
            <ThumbsUp className="text-yellow-500" size={28} />
            <h2 className="text-3xl font-display font-bold">Feedback</h2>
@@ -341,6 +344,15 @@ export function ReviewFeed() {
              </span>
           </div>
         )}
+
+        {/* CTA Button in Section */}
+        <button 
+          onClick={() => setIsModalOpen(true)}
+          className="flex items-center gap-2 px-5 py-2.5 bg-yellow-500/10 text-yellow-500 border border-yellow-500/30 rounded-full hover:bg-yellow-500 hover:text-black transition-all font-semibold"
+        >
+          <PenLine size={18} />
+          Write a Review
+        </button>
       </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -380,6 +392,8 @@ export function ReviewFeed() {
           </MotionDiv>
         ))}
       </div>
+
+      <ReviewModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   );
 }

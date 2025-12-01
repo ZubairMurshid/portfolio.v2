@@ -8,7 +8,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Sun, Moon, Home, User, Book, Code, Briefcase, Mail, FileText, Menu, X } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 import { cn } from '@/lib/utils';
-import { ReviewFloatingButton } from './ReviewSystem';
 
 const MotionDiv = motion.div as any;
 
@@ -88,14 +87,11 @@ export default function NavBar() {
             </button>
           </div>
 
-          {/* Mobile Theme Toggle & Review Button (Top Right) */}
+          {/* Mobile Theme Toggle (Top Right) */}
           <div className="md:hidden flex items-center gap-3">
-            {/* Show review button only on mobile in navbar (isNav=true) */}
-            <ReviewFloatingButton isNav={true} />
-            
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full border border-accent-blue/30"
+              className="p-2 rounded-full border border-accent-blue/30 bg-bg-primary/50 backdrop-blur-sm"
             >
               {mounted ? (
                  theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />
@@ -157,7 +153,7 @@ export default function NavBar() {
                     href={link.path}
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      'flex flex-col items-center justify-center gap-1 px-4 py-2 rounded-xl transition-all whitespace-nowrap min-w-[60px]',
+                      'flex flex-col items-center justify-center gap-1 px-3 py-1 rounded-xl transition-all whitespace-nowrap min-w-[50px]',
                       pathname === link.path 
                         ? 'bg-accent-blue/10 text-accent-blue' 
                         : 'text-text-secondary hover:text-text-primary'
