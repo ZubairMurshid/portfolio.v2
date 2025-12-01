@@ -30,7 +30,8 @@ export function ReviewFloatingButton() {
         animate={{ scale: 1 }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        className="fixed bottom-6 right-6 z-50"
+        // Mobile: Bottom Left | Desktop: Bottom Right
+        className="fixed bottom-6 left-6 md:left-auto md:right-6 z-50"
       >
         <button
           onClick={() => setIsOpen(true)}
