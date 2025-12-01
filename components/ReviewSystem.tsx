@@ -157,7 +157,7 @@ export function ReviewModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
                     ))}
                   </div>
                   <p className="text-xs text-text-muted mt-2 font-medium opacity-70">
-                    Doesn't require sign-in :)
+                    Takes less than a minute.. Doesn't require sign-in :)
                   </p>
                 </div>
 
