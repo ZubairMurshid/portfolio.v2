@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -7,17 +8,18 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Sun, Moon, Home, User, Book, Code, Briefcase, Mail, FileText, Menu, X } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 import { cn } from '@/lib/utils';
+import { ReviewFloatingButton } from './ReviewSystem';
 
 const MotionDiv = motion.div as any;
 
 const navLinks = [
-  { name: 'Home', path: '/', icon: <Home size={18} /> },
-  { name: 'About', path: '/about', icon: <User size={18} /> },
-  { name: 'Skills', path: '/skills', icon: <Book size={18} /> },
-  { name: 'Projects', path: '/projects', icon: <Code size={18} /> },
-  { name: 'Exp', path: '/experience', icon: <Briefcase size={18} /> },
-  { name: 'Blog', path: '/blog', icon: <FileText size={18} /> },
-  { name: 'Contact', path: '/contact', icon: <Mail size={18} /> },
+  { name: 'Home', path: '/', icon: <Home size={20} /> },
+  { name: 'About', path: '/about', icon: <User size={20} /> },
+  { name: 'Skills', path: '/skills', icon: <Book size={20} /> },
+  { name: 'Projects', path: '/projects', icon: <Code size={20} /> },
+  { name: 'Exp', path: '/experience', icon: <Briefcase size={20} /> },
+  { name: 'Blog', path: '/blog', icon: <FileText size={20} /> },
+  { name: 'Contact', path: '/contact', icon: <Mail size={20} /> },
 ];
 
 export default function NavBar() {
@@ -86,8 +88,11 @@ export default function NavBar() {
             </button>
           </div>
 
-          {/* Mobile Theme Toggle (Top Right) */}
-          <div className="md:hidden">
+          {/* Mobile Theme Toggle & Review Button (Top Right) */}
+          <div className="md:hidden flex items-center gap-3">
+            {/* Show relative review button only on mobile in navbar */}
+            <ReviewFloatingButton className="relative block md:hidden" isNav={true} />
+            
             <button
               onClick={toggleTheme}
               className="p-2 rounded-full border border-accent-blue/30"
@@ -110,8 +115,6 @@ export default function NavBar() {
           className="w-14 h-14 rounded-full bg-bg-secondary/80 backdrop-blur-xl border border-white/10 shadow-lg flex items-center justify-center text-accent-blue transition-all active:scale-95 z-50 overflow-hidden relative"
           style={{ boxShadow: '0 0 20px rgba(14, 165, 233, 0.2)' }}
         >
-          {/* We use relative positioning and layoutId to ensure smooth morphing if needed, 
-              but AnimatePresence with rotation is simpler and effective */}
           <AnimatePresence mode="wait">
             {isOpen ? (
               <motion.div
@@ -145,7 +148,7 @@ export default function NavBar() {
               animate={{ width: 'auto', opacity: 1, x: 0 }}
               exit={{ width: 0, opacity: 0, x: 20 }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className="h-14 bg-bg-secondary/90 backdrop-blur-xl border border-white/10 rounded-full shadow-xl flex items-center px-2 overflow-hidden max-w-[calc(100vw-6rem)]"
+              className="h-20 bg-bg-secondary/90 backdrop-blur-xl border border-white/10 rounded-2xl shadow-xl flex items-center px-2 overflow-hidden max-w-[calc(100vw-6rem)]"
             >
               <div className="flex items-center gap-1 min-w-max px-2 overflow-x-auto no-scrollbar">
                 {navLinks.map((link) => (
@@ -154,14 +157,14 @@ export default function NavBar() {
                     href={link.path}
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      'flex items-center gap-2 px-3 py-2 rounded-full transition-all whitespace-nowrap',
+                      'flex flex-col items-center justify-center gap-1 px-4 py-2 rounded-xl transition-all whitespace-nowrap min-w-[60px]',
                       pathname === link.path 
                         ? 'bg-accent-blue/10 text-accent-blue' 
                         : 'text-text-secondary hover:text-text-primary'
                     )}
                   >
                     {link.icon}
-                    <span className="text-xs font-medium">{link.name}</span>
+                    <span className="text-[10px] font-medium">{link.name}</span>
                   </Link>
                 ))}
               </div>

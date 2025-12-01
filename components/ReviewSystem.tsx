@@ -20,8 +20,17 @@ const toSentenceCase = (str: string) => {
   return str;
 };
 
-export function ReviewFloatingButton() {
+interface ReviewFloatingButtonProps {
+  className?: string;
+  isNav?: boolean;
+}
+
+export function ReviewFloatingButton({ className, isNav = false }: ReviewFloatingButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
+
+  // Default to desktop fixed position if no class provided
+  // Hidden on mobile by default because we render a specific one in the Navbar for mobile
+  const containerClass = className || "fixed bottom-6 right-6 z-50 hidden md:block";
 
   return (
     <>
@@ -30,15 +39,18 @@ export function ReviewFloatingButton() {
         animate={{ scale: 1 }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        // Mobile: Bottom Left | Desktop: Bottom Right
-        className="fixed bottom-6 left-6 md:left-auto md:right-6 z-50"
+        className={containerClass}
       >
         <button
           onClick={() => setIsOpen(true)}
-          className="p-3 rounded-full bg-bg-secondary/80 backdrop-blur-md border border-yellow-500/20 text-yellow-500 shadow-lg hover:border-yellow-500 hover:shadow-[0_0_15px_rgba(234,179,8,0.3)] transition-all group"
+          className={
+            isNav 
+            ? "p-2 rounded-full border border-yellow-500/30 text-yellow-500 hover:bg-yellow-500/10 transition-colors"
+            : "p-3 rounded-full bg-bg-secondary/80 backdrop-blur-md border border-yellow-500/20 text-yellow-500 shadow-lg hover:border-yellow-500 hover:shadow-[0_0_15px_rgba(234,179,8,0.3)] transition-all group"
+          }
           aria-label="Rate my website"
         >
-          <Star className="w-6 h-6 fill-current group-hover:rotate-12 transition-transform" />
+          <Star className={isNav ? "w-[18px] h-[18px]" : "w-6 h-6 fill-current group-hover:rotate-12 transition-transform"} />
         </button>
       </MotionDiv>
 
@@ -79,7 +91,6 @@ export function ReviewModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
       setTimeout(() => {
         setIsSubmitting(false);
         onClose();
-        // Trigger a refresh of the feed if possible, or reload page
         window.location.reload(); 
       }, 1000);
     } catch (error) {
@@ -94,7 +105,6 @@ export function ReviewModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
     );
   };
 
-  // Reset form when closed
   useEffect(() => {
     if (!isOpen) {
       setTimeout(() => {
