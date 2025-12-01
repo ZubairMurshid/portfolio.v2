@@ -52,17 +52,17 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
             <Link 
               href="/contact" 
-              className="px-8 py-3 bg-gradient-to-r from-accent-blue to-accent-dark-blue text-white rounded-full font-semibold shadow-lg shadow-accent-blue/25 hover:shadow-neon hover:-translate-y-1 transition-all"
+              className="px-6 py-2.5 min-w-[140px] text-sm bg-gradient-to-r from-accent-blue to-accent-dark-blue text-white rounded-full font-semibold shadow-lg shadow-accent-blue/25 hover:shadow-neon hover:-translate-y-1 transition-all text-center"
             >
               Get In Touch
             </Link>
             <Link 
               href="/projects" 
-              className="px-8 py-3 bg-transparent border-2 border-accent-blue text-accent-blue rounded-full font-semibold hover:bg-accent-blue hover:text-white transition-all hover:-translate-y-1"
+              className="px-6 py-2.5 min-w-[140px] text-sm bg-transparent border-2 border-accent-blue text-accent-blue rounded-full font-semibold hover:bg-accent-blue hover:text-white transition-all hover:-translate-y-1 text-center"
             >
               View Projects
             </Link>
