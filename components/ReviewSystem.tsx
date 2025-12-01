@@ -13,7 +13,6 @@ const TAG_OPTIONS = ['Design', 'Content', 'Performance', 'Creativity', 'Usabilit
 // Helper to convert to sentence case
 const toSentenceCase = (str: string) => {
   if (!str) return str;
-  // If string is all lowercase, capitalize first letter
   if (str === str.toLowerCase()) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
@@ -27,32 +26,69 @@ interface ReviewFloatingButtonProps {
 
 export function ReviewFloatingButton({ className, isNav = false }: ReviewFloatingButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [showCTA, setShowCTA] = useState(false);
 
-  // Default to desktop fixed position if no class provided
-  // Hidden on mobile by default because we render a specific one in the Navbar for mobile
+  // Scroll detection for CTA
+  useEffect(() => {
+    if (isNav) return; // Don't show CTA for the nav button variant
+
+    const handleScroll = () => {
+      // Show when near bottom of page
+      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 500) {
+        // Only show if not already seen in this session (optional, but good UX)
+        if (!sessionStorage.getItem('seenReviewCTA')) {
+          setShowCTA(true);
+          sessionStorage.setItem('seenReviewCTA', 'true');
+          
+          // Auto hide after 8 seconds
+          setTimeout(() => setShowCTA(false), 8000);
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isNav]);
+
   const containerClass = className || "fixed bottom-6 right-6 z-50 hidden md:block";
 
   return (
     <>
-      <MotionDiv
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        className={containerClass}
-      >
-        <button
-          onClick={() => setIsOpen(true)}
-          className={
-            isNav 
-            ? "p-2 rounded-full border border-yellow-500/30 text-yellow-500 hover:bg-yellow-500/10 transition-colors"
-            : "p-3 rounded-full bg-bg-secondary/80 backdrop-blur-md border border-yellow-500/20 text-yellow-500 shadow-lg hover:border-yellow-500 hover:shadow-[0_0_15px_rgba(234,179,8,0.3)] transition-all group"
-          }
-          aria-label="Rate my website"
+      <div className={isNav ? "relative" : containerClass}>
+        {/* Smart CTA Tooltip */}
+        <AnimatePresence>
+          {showCTA && !isOpen && (
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 10 }}
+              className="absolute right-full mr-4 top-1/2 -translate-y-1/2 whitespace-nowrap bg-bg-secondary border border-accent-blue/30 px-3 py-2 rounded-xl shadow-xl text-xs font-bold flex items-center gap-2 pointer-events-none"
+            >
+              <span>Enjoying the portfolio? ⭐</span>
+              <div className="absolute right-[-6px] top-1/2 -translate-y-1/2 w-3 h-3 bg-bg-secondary border-t border-r border-accent-blue/30 rotate-45 transform" />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <MotionDiv
+          initial={isNav ? {} : { scale: 0 }}
+          animate={isNav ? {} : { scale: 1 }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
         >
-          <Star className={isNav ? "w-[18px] h-[18px]" : "w-6 h-6 fill-current group-hover:rotate-12 transition-transform"} />
-        </button>
-      </MotionDiv>
+          <button
+            onClick={() => setIsOpen(true)}
+            className={
+              isNav 
+              ? "p-2 rounded-full border border-yellow-500/30 text-yellow-500 hover:bg-yellow-500/10 transition-colors relative"
+              : "p-3 rounded-full bg-bg-secondary/80 backdrop-blur-md border border-yellow-500/20 text-yellow-500 shadow-lg hover:border-yellow-500 hover:shadow-[0_0_15px_rgba(234,179,8,0.3)] transition-all group"
+            }
+            aria-label="Rate my website"
+          >
+            <Star className={isNav ? "w-[18px] h-[18px]" : "w-6 h-6 fill-current group-hover:rotate-12 transition-transform"} />
+          </button>
+        </MotionDiv>
+      </div>
 
       <ReviewModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </>
@@ -87,7 +123,6 @@ export function ReviewModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
         }),
       });
       
-      // Reset and close
       setTimeout(() => {
         setIsSubmitting(false);
         onClose();
@@ -120,7 +155,7 @@ export function ReviewModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center px-4">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -133,7 +168,7 @@ export function ReviewModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="w-full max-w-md bg-bg-secondary border border-white/10 rounded-2xl shadow-2xl overflow-hidden relative z-10"
+            className="w-full max-w-md bg-bg-secondary border border-white/10 rounded-2xl shadow-2xl overflow-hidden relative z-10 max-h-[85vh] overflow-y-auto"
           >
             <div className="p-6">
               <div className="flex justify-between items-center mb-6">
@@ -168,7 +203,7 @@ export function ReviewModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
                     ))}
                   </div>
                   <p className="text-xs text-text-muted mt-2 font-medium opacity-70">
-                    Takes less than a minute.. Doesn't require sign-in :)
+                    Doesn't require sign-in :)
                   </p>
                 </div>
 
@@ -178,7 +213,7 @@ export function ReviewModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
                     animate={{ opacity: 1, height: 'auto' }}
                     className="space-y-4"
                   >
-                    {/* User Info - Moved to Top */}
+                    {/* User Info Inputs (Moved to Top) */}
                     <div className="grid grid-cols-2 gap-4">
                       <div className="relative">
                         <User className="absolute top-3 left-3 text-text-muted" size={18} />
@@ -272,12 +307,13 @@ export function ReviewFeed() {
 
   if (loading) return null;
 
+  // Calculate stats based on ALL reviews
   const totalReviews = reviews.length;
   const averageRating = totalReviews > 0 
     ? (reviews.reduce((acc, r) => acc + r.rating, 0) / totalReviews).toFixed(1)
     : "0.0";
   
-  // Filter reviews to only show those with comments for the display feed
+  // Display only commented reviews in the feed
   const commentedReviews = reviews.filter(r => r.comment && r.comment.trim().length > 0);
 
   return (

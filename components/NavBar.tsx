@@ -90,8 +90,8 @@ export default function NavBar() {
 
           {/* Mobile Theme Toggle & Review Button (Top Right) */}
           <div className="md:hidden flex items-center gap-3">
-            {/* Show relative review button only on mobile in navbar */}
-            <ReviewFloatingButton className="relative block md:hidden" isNav={true} />
+            {/* Show review button only on mobile in navbar (isNav=true) */}
+            <ReviewFloatingButton isNav={true} />
             
             <button
               onClick={toggleTheme}
