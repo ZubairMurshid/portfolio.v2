@@ -6,7 +6,7 @@ import { Review } from '@/lib/types';
 let reviews: Review[] = [
   {
     id: '1',
-    name: 'Sarah Jenkins',
+    name: 'Abdullah Farhan',
     profession: 'UX Designer',
     rating: 5,
     comment: 'The particle effects are absolutely stunning. Smooth navigation too!',
@@ -15,7 +15,7 @@ let reviews: Review[] = [
   },
   {
     id: '2',
-    name: 'Dev Mike',
+    name: 'Sahan Liyanage',
     profession: 'Frontend Engineer',
     rating: 5,
     comment: 'Clean code structure and amazing use of Framer Motion.',
