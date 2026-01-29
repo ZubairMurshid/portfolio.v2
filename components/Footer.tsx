@@ -13,7 +13,7 @@ export default function Footer() {
           
           {/* Brand - Left */}
           <div className="text-center md:text-left">
-            <h3 className="text-xl font-display font-bold">ZUBAIR MURSHID</h3>
+            <h3 className="text-xl font-display font-bold">Zubair Murshid</h3>
             <p className="text-xs text-text-muted">Built with Next.js & Tailwind</p>
           </div>
 

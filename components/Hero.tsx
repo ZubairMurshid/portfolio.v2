@@ -37,7 +37,7 @@ export default function Hero() {
             transition={{ delay: 0.2, duration: 1, ease: "easeOut" }}
             className="font-sans text-5xl md:text-8xl lg:text-9xl font-extrabold leading-tight mb-8 tracking-tighter"
           >
-            ZUBAIR <GlitchText text="MURSHID" />
+            Zubair <GlitchText text="Murshid" />
           </MotionH1>
 
           <MotionP 
