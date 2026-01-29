@@ -5,8 +5,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sun, Moon, Home, User, Book, Code, Briefcase, Mail, FileText, Menu, X, Map } from 'lucide-react';
-import { useTheme } from './ThemeProvider';
+import { Home, User, Book, Code, Briefcase, Mail, FileText, Menu, X, Map } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 // Fix: Using 'as any' to suppress motion property type errors
@@ -27,7 +26,6 @@ const navLinks = [
 export default function NavBar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const { theme, toggleTheme } = useTheme();
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
 
@@ -43,7 +41,6 @@ export default function NavBar() {
   return (
     <>
       <div className="hidden md:flex fixed top-8 left-0 right-0 justify-center z-50 pointer-events-none">
-        {/* Fix: Replaced motion.nav with MotionNav */}
         <MotionNav
           initial={{ y: -100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -88,25 +85,12 @@ export default function NavBar() {
           </ul>
 
           <div className="w-[1px] h-5 bg-white/10 mx-2" />
-
-          <button
-            onClick={toggleTheme}
-            className="p-2.5 rounded-full hover:bg-white/5 transition-colors relative mr-1"
-            aria-label="Toggle theme"
-          >
-            {mounted ? (
-              /* Fix: Replaced motion.div with MotionDiv */
-              <MotionDiv
-                key={theme}
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1 }}
-              >
-                {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
-              </MotionDiv>
-            ) : (
-              <div className="w-[16px] h-[16px]" />
-            )}
-          </button>
+          
+          <div className="pr-4">
+            <span className="text-[10px] font-mono text-text-muted uppercase tracking-[0.2em] font-bold opacity-40">
+              V1.2
+            </span>
+          </div>
         </MotionNav>
       </div>
 
@@ -118,16 +102,6 @@ export default function NavBar() {
         >
           Z<span className="text-white">M</span>
         </Link>
-        <button
-          onClick={toggleTheme}
-          className="p-3.5 rounded-2xl bg-bg-secondary/80 backdrop-blur-xl border border-white/10 shadow-chrome"
-        >
-          {mounted ? (
-             theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />
-          ) : (
-             <div className="w-5 h-5" />
-          )}
-        </button>
       </div>
 
       <div className="md:hidden fixed bottom-6 right-6 z-50">
@@ -142,7 +116,6 @@ export default function NavBar() {
         
         <AnimatePresence>
           {isOpen && (
-            /* Fix: Replaced motion.div with MotionDiv */
             <MotionDiv
               initial={{ opacity: 0, y: 20, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
