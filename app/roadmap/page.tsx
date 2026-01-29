@@ -2,9 +2,10 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useScroll, useSpring, useTransform, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, Circle, ChevronDown, Rocket, ShieldCheck, Cpu } from 'lucide-react';
+import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion';
+import { CheckCircle2, Circle, ChevronDown, Rocket, ShieldCheck, Cpu, Lock, Clock } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import RoadmapAuthModal from '@/components/RoadmapAuthModal';
 
 const MotionDiv = motion.div as any;
 const MotionPath = motion.path as any;
@@ -39,7 +40,9 @@ const roadmapNodes: RoadmapNode[] = [
 
 export default function RoadmapPage() {
   const [completedNodes, setCompletedNodes] = useState<Set<string>>(new Set());
+  const [ongoingNodes, setOngoingNodes] = useState<Set<string>>(new Set());
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -54,10 +57,11 @@ export default function RoadmapPage() {
   });
 
   useEffect(() => {
-    const saved = localStorage.getItem('completedRoadmapNodes');
-    if (saved) {
-      setCompletedNodes(new Set(JSON.parse(saved)));
-    }
+    const savedCompleted = localStorage.getItem('completedRoadmapNodes');
+    if (savedCompleted) setCompletedNodes(new Set(JSON.parse(savedCompleted)));
+
+    const savedOngoing = localStorage.getItem('ongoingRoadmapNodes');
+    if (savedOngoing) setOngoingNodes(new Set(JSON.parse(savedOngoing)));
 
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
@@ -66,18 +70,10 @@ export default function RoadmapPage() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  const toggleNode = (id: string) => {
-    const newSet = new Set(completedNodes);
-    if (newSet.has(id)) newSet.delete(id);
-    else newSet.add(id);
-    setCompletedNodes(newSet);
-    localStorage.setItem('completedRoadmapNodes', JSON.stringify(Array.from(newSet)));
-  };
-
   // SVG Path parameters
-  const heightPerNode = 220; // Increased spacing for visibility
+  const heightPerNode = 220;
   const totalHeight = roadmapNodes.length * heightPerNode + 200;
-  const curveWidth = 140; // Wider curve
+  const curveWidth = 140;
   const startY = 100;
 
   const generatePath = () => {
@@ -94,6 +90,17 @@ export default function RoadmapPage() {
 
   return (
     <div className="bg-[#020204] min-h-screen text-[#F8F9FA] relative" ref={containerRef}>
+      {/* Admin Login Button */}
+      <button 
+        onClick={() => setIsAuthOpen(true)}
+        className="fixed top-8 right-8 z-[60] p-3 rounded-full bg-white/5 border border-white/10 text-white/40 hover:text-white hover:border-white/30 transition-all backdrop-blur-md"
+      >
+        <Lock size={18} />
+      </button>
+
+      {/* Auth Modal */}
+      <RoadmapAuthModal isOpen={isAuthOpen} onClose={() => setIsAuthOpen(false)} />
+
       {/* Spotlight Effect */}
       <div 
         className="fixed inset-0 pointer-events-none z-10 transition-opacity duration-500"
@@ -129,7 +136,6 @@ export default function RoadmapPage() {
             viewBox={`0 0 100 ${totalHeight}`}
             preserveAspectRatio="none"
           >
-            {/* Background Path (Dotted) */}
             <path
               d={generatePath()}
               fill="none"
@@ -137,7 +143,6 @@ export default function RoadmapPage() {
               strokeWidth="2"
               strokeDasharray="4 8"
             />
-            {/* Progress Path */}
             <MotionPath
               d={generatePath()}
               fill="none"
@@ -152,11 +157,11 @@ export default function RoadmapPage() {
           <div className="relative z-10">
             {roadmapNodes.map((node, i) => {
               const isCompleted = completedNodes.has(node.id);
+              const isOngoing = ongoingNodes.has(node.id);
               const isRight = i % 2 === 0;
 
               return (
                 <div key={node.id} className="relative h-[220px] flex items-center justify-center">
-                  {/* Category Indicator */}
                   {(i === 0 || roadmapNodes[i - 1]?.category !== node.category) && (
                     <div className="absolute -top-16 left-1/2 -translate-x-1/2 flex flex-col items-center">
                       <div className="text-[10px] font-mono uppercase tracking-[0.5em] text-white/60 whitespace-nowrap bg-white/5 px-6 py-1.5 border border-white/10 rounded-full mb-3 backdrop-blur-md">
@@ -166,45 +171,45 @@ export default function RoadmapPage() {
                     </div>
                   )}
 
-                  {/* Node Button and Label */}
                   <div className="flex items-center gap-12 w-full max-w-2xl">
-                    {/* Left Side Label (for even nodes) */}
                     {!isRight && (
                       <div className="flex-1 text-right pr-4">
-                        <NodeLabel node={node} index={i} isCompleted={isCompleted} alignment="right" />
+                        <NodeLabel node={node} index={i} isCompleted={isCompleted} isOngoing={isOngoing} alignment="right" />
                       </div>
                     )}
 
-                    {/* Node Pulse Center */}
                     <div className="relative shrink-0 flex justify-center w-12 h-12">
-                      <button
-                        onClick={() => toggleNode(node.id)}
+                      <div
                         className={cn(
-                          "w-12 h-12 rounded-full border-2 flex items-center justify-center transition-all duration-700 relative z-20 group",
+                          "w-12 h-12 rounded-full border-2 flex items-center justify-center transition-all duration-700 relative z-20 group cursor-default",
                           isCompleted 
                             ? "bg-white border-white shadow-[0_0_40px_rgba(255,255,255,0.5)] text-black" 
-                            : "bg-bg-secondary/60 border-white/20 text-white/40 hover:border-white/60"
+                            : isOngoing
+                              ? "bg-accent-blue border-accent-blue shadow-[0_0_40px_rgba(14,165,233,0.3)] text-white"
+                              : "bg-bg-secondary/60 border-white/20 text-white/40"
                         )}
                       >
-                        {isCompleted ? <CheckCircle2 size={24} /> : <Circle size={20} className="group-hover:scale-110 transition-transform" />}
+                        {isCompleted ? <CheckCircle2 size={24} /> : isOngoing ? <Clock size={20} className="animate-pulse" /> : <Circle size={20} />}
                         
                         <AnimatePresence>
-                          {isCompleted && (
+                          {(isCompleted || isOngoing) && (
                             <MotionDiv
                               initial={{ scale: 0.8, opacity: 0 }}
                               animate={{ scale: 1.6, opacity: 1 }}
                               exit={{ scale: 0.8, opacity: 0 }}
-                              className="absolute inset-0 bg-white/10 rounded-full -z-10 blur-2xl"
+                              className={cn(
+                                "absolute inset-0 rounded-full -z-10 blur-2xl",
+                                isCompleted ? "bg-white/10" : "bg-accent-blue/20"
+                              )}
                             />
                           )}
                         </AnimatePresence>
-                      </button>
+                      </div>
                     </div>
 
-                    {/* Right Side Label (for odd nodes) */}
                     {isRight && (
                       <div className="flex-1 text-left pl-4">
-                        <NodeLabel node={node} index={i} isCompleted={isCompleted} alignment="left" />
+                        <NodeLabel node={node} index={i} isCompleted={isCompleted} isOngoing={isOngoing} alignment="left" />
                       </div>
                     )}
                   </div>
@@ -214,7 +219,6 @@ export default function RoadmapPage() {
           </div>
         </div>
         
-        {/* Footer Message */}
         <div className="mt-40 text-center">
           <ChevronDown className="mx-auto text-white/10 animate-bounce mb-8" size={32} />
           <div className="inline-block px-12 py-6 bg-white/5 border border-white/10 text-white font-bold rounded-2xl shadow-chrome uppercase tracking-widest text-xs backdrop-blur-xl">
@@ -226,7 +230,7 @@ export default function RoadmapPage() {
   );
 }
 
-function NodeLabel({ node, index, isCompleted, alignment }: { node: RoadmapNode, index: number, isCompleted: boolean, alignment: 'left' | 'right' }) {
+function NodeLabel({ node, index, isCompleted, isOngoing, alignment }: { node: RoadmapNode, index: number, isCompleted: boolean, isOngoing: boolean, alignment: 'left' | 'right' }) {
   return (
     <motion.div 
       initial={{ opacity: 0, x: alignment === 'left' ? 20 : -20 }}
@@ -234,20 +238,26 @@ function NodeLabel({ node, index, isCompleted, alignment }: { node: RoadmapNode,
       viewport={{ once: true }}
       className={cn(
         "space-y-1.5 transition-all duration-500",
-        isCompleted ? "opacity-100" : "opacity-60"
+        (isCompleted || isOngoing) ? "opacity-100" : "opacity-40"
       )}
     >
-      <div className="font-mono text-[10px] uppercase tracking-widest text-accent-blue/60 font-bold">
-        Ref.{index.toString().padStart(2, '0')}
+      <div className={cn(
+        "font-mono text-[10px] uppercase tracking-widest font-bold",
+        isCompleted ? "text-white/60" : isOngoing ? "text-accent-blue" : "text-white/20"
+      )}>
+        Ref.{index.toString().padStart(2, '0')} {isOngoing && "// IN PROGRESS"}
       </div>
       <h4 className={cn(
         "text-xl md:text-2xl font-sans font-black tracking-tight",
-        isCompleted ? "text-white" : "text-white/40"
+        isCompleted ? "text-white" : isOngoing ? "text-accent-blue" : "text-white/40"
       )}>
         {node.label}
       </h4>
       {node.checkpoint && (
-        <div className="text-[11px] text-text-muted font-medium bg-white/5 inline-block px-3 py-1 rounded border border-white/5">
+        <div className={cn(
+          "text-[11px] font-medium bg-white/5 inline-block px-3 py-1 rounded border",
+          isOngoing ? "border-accent-blue/30 text-accent-blue/80" : "border-white/5 text-text-muted"
+        )}>
           {node.checkpoint}
         </div>
       )}
