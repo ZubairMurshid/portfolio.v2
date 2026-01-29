@@ -10,6 +10,7 @@ import ProjectSpotlight from '@/components/ProjectSpotlight';
 import RadarChart from '@/components/RadarChart';
 import GithubPulse from '@/components/GithubPulse';
 import BlogPreview from '@/components/BlogPreview';
+import LinkedInFeed from '@/components/LinkedInFeed';
 import { ReviewFeed } from '@/components/ReviewSystem';
 
 // Fix: Using 'as any' to suppress motion property type errors
@@ -156,6 +157,8 @@ export default function Home() {
         </section>
 
         <GithubPulse />
+
+        <LinkedInFeed />
         
         <BlogPreview />
 
