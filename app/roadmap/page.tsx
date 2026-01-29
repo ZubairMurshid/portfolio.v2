@@ -26,10 +26,10 @@ const roadmapNodes: RoadmapNode[] = [
   { id: 'tailwind', label: 'Tailwind CSS', checkpoint: 'Checkpoint - Frontend Apps', category: 'Frontend Foundations' },
   { id: 'nodejs', label: 'Node.js', checkpoint: 'Checkpoint - CLI Apps', category: 'Backend Development' },
   { id: 'postgres', label: 'PostgreSQL', checkpoint: 'Checkpoint - Simple CRUD Apps', category: 'Backend Development' },
-  { id: 'redis', label: 'Redis', category: 'Backend Development' },
-  { id: 'jwt', label: 'JWT Auth', category: 'Backend Development' },
+  { id: 'redis', label: 'Redis', checkpoint: 'In-memory data structure store, used as a database, cache, and message broker.', category: 'Backend Development' },
+  { id: 'jwt', label: 'JWT Auth', checkpoint: 'Securely transmitting information between parties as a JSON object.', category: 'Backend Development' },
   { id: 'rest', label: 'RESTful APIs', checkpoint: 'Checkpoint - Complete App', category: 'Backend Development' },
-  { id: 'linux', label: 'Linux Basics', category: 'DevOps & Cloud' },
+  { id: 'linux', label: 'Linux Basics', checkpoint: 'Command line proficiency, file permissions, and process management.', category: 'DevOps & Cloud' },
   { id: 'aws', label: 'AWS (S3, EC2, VPC)', checkpoint: 'Checkpoint - Deployment', category: 'DevOps & Cloud' },
   { id: 'terraform', label: 'Terraform', checkpoint: 'Checkpoint - Infrastructure', category: 'DevOps & Cloud' },
   { id: 'ansible', label: 'Ansible', checkpoint: 'Checkpoint - Automation', category: 'DevOps & Cloud' },
@@ -105,7 +105,7 @@ export default function RoadmapPage() {
         <div className="max-w-4xl mx-auto text-center mb-32">
           <div className="flex justify-center items-center gap-4 mb-4">
             <div className="w-12 h-[1px] bg-white/20" />
-            <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-[#64748B]">Execution Path v1.1</span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-[#64748B]">Execution Path v1.2</span>
             <div className="w-12 h-[1px] bg-white/20" />
           </div>
           <h1 className="text-5xl md:text-8xl font-sans font-extrabold mb-8 tracking-tighter">
@@ -116,15 +116,13 @@ export default function RoadmapPage() {
           </p>
           
           <div className="mt-12 flex justify-center gap-12">
-            {/* Fix: Replaced roadmapNodes.size with roadmapNodes.length as arrays use .length */}
             <Stat label="Completed" value={completedNodes.size} total={roadmapNodes.length} />
-            {/* Fix: Replaced roadmapNodes.size with roadmapNodes.length as arrays use .length */}
             <Stat label="Status" value={`${Math.round((completedNodes.size / roadmapNodes.length) * 100)}%`} subtitle="Mastery" />
           </div>
         </div>
 
         {/* Roadmap Path Container */}
-        <div className="relative mx-auto max-w-md">
+        <div className="relative mx-auto max-w-lg">
           <svg
             className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] h-full pointer-events-none overflow-visible"
             viewBox={`0 0 100 ${totalHeight}`}
@@ -154,7 +152,6 @@ export default function RoadmapPage() {
             {roadmapNodes.map((node, i) => {
               const isCompleted = completedNodes.has(node.id);
               const isRight = i % 2 === 0;
-              const nextNodeIsNewCategory = roadmapNodes[i + 1]?.category !== node.category;
 
               return (
                 <div key={node.id} className="relative h-[180px] flex items-center justify-center">
@@ -168,12 +165,14 @@ export default function RoadmapPage() {
                     </div>
                   )}
 
-                  {/* Node Pulse */}
-                  <div className="group relative">
+                  {/* Node pulse button and labels */}
+                  <div className="group relative flex items-center justify-center w-full max-w-[400px]">
+                    
+                    {/* Main Node Pulse Button */}
                     <button
                       onClick={() => toggleNode(node.id)}
                       className={cn(
-                        "w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-700 relative z-20",
+                        "w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-700 relative z-20 shrink-0",
                         isCompleted 
                           ? "bg-white border-white shadow-[0_0_30px_rgba(255,255,255,0.4)] text-black" 
                           : "bg-bg-secondary/40 border-white/10 text-white/40 hover:border-white/40"
@@ -194,22 +193,33 @@ export default function RoadmapPage() {
                       </AnimatePresence>
                     </button>
 
-                    {/* Checkpoint Label (Revealed on Hover) */}
+                    {/* Skill Label - Always Visible */}
                     <div className={cn(
-                      "absolute top-1/2 -translate-y-1/2 w-64 px-8 pointer-events-none group-hover:opacity-100 opacity-0 transition-all duration-500",
-                      isRight ? "left-full text-left" : "right-full text-right"
+                      "absolute top-1/2 -translate-y-1/2 w-48 transition-all duration-500",
+                      isRight ? "left-16 text-left" : "right-16 text-right"
                     )}>
                       <div className="space-y-1">
-                        <div className="font-mono text-[9px] uppercase tracking-widest text-[#64748B]">
-                          {node.id} // 0{i + 1}
+                        <div className="font-mono text-[9px] uppercase tracking-widest text-[#64748B] opacity-60">
+                          {node.id.toUpperCase()} // 0{i + 1}
                         </div>
-                        <h4 className="text-lg font-bold text-[#F8F9FA] leading-tight">
+                        <h4 className={cn(
+                          "text-xl font-bold tracking-tight transition-colors duration-500",
+                          isCompleted ? "text-white" : "text-text-muted group-hover:text-white/80"
+                        )}>
                           {node.label}
                         </h4>
+                        
+                        {/* More info (Checkpoint) revealed on group hover */}
                         {node.checkpoint && (
-                          <div className="text-[10px] text-text-muted italic opacity-70">
-                            {node.checkpoint}
-                          </div>
+                          <MotionDiv 
+                            initial={{ opacity: 0, y: 5 }}
+                            whileHover={{ opacity: 1, y: 0 }}
+                            className="opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none"
+                          >
+                            <div className="text-[11px] text-text-muted font-medium leading-relaxed bg-white/5 backdrop-blur-sm p-2 rounded border border-white/5 inline-block mt-2 shadow-2xl">
+                               {node.checkpoint}
+                            </div>
+                          </MotionDiv>
                         )}
                       </div>
                     </div>
