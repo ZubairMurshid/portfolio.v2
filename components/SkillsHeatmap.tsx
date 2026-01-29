@@ -1,3 +1,4 @@
+
 'use client';
 
 import { motion } from 'framer-motion';
@@ -24,39 +25,52 @@ export default function SkillsHeatmap() {
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
 
   return (
-    <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 border-l border-t border-white/10">
       {skills.map((skill, i) => (
         <MotionDiv
           key={skill.name}
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           transition={{ delay: i * 0.05 }}
-          whileHover={{ scale: 1.1, zIndex: 10 }}
           onMouseEnter={() => setHoveredSkill(skill.name)}
           onMouseLeave={() => setHoveredSkill(null)}
           className={`
-            relative aspect-square rounded-xl p-4 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-300
-            ${hoveredSkill === skill.name ? 'bg-accent-blue text-white shadow-neon' : 'bg-bg-tertiary border border-white/5 hover:border-accent-blue/50'}
+            relative p-6 h-32 flex flex-col justify-between cursor-crosshair group transition-all duration-300
+            border-r border-b border-white/10 
+            ${hoveredSkill === skill.name ? 'bg-white/[0.02]' : 'bg-transparent'}
           `}
         >
-          <div className="text-sm font-bold">{skill.name}</div>
-          <div 
-            className={`text-xs mt-1 px-2 py-0.5 rounded-full ${
-              hoveredSkill === skill.name ? 'bg-white/20' : 'bg-bg-primary text-text-muted'
-            }`}
-          >
-            {skill.level}%
-          </div>
+          {/* Spotlight Effect Borders */}
+          <div className={`absolute inset-0 border border-white/0 group-hover:border-white/40 transition-all duration-500 pointer-events-none`} />
           
-          {/* Heatmap intensity indicator */}
-          <div 
-            className="absolute bottom-0 left-0 right-0 h-1 bg-accent-blue/30 rounded-b-xl overflow-hidden"
-          >
-            <div 
-              className="h-full bg-accent-blue" 
-              style={{ width: `${skill.level}%` }} 
-            />
+          <div className="flex justify-between items-start">
+            <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[#64748B]">
+              {skill.category}
+            </span>
+            <span className="font-mono text-[9px] text-text-muted opacity-50">
+              Ref.{i.toString().padStart(3, '0')}
+            </span>
           </div>
+
+          <div className="space-y-1">
+            <div className="text-sm font-bold text-[#F8F9FA] tracking-tight font-sans">
+              {skill.name}
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="h-[1px] flex-grow bg-white/5 relative">
+                <div 
+                  className="absolute left-0 top-0 h-full bg-white/30 transition-all duration-1000" 
+                  style={{ width: `${skill.level}%` }}
+                />
+              </div>
+              <span className="font-mono text-[10px] text-white/40">
+                {skill.level}%
+              </span>
+            </div>
+          </div>
+
+          {/* Shimmer Effect on lines - internal to cell */}
+          <div className="absolute bottom-0 left-0 w-full h-[0.5px] bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
         </MotionDiv>
       ))}
     </div>
