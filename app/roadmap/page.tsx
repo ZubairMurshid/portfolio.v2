@@ -1,8 +1,9 @@
+
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useSpring, useTransform, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, Circle, ChevronDown, Rocket, ShieldCheck, Cpu } from 'lucide-react';
+import { CheckCircle2, Circle, ChevronDown, Rocket, ShieldCheck, Cpu, Lock, Unlock, Info } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const MotionDiv = motion.div as any;
@@ -12,32 +13,34 @@ interface RoadmapNode {
   id: string;
   label: string;
   checkpoint?: string;
+  brief: string;
   category: 'Frontend Foundations' | 'Backend Development' | 'DevOps & Cloud';
 }
 
 const roadmapNodes: RoadmapNode[] = [
-  { id: 'html', label: 'HTML', checkpoint: 'Checkpoint - Static Webpages', category: 'Frontend Foundations' },
-  { id: 'css', label: 'CSS', checkpoint: 'Checkpoint - Static Webpages', category: 'Frontend Foundations' },
-  { id: 'js', label: 'JavaScript', checkpoint: 'Checkpoint - Interactivity', category: 'Frontend Foundations' },
-  { id: 'npm', label: 'npm', checkpoint: 'Checkpoint - External Packages', category: 'Frontend Foundations' },
-  { id: 'git', label: 'Git', checkpoint: 'Checkpoint - Collaborative Work', category: 'Frontend Foundations' },
-  { id: 'github', label: 'GitHub', checkpoint: 'Checkpoint - Collaborative Work', category: 'Frontend Foundations' },
-  { id: 'react', label: 'React', checkpoint: 'Checkpoint - Frontend Apps', category: 'Frontend Foundations' },
-  { id: 'tailwind', label: 'Tailwind CSS', checkpoint: 'Checkpoint - Frontend Apps', category: 'Frontend Foundations' },
-  { id: 'nodejs', label: 'Node.js', checkpoint: 'Checkpoint - CLI Apps', category: 'Backend Development' },
-  { id: 'postgres', label: 'PostgreSQL', checkpoint: 'Checkpoint - Simple CRUD Apps', category: 'Backend Development' },
-  { id: 'redis', label: 'Redis', checkpoint: 'In-memory data structure store, used as a database, cache, and message broker.', category: 'Backend Development' },
-  { id: 'jwt', label: 'JWT Auth', checkpoint: 'Securely transmitting information between parties as a JSON object.', category: 'Backend Development' },
-  { id: 'rest', label: 'RESTful APIs', checkpoint: 'Checkpoint - Complete App', category: 'Backend Development' },
-  { id: 'linux', label: 'Linux Basics', checkpoint: 'Command line proficiency, file permissions, and process management.', category: 'DevOps & Cloud' },
-  { id: 'aws', label: 'AWS (S3, EC2, VPC)', checkpoint: 'Checkpoint - Deployment', category: 'DevOps & Cloud' },
-  { id: 'terraform', label: 'Terraform', checkpoint: 'Checkpoint - Infrastructure', category: 'DevOps & Cloud' },
-  { id: 'ansible', label: 'Ansible', checkpoint: 'Checkpoint - Automation', category: 'DevOps & Cloud' },
-  { id: 'gha', label: 'GitHub Actions', checkpoint: 'Checkpoint - CI / CD', category: 'DevOps & Cloud' },
+  { id: 'html', label: 'HTML', brief: 'The skeleton of the web. Master semantic markup to ensure accessibility and SEO optimization.', checkpoint: 'Checkpoint - Static Webpages', category: 'Frontend Foundations' },
+  { id: 'css', label: 'CSS', brief: 'The design layer. Implementing responsive layouts using Flexbox, Grid, and modern variables.', checkpoint: 'Checkpoint - Static Webpages', category: 'Frontend Foundations' },
+  { id: 'js', label: 'JavaScript', brief: 'The brain of the frontend. Understanding ES6+, DOM manipulation, and asynchronous patterns.', checkpoint: 'Checkpoint - Interactivity', category: 'Frontend Foundations' },
+  { id: 'npm', label: 'npm', brief: 'Package management. Managing complex dependencies and standardizing build scripts.', checkpoint: 'Checkpoint - External Packages', category: 'Frontend Foundations' },
+  { id: 'git', label: 'Git', brief: 'Version control. Mastering branching strategies and resolving merge conflicts in a team.', checkpoint: 'Checkpoint - Collaborative Work', category: 'Frontend Foundations' },
+  { id: 'github', label: 'GitHub', brief: 'Collaborative engineering. Using Pull Requests, Actions, and Issues for streamlined development.', checkpoint: 'Checkpoint - Collaborative Work', category: 'Frontend Foundations' },
+  { id: 'react', label: 'React', brief: 'Component-based architecture. Managing state and effects for highly interactive UIs.', checkpoint: 'Checkpoint - Frontend Apps', category: 'Frontend Foundations' },
+  { id: 'tailwind', label: 'Tailwind CSS', brief: 'Utility-first styling. Rapidly building custom designs without leaving the HTML context.', checkpoint: 'Checkpoint - Frontend Apps', category: 'Frontend Foundations' },
+  { id: 'nodejs', label: 'Node.js', brief: 'Server-side execution. Building scalable backend services using the V8 engine.', checkpoint: 'Checkpoint - CLI Apps', category: 'Backend Development' },
+  { id: 'postgres', label: 'PostgreSQL', brief: 'Relational integrity. Designing complex schemas and optimizing SQL query performance.', checkpoint: 'Checkpoint - Simple CRUD Apps', category: 'Backend Development' },
+  { id: 'redis', label: 'Redis', brief: 'Lightning-fast data storage. Implementing caching layers and real-time pub/sub systems.', category: 'Backend Development' },
+  { id: 'jwt', label: 'JWT Auth', brief: 'Stateless security. Implementing token-based authentication for secure API access.', category: 'Backend Development' },
+  { id: 'rest', label: 'RESTful APIs', brief: 'Interface design. Creating standardized, predictable, and scalable API endpoints.', checkpoint: 'Checkpoint - Complete App', category: 'Backend Development' },
+  { id: 'linux', label: 'Linux Basics', brief: 'System administration. Navigating the CLI, managing permissions, and process control.', category: 'DevOps & Cloud' },
+  { id: 'aws', label: 'AWS (S3, EC2, VPC)', brief: 'Cloud infrastructure. Provisioning scalable compute, storage, and networking resources.', checkpoint: 'Checkpoint - Deployment', category: 'DevOps & Cloud' },
+  { id: 'terraform', label: 'Terraform', brief: 'Infrastructure as Code. Defining and managing cloud resources using declarative config files.', checkpoint: 'Checkpoint - Infrastructure', category: 'DevOps & Cloud' },
+  { id: 'ansible', label: 'Ansible', brief: 'Configuration management. Automating system updates and software deployments at scale.', checkpoint: 'Checkpoint - Automation', category: 'DevOps & Cloud' },
+  { id: 'gha', label: 'GitHub Actions', brief: 'CI/CD orchestration. Building automated pipelines for testing and production releases.', checkpoint: 'Checkpoint - CI / CD', category: 'DevOps & Cloud' },
 ];
 
 export default function RoadmapPage() {
   const [completedNodes, setCompletedNodes] = useState<Set<string>>(new Set());
+  const [isAdmin, setIsAdmin] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -66,6 +69,7 @@ export default function RoadmapPage() {
   }, []);
 
   const toggleNode = (id: string) => {
+    if (!isAdmin) return; // Restrict toggling to Admin Mode
     const newSet = new Set(completedNodes);
     if (newSet.has(id)) newSet.delete(id);
     else newSet.add(id);
@@ -102,6 +106,30 @@ export default function RoadmapPage() {
       />
 
       <div className="container mx-auto px-6 pt-32 pb-40 relative z-20">
+        
+        {/* Admin Toggle - Secret Control */}
+        <div className="fixed top-32 right-8 z-[100] group">
+          <button 
+            onClick={() => setIsAdmin(!isAdmin)}
+            className={cn(
+              "p-4 rounded-2xl border transition-all duration-500 flex items-center gap-3 backdrop-blur-xl",
+              isAdmin 
+                ? "bg-emerald-500/10 border-emerald-500/50 text-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.2)]" 
+                : "bg-white/5 border-white/10 text-text-muted hover:border-white/30"
+            )}
+          >
+            {isAdmin ? <Unlock size={18} /> : <Lock size={18} />}
+            <span className="text-[10px] font-mono uppercase tracking-[0.2em] font-bold">
+              {isAdmin ? "Edit Mode Active" : "Management Locked"}
+            </span>
+          </button>
+          {!isAdmin && (
+            <div className="absolute right-0 top-full mt-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none text-[9px] text-text-muted uppercase tracking-widest whitespace-nowrap bg-black/80 p-2 rounded border border-white/10">
+              Only Zubair can toggle progress.
+            </div>
+          )}
+        </div>
+
         <div className="max-w-4xl mx-auto text-center mb-32">
           <div className="flex justify-center items-center gap-4 mb-4">
             <div className="w-12 h-[1px] bg-white/20" />
@@ -175,7 +203,8 @@ export default function RoadmapPage() {
                         "w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-700 relative z-20 shrink-0",
                         isCompleted 
                           ? "bg-white border-white shadow-[0_0_30px_rgba(255,255,255,0.4)] text-black" 
-                          : "bg-bg-secondary/40 border-white/10 text-white/40 hover:border-white/40"
+                          : "bg-bg-secondary/40 border-white/10 text-white/40 hover:border-white/40",
+                        !isAdmin && "cursor-default"
                       )}
                     >
                       {isCompleted ? <CheckCircle2 size={24} /> : <Circle size={20} className="opacity-40" />}
@@ -195,32 +224,51 @@ export default function RoadmapPage() {
 
                     {/* Skill Label - Always Visible */}
                     <div className={cn(
-                      "absolute top-1/2 -translate-y-1/2 w-48 transition-all duration-500",
+                      "absolute top-1/2 -translate-y-1/2 w-56 transition-all duration-500",
                       isRight ? "left-16 text-left" : "right-16 text-right"
                     )}>
                       <div className="space-y-1">
-                        <div className="font-mono text-[9px] uppercase tracking-widest text-[#64748B] opacity-60">
-                          {node.id.toUpperCase()} // 0{i + 1}
+                        <div className="flex items-center gap-2 opacity-60">
+                          <span className="font-mono text-[9px] uppercase tracking-widest text-[#64748B]">
+                            {node.id.toUpperCase()} // 0{i + 1}
+                          </span>
+                          {isCompleted && (
+                            <span className="flex items-center gap-1 text-[8px] font-bold text-emerald-500 uppercase tracking-widest bg-emerald-500/10 px-1.5 rounded">
+                              Verified
+                            </span>
+                          )}
                         </div>
+                        
                         <h4 className={cn(
-                          "text-xl font-bold tracking-tight transition-colors duration-500",
-                          isCompleted ? "text-white" : "text-text-muted group-hover:text-white/80"
+                          "text-xl font-bold tracking-tight transition-colors duration-500 flex items-center gap-3",
+                          isCompleted ? "text-white" : "text-text-muted group-hover:text-white/80",
+                          !isRight && "justify-end"
                         )}>
+                          {!isRight && <Info size={14} className="opacity-0 group-hover:opacity-40 transition-opacity" />}
                           {node.label}
+                          {isRight && <Info size={14} className="opacity-0 group-hover:opacity-40 transition-opacity" />}
                         </h4>
                         
-                        {/* More info (Checkpoint) revealed on group hover */}
-                        {node.checkpoint && (
-                          <MotionDiv 
-                            initial={{ opacity: 0, y: 5 }}
-                            whileHover={{ opacity: 1, y: 0 }}
-                            className="opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none"
-                          >
-                            <div className="text-[11px] text-text-muted font-medium leading-relaxed bg-white/5 backdrop-blur-sm p-2 rounded border border-white/5 inline-block mt-2 shadow-2xl">
-                               {node.checkpoint}
-                            </div>
-                          </MotionDiv>
-                        )}
+                        {/* Technical Briefing Card - Revealed on Hover */}
+                        <div className={cn(
+                          "opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 pointer-events-none mt-3",
+                        )}>
+                          <div className="bg-bg-secondary/80 backdrop-blur-md p-4 rounded-xl border border-white/10 shadow-2xl relative overflow-hidden">
+                            {/* Blueprint Lines background */}
+                            <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', backgroundSize: '10px 10px' }} />
+                            
+                            <h5 className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/40 mb-2">Technical Briefing</h5>
+                            <p className="text-[11px] text-text-secondary font-medium leading-relaxed mb-3 relative z-10">
+                               {node.brief}
+                            </p>
+                            {node.checkpoint && (
+                              <div className="pt-2 border-t border-white/5 flex items-center gap-2">
+                                <ShieldCheck size={12} className="text-accent-blue/40" />
+                                <span className="text-[9px] font-bold uppercase tracking-widest text-text-muted italic">{node.checkpoint}</span>
+                              </div>
+                            )}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
