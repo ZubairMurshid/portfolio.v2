@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sun, Moon, Home, User, Book, Code, Briefcase, Mail, FileText, Menu, X } from 'lucide-react';
+import { Sun, Moon, Home, User, Book, Code, Briefcase, Mail, FileText, Menu, X, Map } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 import { cn } from '@/lib/utils';
 
@@ -17,6 +17,7 @@ const navLinks = [
   { name: 'Home', path: '/', icon: <Home size={18} /> },
   { name: 'About', path: '/about', icon: <User size={18} /> },
   { name: 'Skills', path: '/skills', icon: <Book size={18} /> },
+  { name: 'Roadmap', path: '/roadmap', icon: <Map size={18} /> },
   { name: 'Projects', path: '/projects', icon: <Code size={18} /> },
   { name: 'Exp', path: '/experience', icon: <Briefcase size={18} /> },
   { name: 'Blog', path: '/blog', icon: <FileText size={18} /> },

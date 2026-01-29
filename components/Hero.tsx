@@ -4,7 +4,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail, Globe } from 'lucide-react';
+import { Github, Linkedin, Mail, Globe, Sparkles } from 'lucide-react';
 import ParticleCanvas from './ParticleCanvas';
 import GlitchText from './GlitchText';
 
@@ -54,19 +54,32 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7 }}
-            className="flex flex-col sm:flex-row gap-5 justify-center items-center"
+            className="flex flex-col gap-5 justify-center items-center"
           >
+            <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
+              <Link 
+                href="/projects" 
+                className="px-10 py-3.5 min-w-[180px] text-xs uppercase tracking-widest bg-white text-black rounded-full font-bold hover:bg-accent-chrome transition-all hover:scale-105 active:scale-95 shadow-xl"
+              >
+                Explore Work
+              </Link>
+              <Link 
+                href="/contact" 
+                className="px-10 py-3.5 min-w-[180px] text-xs uppercase tracking-widest border border-white/20 text-white rounded-full font-bold hover:bg-white/5 transition-all hover:scale-105 active:scale-95"
+              >
+                Contact
+              </Link>
+            </div>
+            
             <Link 
-              href="/projects" 
-              className="px-10 py-3.5 min-w-[180px] text-xs uppercase tracking-widest bg-white text-black rounded-full font-bold hover:bg-accent-chrome transition-all hover:scale-105 active:scale-95 shadow-xl"
+              href="/roadmap" 
+              className="group relative px-8 py-3 rounded-full overflow-hidden flex items-center gap-3 transition-all hover:scale-105 active:scale-95"
             >
-              Explore Work
-            </Link>
-            <Link 
-              href="/contact" 
-              className="px-10 py-3.5 min-w-[180px] text-xs uppercase tracking-widest border border-white/20 text-white rounded-full font-bold hover:bg-white/5 transition-all hover:scale-105 active:scale-95"
-            >
-              Contact
+              <div className="absolute inset-0 bg-white/5 backdrop-blur-md border border-white/10 group-hover:bg-white/10 transition-colors" />
+              <Sparkles size={16} className="text-yellow-500 relative z-10" />
+              <span className="text-[10px] uppercase font-bold tracking-widest text-text-muted group-hover:text-white relative z-10">
+                Look at how i'm levelling up for my internship
+              </span>
             </Link>
           </MotionDiv>
         </div>
