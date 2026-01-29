@@ -1,3 +1,4 @@
+
 'use client';
 
 import React from 'react';
@@ -5,6 +6,7 @@ import RadarChart from '@/components/RadarChart';
 import SkillsHeatmap from '@/components/SkillsHeatmap';
 import { motion } from 'framer-motion';
 
+// Fix: Using 'as any' to suppress motion property type errors
 const MotionDiv = motion.div as any;
 
 const radarSkills = [
@@ -76,7 +78,8 @@ function SkillBar({ name, level }: { name: string; level: number }) {
         <span className="text-accent-blue font-mono">{level}%</span>
       </div>
       <div className="h-2 bg-bg-tertiary rounded-full overflow-hidden">
-        <motion.div 
+        {/* Fix: Replaced motion.div with MotionDiv */}
+        <MotionDiv 
           initial={{ width: 0 }}
           whileInView={{ width: `${level}%` }}
           transition={{ duration: 1, ease: "easeOut" }}

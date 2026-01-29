@@ -1,8 +1,12 @@
+
 'use client';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Search, ArrowRight, Home, User, Book, Briefcase, Code, Mail, FileText } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
+
+// Fix: Using 'as any' to suppress motion property type errors
+const MotionDiv = motion.div as any;
 
 const pages = [
   { name: 'Home', path: '/', icon: <Home size={16} /> },
@@ -41,7 +45,8 @@ export default function CommandPalette() {
     <AnimatePresence>
       {open && (
         <div className="fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm flex items-start justify-center pt-[20vh] px-4">
-          <motion.div
+          {/* Fix: Replaced motion.div with MotionDiv */}
+          <MotionDiv
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
@@ -72,7 +77,7 @@ export default function CommandPalette() {
                 </button>
               ))}
             </div>
-          </motion.div>
+          </MotionDiv>
           <div className="absolute inset-0 -z-10" onClick={() => setOpen(false)} />
         </div>
       )}

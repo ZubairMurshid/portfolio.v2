@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -9,46 +10,45 @@ const MotionDiv = motion.div as any;
 export default function ProjectSpotlight() {
   return (
     <MotionDiv 
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
-      className="relative rounded-3xl overflow-hidden border border-accent-blue/30 bg-bg-secondary/50 backdrop-blur-md p-8 md:p-12 my-20 group"
+      transition={{ duration: 0.8 }}
+      className="relative rounded-[2.5rem] overflow-hidden border border-white/10 bg-bg-secondary/30 backdrop-blur-2xl p-10 md:p-16 my-32 group"
     >
-      <div className="absolute inset-0 bg-gradient-to-r from-accent-blue/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none" />
       
-      <div className="relative z-10 grid md:grid-cols-2 gap-8 items-center">
+      <div className="relative z-10 grid md:grid-cols-2 gap-16 items-center">
         <div>
-          <div className="flex items-center gap-2 text-accent-blue mb-4">
-            <Sparkles size={18} />
-            <span className="text-sm font-bold uppercase tracking-wider">Featured Project</span>
+          <div className="flex items-center gap-3 text-text-muted mb-6">
+            <div className="w-8 h-[1px] bg-white/20" />
+            <span className="text-[10px] font-bold uppercase tracking-[0.3em]">Signature Project</span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">EventLK</h2>
-          <p className="text-text-secondary text-lg mb-6 leading-relaxed">
-            A comprehensive intelligent event management system specifically for university clubs. 
-            Features AI-driven recommendations for venues and budgets.
+          <h2 className="text-4xl md:text-6xl font-sans font-extrabold mb-6 tracking-tighter">EventLK</h2>
+          <p className="text-text-secondary text-lg mb-10 leading-relaxed font-medium">
+            An intelligent event management system for university ecosystems. 
+            Harnessing predictive analytics to streamline campus engagement.
           </p>
           
-          <div className="flex flex-wrap gap-3 mb-8">
-            {['AI/ML', 'Python', 'Java', 'MySQL', 'QR Integration'].map(tag => (
-              <span key={tag} className="px-3 py-1 rounded-full bg-accent-blue/10 text-accent-blue text-sm border border-accent-blue/20">
+          <div className="flex flex-wrap gap-2.5 mb-10">
+            {['Artificial Intelligence', 'Full-Stack', 'Security'].map(tag => (
+              <span key={tag} className="px-4 py-1.5 rounded-full bg-white/5 text-text-muted text-[10px] font-bold uppercase tracking-widest border border-white/5 group-hover:border-white/20 transition-colors">
                 {tag}
               </span>
             ))}
           </div>
 
-          <div className="p-4 rounded-xl bg-bg-primary/50 border border-accent-blue/10 mb-8 inline-block">
-            <div className="text-2xl font-bold text-accent-blue">40%</div>
-            <div className="text-sm text-text-muted">Reduction in planning time</div>
-          </div>
-
-          <Link href="/projects/eventlk" className="inline-flex items-center gap-2 text-accent-blue font-bold hover:gap-4 transition-all">
-            View Case Study <ArrowRight size={20} />
+          <Link href="/projects/eventlk" className="inline-flex items-center gap-3 text-white font-bold text-xs uppercase tracking-widest hover:gap-6 transition-all group/link">
+            Case Study 
+            <div className="p-2 rounded-full border border-white/20 group-hover/link:bg-white group-hover/link:text-black transition-all">
+              <ArrowRight size={16} />
+            </div>
           </Link>
         </div>
         
-        <div className="relative aspect-video rounded-xl overflow-hidden shadow-2xl shadow-accent-blue/10 bg-bg-tertiary">
-             {/* Placeholder for project screenshot */}
-             <div className="absolute inset-0 flex items-center justify-center text-text-muted">
-                Project Preview
+        <div className="relative aspect-video rounded-3xl overflow-hidden border border-white/5 bg-bg-tertiary shadow-2xl group-hover:scale-[1.02] transition-transform duration-700">
+             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(255,255,255,0.05)_0%,transparent_70%)]" />
+             <div className="absolute inset-0 flex items-center justify-center text-[10px] uppercase tracking-[0.5em] text-text-muted font-mono">
+                System Interface Preview
              </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
+
 import React from 'react';
-import { Space_Grotesk, Exo_2, JetBrains_Mono } from 'next/font/google';
+import { Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import NavBar from '@/components/NavBar';
@@ -10,16 +11,10 @@ import CommandPalette from '@/components/CommandPalette';
 import { ReviewFloatingButton } from '@/components/ReviewSystem';
 import { cn } from '@/lib/utils';
 
-// Configure fonts via Next.js optimization system
-const spaceGrotesk = Space_Grotesk({ 
+// Premium high-end sans-serif alternative to Google Sans
+const jakarta = Plus_Jakarta_Sans({ 
   subsets: ['latin'],
-  variable: '--font-space',
-  display: 'swap',
-});
-
-const exo2 = Exo_2({ 
-  subsets: ['latin'],
-  variable: '--font-exo',
+  variable: '--font-sans',
   display: 'swap',
 });
 
@@ -30,8 +25,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata = {
-  title: 'Zubair Murshid | Portfolio',
-  description: 'Computer Science Undergraduate Portfolio',
+  title: 'Zubair Murshid | Cinematic Portfolio',
+  description: 'High-end Computer Science Undergraduate Portfolio with a cinematic spotlight aesthetic.',
 };
 
 export default function RootLayout({
@@ -40,8 +35,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className={cn(spaceGrotesk.variable, exo2.variable, jetbrainsMono.variable)}>
-      <body className="bg-bg-primary text-text-primary antialiased font-sans transition-colors duration-300 min-h-screen flex flex-col selection:bg-accent-blue/30 selection:text-accent-blue">
+    <html lang="en" suppressHydrationWarning className={cn(jakarta.variable, jakarta.variable, jetbrainsMono.variable)}>
+      <body className="bg-bg-primary text-text-primary antialiased font-sans transition-colors duration-500 min-h-screen flex flex-col selection:bg-white/10 selection:text-white">
         <ThemeProvider>
           <ScrollProgress />
           <CustomCursor />

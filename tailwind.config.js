@@ -11,8 +11,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-space)', 'sans-serif'],
-        display: ['var(--font-exo)', 'sans-serif'],
+        sans: ['var(--font-sans)', 'sans-serif'],
+        display: ['var(--font-display)', 'sans-serif'],
         mono: ['var(--font-mono)', 'monospace'],
       },
       colors: {
@@ -27,26 +27,25 @@ module.exports = {
           muted: 'rgb(var(--text-muted) / <alpha-value>)',
         },
         accent: {
-          blue: 'rgb(var(--accent-blue) / <alpha-value>)',
-          darkBlue: 'rgb(var(--accent-dark-blue) / <alpha-value>)',
-          navy: 'rgb(var(--accent-navy) / <alpha-value>)',
+          silver: '#9BA1A6',
+          chrome: '#F8F9FA',
+          white: '#FFFFFF',
         },
       },
       boxShadow: {
-        neon: 'var(--neon-glow)',
+        spotlight: '0 0 40px rgba(255, 255, 255, 0.1)',
+        chrome: '0 0 1px 1px rgba(255, 255, 255, 0.1)',
       },
       animation: {
-        'spin-slow': 'spin 8s linear infinite',
-        bounce: 'bounce 2s infinite',
-        pulse: 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'spin-slow': 'spin 12s linear infinite',
+        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
     },
   },
   plugins: [],
   safelist: [
-    'from-blue-500', 'to-cyan-500',
-    'from-emerald-500', 'to-teal-500',
-    'from-violet-500', 'to-purple-500',
-    'group-hover:opacity-10'
+    'from-white', 'to-accent-silver',
+    'from-accent-silver', 'to-white',
+    'group-hover:opacity-20'
   ]
 };

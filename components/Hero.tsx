@@ -15,26 +15,27 @@ const MotionP = motion.p as any;
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4">
+      {/* Background Ambience */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(255,255,255,0.03)_0%,transparent_60%)] pointer-events-none" />
       <ParticleCanvas />
       
       <div className="container mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center h-full">
-        {/* Main Content - Centered (Spans 10 cols) */}
         <div className="lg:col-span-10 lg:col-start-2 text-center pt-20">
           
           <MotionDiv 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-block px-6 py-2 mb-6 rounded-full border border-accent-blue/30 bg-bg-secondary/50 backdrop-blur-sm text-accent-blue text-sm font-medium tracking-wider uppercase"
+            transition={{ duration: 0.8 }}
+            className="inline-block px-5 py-1.5 mb-8 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-accent-chrome text-[10px] font-mono tracking-[0.2em] uppercase"
           >
-            Computer Science Undergraduate
+            Engineering Precise Solutions
           </MotionDiv>
 
           <MotionH1 
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
-            className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-6"
+            transition={{ delay: 0.2, duration: 1, ease: "easeOut" }}
+            className="font-sans text-5xl md:text-8xl lg:text-9xl font-extrabold leading-tight mb-8 tracking-tighter"
           >
             ZUBAIR <GlitchText text="MURSHID" />
           </MotionH1>
@@ -42,45 +43,45 @@ export default function Hero() {
           <MotionP 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="text-text-secondary text-lg md:text-xl max-w-2xl mx-auto mb-10"
+            transition={{ delay: 0.5, duration: 1 }}
+            className="text-text-secondary text-base md:text-lg max-w-xl mx-auto mb-12 font-medium tracking-tight"
           >
-            Building Secure Digital Solutions | Cybersecurity Enthusiast | Full-Stack Developer
+            Software Engineer & Cybersecurity Enthusiast. <br className="hidden md:block"/>
+            Crafting high-integrity digital architectures.
           </MotionP>
 
           <MotionDiv 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            transition={{ delay: 0.7 }}
+            className="flex flex-col sm:flex-row gap-5 justify-center items-center"
           >
             <Link 
-              href="/contact" 
-              className="px-6 py-2.5 min-w-[140px] text-sm bg-gradient-to-r from-accent-blue to-accent-dark-blue text-white rounded-full font-semibold shadow-lg shadow-accent-blue/25 hover:shadow-neon hover:-translate-y-1 transition-all text-center"
+              href="/projects" 
+              className="px-10 py-3.5 min-w-[180px] text-xs uppercase tracking-widest bg-white text-black rounded-full font-bold hover:bg-accent-chrome transition-all hover:scale-105 active:scale-95 shadow-xl"
             >
-              Get In Touch
+              Explore Work
             </Link>
             <Link 
-              href="/projects" 
-              className="px-6 py-2.5 min-w-[140px] text-sm bg-transparent border-2 border-accent-blue text-accent-blue rounded-full font-semibold hover:bg-accent-blue hover:text-white transition-all hover:-translate-y-1 text-center"
+              href="/contact" 
+              className="px-10 py-3.5 min-w-[180px] text-xs uppercase tracking-widest border border-white/20 text-white rounded-full font-bold hover:bg-white/5 transition-all hover:scale-105 active:scale-95"
             >
-              View Projects
+              Contact
             </Link>
           </MotionDiv>
         </div>
 
-        {/* Vertical Socials (Desktop) - Placed in the 12th column for proper alignment */}
+        {/* Social Bar - Silver Style */}
         <MotionDiv 
-          initial={{ opacity: 0, x: 50 }}
+          initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.8 }}
-          className="hidden lg:grid grid-rows-1 place-items-center h-full absolute right-6 top-0 bottom-0"
+          transition={{ delay: 0.9 }}
+          className="hidden lg:flex flex-col gap-6 absolute right-12 top-1/2 -translate-y-1/2"
         >
-          <div className="flex flex-col justify-center gap-6 p-4 rounded-full bg-bg-primary/30 backdrop-blur-sm border border-white/5">
-            <SocialLink href="https://github.com/ZubairMurshid" icon={<Github size={20} />} />
-            <SocialLink href="https://linkedin.com/in/itszubairmurshid" icon={<Linkedin size={20} />} />
-            <SocialLink href="mailto:zubairmurshid@icloud.com" icon={<Mail size={20} />} />
-            <SocialLink href="#" icon={<Globe size={20} />} />
+          <div className="flex flex-col gap-8 items-center py-8 px-4 rounded-full bg-white/5 backdrop-blur-md border border-white/10">
+            <SocialLink href="https://github.com/ZubairMurshid" icon={<Github size={18} />} />
+            <SocialLink href="https://linkedin.com/in/itszubairmurshid" icon={<Linkedin size={18} />} />
+            <SocialLink href="mailto:zubairmurshid@icloud.com" icon={<Mail size={18} />} />
           </div>
         </MotionDiv>
       </div>
@@ -88,11 +89,11 @@ export default function Hero() {
       <MotionDiv 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-text-muted text-xs animate-bounce"
+        transition={{ delay: 1.2, duration: 1 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 text-text-muted text-[10px] tracking-[0.3em] uppercase"
       >
-        <span>Scroll</span>
-        <div className="w-px h-8 bg-gradient-to-b from-accent-blue to-transparent" />
+        <span>Discover</span>
+        <div className="w-[1px] h-12 bg-gradient-to-b from-white/20 to-transparent" />
       </MotionDiv>
     </section>
   );
@@ -104,7 +105,7 @@ function SocialLink({ href, icon }: { href: string; icon: React.ReactNode }) {
       href={href} 
       target="_blank" 
       rel="noopener noreferrer"
-      className="p-3 rounded-full bg-bg-secondary/80 border border-accent-blue/20 hover:border-accent-blue hover:text-accent-blue hover:shadow-neon transition-all"
+      className="text-text-muted hover:text-white transition-all transform hover:scale-110"
     >
       {icon}
     </a>

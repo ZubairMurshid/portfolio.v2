@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useRef, useEffect, useState } from 'react';
@@ -18,7 +19,6 @@ export default function RadarChart({ skills }: RadarChartProps) {
     const handleResize = () => {
       if (containerRef.current) {
         const { width } = containerRef.current.getBoundingClientRect();
-        // Keep aspect ratio square, but cap max size
         const size = Math.min(width, 500);
         setDimensions({ width: size, height: size });
       }
@@ -37,7 +37,6 @@ export default function RadarChart({ skills }: RadarChartProps) {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Set actual canvas size to match display size for sharpness
     const dpr = window.devicePixelRatio || 1;
     canvas.width = dimensions.width * dpr;
     canvas.height = dimensions.height * dpr;
@@ -47,15 +46,15 @@ export default function RadarChart({ skills }: RadarChartProps) {
 
     const centerX = dimensions.width / 2;
     const centerY = dimensions.height / 2;
-    // Adjust radius to fit labels
     const radius = Math.min(centerX, centerY) * 0.65; 
 
     const angleStep = (Math.PI * 2) / skills.length;
 
-    const gridColor = theme === 'dark' ? 'rgba(14, 165, 233, 0.2)' : 'rgba(30, 58, 138, 0.15)';
-    const textColor = theme === 'dark' ? '#f8fafc' : '#0f172a';
-    const fillColor = theme === 'dark' ? 'rgba(14, 165, 233, 0.3)' : 'rgba(30, 58, 138, 0.2)';
-    const strokeColor = theme === 'dark' ? '#0EA5E9' : '#1e3a8a';
+    // Cinematic Monochrome Theme
+    const gridColor = theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)';
+    const textColor = theme === 'dark' ? '#F8F9FA' : '#020204';
+    const fillColor = theme === 'dark' ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.05)';
+    const strokeColor = theme === 'dark' ? '#F8F9FA' : '#020204';
 
     ctx.clearRect(0, 0, dimensions.width, dimensions.height);
 
@@ -102,7 +101,8 @@ export default function RadarChart({ skills }: RadarChartProps) {
     ctx.fillStyle = fillColor;
     ctx.fill();
     ctx.strokeStyle = strokeColor;
-    ctx.lineWidth = 2;
+    ctx.setLineDash([]);
+    ctx.lineWidth = 1.5;
     ctx.stroke();
 
     // Draw Points
@@ -113,24 +113,24 @@ export default function RadarChart({ skills }: RadarChartProps) {
       const x = centerX + skillRadius * Math.cos(angle);
       const y = centerY + skillRadius * Math.sin(angle);
       ctx.beginPath();
-      ctx.arc(x, y, 4, 0, Math.PI * 2);
+      ctx.arc(x, y, 3, 0, Math.PI * 2);
       ctx.fillStyle = strokeColor;
       ctx.fill();
     }
 
     // Draw Labels
     ctx.fillStyle = textColor;
-    ctx.font = 'bold 12px "Space Grotesk"';
+    ctx.font = '500 11px "JetBrains Mono"';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
 
     for (let i = 0; i < skills.length; i++) {
       const skill = skills[i];
       const angle = angleStep * i - Math.PI / 2;
-      const labelRadius = radius + 25;
+      const labelRadius = radius + 30;
       const x = centerX + labelRadius * Math.cos(angle);
       const y = centerY + labelRadius * Math.sin(angle);
-      ctx.fillText(skill.name, x, y);
+      ctx.fillText(skill.name.toUpperCase(), x, y);
     }
 
   }, [theme, skills, dimensions]);

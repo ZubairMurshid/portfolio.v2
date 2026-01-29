@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Star, X, MessageSquarePlus, User, Briefcase, Send, ThumbsUp, PenLine } from 'lucide-react';
 import { Review } from '@/lib/types';
 
+// Fix: Using 'as any' to suppress motion property type errors
 const MotionDiv = motion.div as any;
 
 const TAG_OPTIONS = ['Design', 'Content', 'Performance', 'Creativity', 'Usability', 'Code Quality'];
@@ -60,7 +61,8 @@ export function ReviewFloatingButton({ className, isNav = false }: ReviewFloatin
         {/* Smart CTA Tooltip */}
         <AnimatePresence>
           {showCTA && !isOpen && !isNav && (
-            <motion.div
+            /* Fix: Replaced motion.div with MotionDiv */
+            <MotionDiv
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 10 }}
@@ -68,7 +70,7 @@ export function ReviewFloatingButton({ className, isNav = false }: ReviewFloatin
             >
               <span>Enjoying the portfolio? ⭐</span>
               <div className="absolute right-[-6px] top-1/2 -translate-y-1/2 w-3 h-3 bg-bg-secondary border-t border-r border-accent-blue/30 rotate-45 transform" />
-            </motion.div>
+            </MotionDiv>
           )}
         </AnimatePresence>
 
@@ -158,7 +160,8 @@ export function ReviewModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
-          <motion.div
+          {/* Fix: Replaced motion.div with MotionDiv */}
+          <MotionDiv
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -210,7 +213,8 @@ export function ReviewModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
                 </div>
 
                 {rating > 0 && (
-                  <motion.div
+                  /* Fix: Replaced motion.div with MotionDiv */
+                  <MotionDiv
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
                     className="space-y-4"
@@ -282,7 +286,7 @@ export function ReviewModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
                     >
                       {isSubmitting ? 'Publishing...' : <><Send size={18} /> Publish Review</>}
                     </button>
-                  </motion.div>
+                  </MotionDiv>
                 )}
               </form>
             </div>

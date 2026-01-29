@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useRef, useEffect } from 'react';
@@ -16,8 +17,8 @@ export default function ParticleCanvas() {
 
     let animationFrameId: number;
     let particles: Particle[] = [];
-    const particleCount = 80;
-    const connectionDistance = 150;
+    const particleCount = 60; // Slightly reduced for cleaner "Spotlight" look
+    const connectionDistance = 180;
 
     const handleResize = () => {
       canvas.width = window.innerWidth;
@@ -34,9 +35,9 @@ export default function ParticleCanvas() {
       constructor() {
         this.x = Math.random() * canvas!.width;
         this.y = Math.random() * canvas!.height;
-        this.vx = (Math.random() - 0.5) * 0.5;
-        this.vy = (Math.random() - 0.5) * 0.5;
-        this.radius = Math.random() * 2 + 1;
+        this.vx = (Math.random() - 0.5) * 0.3; // Slower, driftier movement
+        this.vy = (Math.random() - 0.5) * 0.3;
+        this.radius = Math.random() * 1.5 + 0.5;
       }
 
       update() {
@@ -49,7 +50,8 @@ export default function ParticleCanvas() {
 
       draw(currentTheme: string) {
         if (!ctx) return;
-        const color = currentTheme === 'dark' ? 'rgba(14, 165, 233, 0.8)' : 'rgba(30, 58, 138, 0.6)';
+        // Cinematic silver dust
+        const color = currentTheme === 'dark' ? 'rgba(255, 255, 255, 0.4)' : 'rgba(0, 0, 0, 0.2)';
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
         ctx.fillStyle = color;
@@ -68,7 +70,7 @@ export default function ParticleCanvas() {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      const lineColor = theme === 'dark' ? 'rgba(14, 165, 233, 0.2)' : 'rgba(30, 58, 138, 0.15)';
+      const lineColor = theme === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.03)';
 
       for (let i = 0; i < particles.length; i++) {
         particles[i].update();
@@ -106,8 +108,8 @@ export default function ParticleCanvas() {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute top-0 left-0 w-full h-full -z-10 opacity-60"
-      id="techCanvas"
+      className="absolute top-0 left-0 w-full h-full -z-10 pointer-events-none opacity-40"
+      id="cinematicCanvas"
     />
   );
 }
