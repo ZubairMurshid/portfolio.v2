@@ -103,10 +103,11 @@ export default function RoadmapPage() {
 
   return (
     <div className="bg-[#020204] min-h-screen text-[#F8F9FA] relative" ref={containerRef}>
-      {/* Admin Login Button */}
+      {/* Admin Login Button - Adjusted to not overlap fixed navbar */}
       <button 
         onClick={() => setIsAuthOpen(true)}
-        className="fixed top-8 right-8 z-[60] p-3 rounded-full bg-white/5 border border-white/10 text-white/40 hover:text-white hover:border-white/30 transition-all backdrop-blur-md"
+        className="fixed top-20 md:top-10 right-6 md:right-10 z-40 p-3 rounded-full bg-white/5 border border-white/10 text-white/40 hover:text-white hover:border-white/30 transition-all backdrop-blur-md shadow-2xl"
+        title="Admin Login"
       >
         <Lock size={18} />
       </button>
