@@ -18,13 +18,13 @@ export default function Hero() {
       <ParticleCanvas />
       
       <div className="container mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center h-full">
-        <div className="lg:col-span-10 lg:col-start-2 text-center pt-20">
+        <div className="lg:col-span-10 lg:col-start-2 text-center pt-10 lg:pt-20">
           
           <MotionDiv 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="inline-block px-5 py-1.5 mb-8 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-accent-chrome text-[10px] font-mono tracking-[0.2em] uppercase"
+            className="inline-block px-5 py-1.5 mb-4 lg:mb-8 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-accent-chrome text-[10px] font-mono tracking-[0.2em] uppercase"
           >
             Engineering Precise Solutions
           </MotionDiv>
