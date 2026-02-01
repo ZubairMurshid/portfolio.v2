@@ -20,35 +20,52 @@ export default function RoadmapAuthModal({ isOpen, onClose }: { isOpen: boolean;
   const [isLoading, setIsLoading] = useState(false);
   
   // Forgot Password States
-  const [verificationCode, setVerificationCode] = useState('');
   const [enteredCode, setEnteredCode] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const targetEmail = 'zubairmurshid69@gmail.com';
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (username === 'zubairmur' && password === 'roadmapedit') {
-      sessionStorage.setItem('roadmap_admin_authed', 'true');
-      router.push('/roadmap/admin');
-      onClose();
-    } else {
-      setError('Invalid credentials. Check your input.');
+    setIsLoading(true);
+    setError('');
+    
+    try {
+      const res = await fetch('/api/auth/reset', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'login', username, password })
+      });
+      
+      if (res.ok) {
+        sessionStorage.setItem('roadmap_admin_authed', 'true');
+        router.push('/roadmap/admin');
+        onClose();
+      } else {
+        const data = await res.json();
+        setError(data.error || 'Access denied.');
+      }
+    } catch (err) {
+      setError('Connection failed.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleSendCode = async () => {
     setIsLoading(true);
+    setError('');
     try {
-      const res = await fetch('/api/roadmap/auth', {
+      const res = await fetch('/api/auth/reset', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'send-code', email: targetEmail })
+        body: JSON.stringify({ action: 'send-code' })
       });
       if (res.ok) setView('verify');
+      else setError('Failed to send code.');
     } catch (err) {
-      setError('Failed to send code.');
+      setError('Network error.');
     } finally {
       setIsLoading(false);
     }
@@ -56,11 +73,12 @@ export default function RoadmapAuthModal({ isOpen, onClose }: { isOpen: boolean;
 
   const handleVerifyCode = async () => {
     setIsLoading(true);
+    setError('');
     try {
-      const res = await fetch('/api/roadmap/auth', {
+      const res = await fetch('/api/auth/reset', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'verify-code', email: targetEmail, code: enteredCode })
+        body: JSON.stringify({ action: 'verify-code', code: enteredCode })
       });
       if (res.ok) setView('reset');
       else setError('Invalid code entered.');
@@ -78,13 +96,15 @@ export default function RoadmapAuthModal({ isOpen, onClose }: { isOpen: boolean;
       return;
     }
     setIsLoading(true);
+    setError('');
     try {
-      const res = await fetch('/api/roadmap/auth', {
+      const res = await fetch('/api/auth/reset', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'reset-password', email: targetEmail, newPassword })
+        body: JSON.stringify({ action: 'reset-password', code: enteredCode, newPassword })
       });
       if (res.ok) setView('success');
+      else setError('Reset failed.');
     } catch (err) {
       setError('Failed to reset password.');
     } finally {
@@ -108,7 +128,7 @@ export default function RoadmapAuthModal({ isOpen, onClose }: { isOpen: boolean;
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="w-full max-w-sm bg-bg-secondary border border-white/10 rounded-[2rem] shadow-2xl overflow-hidden relative z-10"
+            className="w-full max-w-sm bg-bg-secondary border border-white/10 rounded-[2rem] shadow-2xl overflow-hidden relative z-10 font-sans"
           >
             <div className="p-8">
               <div className="flex justify-between items-center mb-8">
@@ -116,9 +136,9 @@ export default function RoadmapAuthModal({ isOpen, onClose }: { isOpen: boolean;
                   <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
                     <Lock size={16} className="text-accent-blue" />
                   </div>
-                  <h3 className="font-bold tracking-tight">Access Control</h3>
+                  <h3 className="font-bold tracking-tight text-white">Access Control</h3>
                 </div>
-                <button onClick={onClose} className="p-2 hover:bg-white/5 rounded-full transition-colors">
+                <button onClick={onClose} className="p-2 hover:bg-white/5 rounded-full transition-colors text-white/60 hover:text-white">
                   <X size={18} />
                 </button>
               </div>
@@ -132,7 +152,7 @@ export default function RoadmapAuthModal({ isOpen, onClose }: { isOpen: boolean;
                       placeholder="Username"
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
-                      className="w-full pl-11 pr-4 py-3.5 bg-bg-tertiary/50 border border-white/5 rounded-xl outline-none focus:border-accent-blue/50 transition-all text-sm"
+                      className="w-full pl-11 pr-4 py-3.5 bg-bg-tertiary/50 border border-white/5 rounded-xl outline-none focus:border-accent-blue/50 transition-all text-sm text-white placeholder:text-text-muted"
                     />
                   </div>
                   <div className="relative">
@@ -142,14 +162,17 @@ export default function RoadmapAuthModal({ isOpen, onClose }: { isOpen: boolean;
                       placeholder="Password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="w-full pl-11 pr-4 py-3.5 bg-bg-tertiary/50 border border-white/5 rounded-xl outline-none focus:border-accent-blue/50 transition-all text-sm"
+                      className="w-full pl-11 pr-4 py-3.5 bg-bg-tertiary/50 border border-white/5 rounded-xl outline-none focus:border-accent-blue/50 transition-all text-sm text-white placeholder:text-text-muted"
                     />
                   </div>
                   
                   {error && <p className="text-[10px] text-red-500 font-bold uppercase tracking-wider text-center">{error}</p>}
 
-                  <button className="w-full py-3.5 bg-white text-black font-bold rounded-xl text-xs uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:bg-accent-chrome transition-all">
-                    Initialize Admin <ArrowRight size={14} />
+                  <button 
+                    disabled={isLoading}
+                    className="w-full py-3.5 bg-white text-black font-bold rounded-xl text-xs uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:scale-[1.02] transition-all disabled:opacity-50"
+                  >
+                    {isLoading ? <Loader2 className="animate-spin" size={14} /> : 'Initialize Admin'} <ArrowRight size={14} />
                   </button>
 
                   <button 
@@ -164,17 +187,17 @@ export default function RoadmapAuthModal({ isOpen, onClose }: { isOpen: boolean;
 
               {view === 'forgot' && (
                 <div className="space-y-6 text-center">
-                  <div className="p-4 bg-white/5 border border-white/5 rounded-2xl text-xs text-text-secondary leading-relaxed">
-                    A verification code will be sent to <span className="text-white font-bold">{targetEmail}</span> to confirm your identity.
+                  <div className="p-4 bg-white/5 border border-white/5 rounded-2xl text-[11px] text-text-secondary leading-relaxed">
+                    A verification code will be sent to <span className="text-white font-bold">{targetEmail}</span> to confirm identity.
                   </div>
                   <button
                     onClick={handleSendCode}
                     disabled={isLoading}
-                    className="w-full py-3.5 bg-accent-blue text-white font-bold rounded-xl text-xs uppercase tracking-[0.2em] flex items-center justify-center gap-2"
+                    className="w-full py-3.5 bg-accent-blue text-white font-bold rounded-xl text-xs uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:scale-[1.02] transition-all"
                   >
                     {isLoading ? <Loader2 className="animate-spin" size={14} /> : 'Send Code'}
                   </button>
-                  <button onClick={() => setView('login')} className="text-[10px] uppercase font-mono tracking-widest text-text-muted">Back to Login</button>
+                  <button onClick={() => setView('login')} className="text-[10px] uppercase font-mono tracking-widest text-text-muted hover:text-white">Back to Login</button>
                 </div>
               )}
 
@@ -187,7 +210,7 @@ export default function RoadmapAuthModal({ isOpen, onClose }: { isOpen: boolean;
                       maxLength={6}
                       value={enteredCode}
                       onChange={(e) => setEnteredCode(e.target.value)}
-                      className="w-full bg-transparent border-b-2 border-white/10 text-center text-3xl font-mono tracking-[0.5em] focus:border-accent-blue outline-none py-2"
+                      className="w-full bg-transparent border-b-2 border-white/10 text-center text-3xl font-mono tracking-[0.5em] focus:border-accent-blue outline-none py-2 text-white"
                       placeholder="000000"
                     />
                   </div>
@@ -195,7 +218,7 @@ export default function RoadmapAuthModal({ isOpen, onClose }: { isOpen: boolean;
                   <button
                     onClick={handleVerifyCode}
                     disabled={isLoading || enteredCode.length !== 6}
-                    className="w-full py-3.5 bg-white text-black font-bold rounded-xl text-xs uppercase tracking-widest flex items-center justify-center gap-2"
+                    className="w-full py-3.5 bg-white text-black font-bold rounded-xl text-xs uppercase tracking-widest flex items-center justify-center gap-2 disabled:opacity-50"
                   >
                     {isLoading ? <Loader2 className="animate-spin" size={14} /> : 'Verify Code'}
                   </button>
@@ -209,14 +232,14 @@ export default function RoadmapAuthModal({ isOpen, onClose }: { isOpen: boolean;
                     placeholder="New Password"
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
-                    className="w-full px-4 py-3.5 bg-bg-tertiary/50 border border-white/5 rounded-xl outline-none focus:border-accent-blue/50 text-sm"
+                    className="w-full px-4 py-3.5 bg-bg-tertiary/50 border border-white/5 rounded-xl outline-none focus:border-accent-blue/50 text-sm text-white placeholder:text-text-muted"
                   />
                   <input
                     type="password"
                     placeholder="Confirm New Password"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="w-full px-4 py-3.5 bg-bg-tertiary/50 border border-white/5 rounded-xl outline-none focus:border-accent-blue/50 text-sm"
+                    className="w-full px-4 py-3.5 bg-bg-tertiary/50 border border-white/5 rounded-xl outline-none focus:border-accent-blue/50 text-sm text-white placeholder:text-text-muted"
                   />
                   {error && <p className="text-[10px] text-red-500 font-bold text-center">{error}</p>}
                   <button className="w-full py-3.5 bg-accent-blue text-white font-bold rounded-xl text-xs uppercase tracking-widest">
@@ -230,13 +253,13 @@ export default function RoadmapAuthModal({ isOpen, onClose }: { isOpen: boolean;
                   <div className="w-16 h-16 bg-green-500/10 border border-green-500/30 text-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
                     <CheckCircle size={32} />
                   </div>
-                  <h4 className="font-bold text-lg">Password Changed</h4>
-                  <p className="text-xs text-text-secondary">Your credentials have been updated and a confirmation email has been sent.</p>
+                  <h4 className="font-bold text-lg text-white tracking-tight">Access Restored</h4>
+                  <p className="text-[11px] text-text-secondary">Your credentials have been updated and a confirmation email has been dispatched.</p>
                   <button 
                     onClick={() => { setView('login'); setError(''); }}
                     className="w-full py-3.5 bg-white text-black font-bold rounded-xl text-xs uppercase tracking-widest"
                   >
-                    Return to Login
+                    Proceed to Login
                   </button>
                 </div>
               )}

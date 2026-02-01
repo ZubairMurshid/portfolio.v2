@@ -41,6 +41,7 @@ const roadmapNodes: RoadmapNode[] = [
 export default function RoadmapPage() {
   const [completedNodes, setCompletedNodes] = useState<Set<string>>(new Set());
   const [ongoingNodes, setOngoingNodes] = useState<Set<string>>(new Set());
+  const [isLoadingState, setIsLoadingState] = useState(true);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -57,11 +58,23 @@ export default function RoadmapPage() {
   });
 
   useEffect(() => {
-    const savedCompleted = localStorage.getItem('completedRoadmapNodes');
-    if (savedCompleted) setCompletedNodes(new Set(JSON.parse(savedCompleted)));
+    // Fetch global state from persistent storage
+    const fetchGlobalState = async () => {
+      try {
+        const response = await fetch('/api/roadmap');
+        if (response.ok) {
+          const data = await response.json();
+          setCompletedNodes(new Set(data.completed || []));
+          setOngoingNodes(new Set(data.ongoing || []));
+        }
+      } catch (error) {
+        console.error('Failed to fetch roadmap state:', error);
+      } finally {
+        setIsLoadingState(false);
+      }
+    };
 
-    const savedOngoing = localStorage.getItem('ongoingRoadmapNodes');
-    if (savedOngoing) setOngoingNodes(new Set(JSON.parse(savedOngoing)));
+    fetchGlobalState();
 
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });

@@ -1,4 +1,3 @@
-
 'use client';
 
 import React from 'react';
@@ -6,7 +5,6 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail, Globe, Sparkles } from 'lucide-react';
 import ParticleCanvas from './ParticleCanvas';
-import GlitchText from './GlitchText';
 
 const MotionDiv = motion.div as any;
 const MotionH1 = motion.h1 as any;
@@ -37,7 +35,7 @@ export default function Hero() {
             transition={{ delay: 0.2, duration: 1, ease: "easeOut" }}
             className="font-sans text-5xl md:text-8xl lg:text-9xl font-extrabold leading-tight mb-8 tracking-tighter"
           >
-            Zubair <GlitchText text="Murshid" />
+            Zubair <span className="gradient-text">Murshid</span>
           </MotionH1>
 
           <MotionP 

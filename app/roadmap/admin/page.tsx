@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Save, LogOut, CheckCircle2, Circle, Clock, LayoutDashboard } from 'lucide-react';
+import { Save, LogOut, CheckCircle2, Circle, Clock, LayoutDashboard, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const MotionDiv = motion.div as any;
@@ -36,46 +36,74 @@ export default function RoadmapAdmin() {
   const router = useRouter();
   const [statuses, setStatuses] = useState<Record<string, Status>>({});
   const [isSaving, setIsSaving] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Auth check
     const isAuthed = sessionStorage.getItem('roadmap_admin_authed');
     if (!isAuthed) {
       router.push('/roadmap');
       return;
     }
 
-    // Load existing data
-    const completed = JSON.parse(localStorage.getItem('completedRoadmapNodes') || '[]');
-    const ongoing = JSON.parse(localStorage.getItem('ongoingRoadmapNodes') || '[]');
-    
-    const initialStatuses: Record<string, Status> = {};
-    nodes.forEach(node => {
-      if (completed.includes(node.id)) initialStatuses[node.id] = 'completed';
-      else if (ongoing.includes(node.id)) initialStatuses[node.id] = 'ongoing';
-      else initialStatuses[node.id] = 'not-started';
-    });
-    setStatuses(initialStatuses);
+    const loadData = async () => {
+      try {
+        const response = await fetch('/api/roadmap');
+        if (response.ok) {
+          const data = await response.json();
+          const initialStatuses: Record<string, Status> = {};
+          nodes.forEach(node => {
+            if (data.completed?.includes(node.id)) initialStatuses[node.id] = 'completed';
+            else if (data.ongoing?.includes(node.id)) initialStatuses[node.id] = 'ongoing';
+            else initialStatuses[node.id] = 'not-started';
+          });
+          setStatuses(initialStatuses);
+        }
+      } catch (err) {
+        console.error('Failed to load roadmap state');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    loadData();
   }, [router]);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     setIsSaving(true);
     const completed = nodes.filter(n => statuses[n.id] === 'completed').map(n => n.id);
     const ongoing = nodes.filter(n => statuses[n.id] === 'ongoing').map(n => n.id);
     
-    localStorage.setItem('completedRoadmapNodes', JSON.stringify(completed));
-    localStorage.setItem('ongoingRoadmapNodes', JSON.stringify(ongoing));
+    try {
+      const res = await fetch('/api/roadmap', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ completed, ongoing })
+      });
 
-    setTimeout(() => {
+      if (res.ok) {
+        alert('Global progress synchronized successfully!');
+      } else {
+        alert('Failed to save progress.');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Network error during save.');
+    } finally {
       setIsSaving(false);
-      alert('Progress synchronized successfully!');
-    }, 800);
+    }
   };
 
   const handleLogout = () => {
     sessionStorage.removeItem('roadmap_admin_authed');
     router.push('/roadmap');
   };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-[#020204] flex items-center justify-center">
+        <Loader2 className="animate-spin text-accent-blue" size={32} />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#020204] pt-32 pb-20 px-6">
@@ -93,13 +121,13 @@ export default function RoadmapAdmin() {
             <button
               onClick={handleSave}
               disabled={isSaving}
-              className="flex items-center gap-2 px-6 py-2.5 bg-white text-black rounded-xl font-bold text-xs uppercase tracking-widest hover:scale-105 transition-all disabled:opacity-50"
+              className="flex items-center gap-2 px-6 py-2.5 bg-white text-black rounded-xl font-mono text-xs uppercase tracking-widest hover:scale-105 transition-all disabled:opacity-50"
             >
-              {isSaving ? 'Syncing...' : <><Save size={16} /> Save Changes</>}
+              {isSaving ? <Loader2 className="animate-spin" size={16} /> : <><Save size={16} /> Save Changes</>}
             </button>
             <button
               onClick={handleLogout}
-              className="flex items-center gap-2 px-6 py-2.5 border border-red-500/20 text-red-500 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-red-500/10 transition-all"
+              className="flex items-center gap-2 px-6 py-2.5 border border-red-500/20 text-red-500 rounded-xl font-mono text-xs uppercase tracking-widest hover:bg-red-500/10 transition-all"
             >
               <LogOut size={16} /> Logout
             </button>
