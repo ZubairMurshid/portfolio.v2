@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, User, Book, Code, Briefcase, Mail, FileText, Menu, X, Map } from 'lucide-react';
+import { Home, User, Book, Code, Briefcase, Mail, FileText, Menu, X, Map, Github, Linkedin } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 // Fix: Using 'as any' to suppress motion property type errors
@@ -24,22 +24,19 @@ const navLinks = [
 ];
 
 export default function NavBar() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  if (!mounted) return null;
 
   return (
     <>
+      {/* Desktop NavBar */}
       <div className="hidden md:flex fixed top-8 left-0 right-0 justify-center z-50 pointer-events-none">
         <MotionNav
           initial={{ y: -100, opacity: 0 }}
@@ -94,48 +91,84 @@ export default function NavBar() {
         </MotionNav>
       </div>
 
-      {/* Mobile NavBar Update */}
-      <div className="md:hidden fixed top-0 left-0 right-0 z-40 p-4 flex justify-between items-center">
-        <Link 
-          href="/" 
-          className="text-xl font-sans font-black tracking-tighter bg-bg-secondary/80 backdrop-blur-xl p-3 rounded-2xl border border-white/10 shadow-chrome"
-        >
-          Z<span className="text-white">M</span>
-        </Link>
-      </div>
+      {/* Mobile NavBar - Premium Tech Style */}
+      <div className="md:hidden fixed top-0 left-0 right-0 z-50">
+        <div className="flex justify-between items-center h-14 px-6 bg-bg-primary/80 backdrop-blur-xl border-b border-white/5 shadow-lg">
+          {/* Logo Left */}
+          <Link 
+            href="/" 
+            className="text-lg font-sans font-black tracking-tighter"
+            onClick={() => setIsOpen(false)}
+          >
+            Z<span className="text-white">M</span>
+          </Link>
 
-      <div className="md:hidden fixed bottom-6 right-6 z-50">
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="w-14 h-14 rounded-2xl bg-white text-black shadow-2xl flex items-center justify-center transition-all active:scale-90"
-        >
-          <AnimatePresence mode="wait">
-             {isOpen ? <X size={24} key="x"/> : <Menu size={24} key="m"/>}
-          </AnimatePresence>
-        </button>
-        
+          {/* Icons Right */}
+          <div className="flex items-center gap-6">
+            <a 
+              href="https://github.com/ZubairMurshid" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-text-muted hover:text-white transition-colors"
+            >
+              <Github size={20} />
+            </a>
+            <a 
+              href="https://linkedin.com/in/itszubairmurshid" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-text-muted hover:text-white transition-colors"
+            >
+              <Linkedin size={20} />
+            </a>
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-white transition-all active:scale-90"
+              aria-label="Toggle Menu"
+            >
+              <AnimatePresence mode="wait">
+                 {isOpen ? <X size={20} key="x"/> : <Menu size={20} key="m"/>}
+              </AnimatePresence>
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Menu Overlay */}
         <AnimatePresence>
           {isOpen && (
             <MotionDiv
-              initial={{ opacity: 0, y: 20, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 20, scale: 0.9 }}
-              className="absolute bottom-20 right-0 w-64 bg-bg-secondary/90 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-2xl p-4 space-y-2 overflow-hidden"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="bg-bg-secondary/95 backdrop-blur-3xl border-b border-white/10 overflow-hidden shadow-2xl"
             >
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.path}
-                  onClick={() => setIsOpen(false)}
-                  className={cn(
-                    'flex items-center gap-4 px-4 py-3 rounded-2xl transition-all',
-                    pathname === link.path ? 'bg-white/10 text-white' : 'text-text-muted'
-                  )}
-                >
-                  {link.icon}
-                  <span className="text-xs font-bold uppercase tracking-widest">{link.name}</span>
-                </Link>
-              ))}
+              <nav className="p-6 grid grid-cols-2 gap-3">
+                {navLinks.map((link) => {
+                  const isActive = pathname === link.path;
+                  return (
+                    <Link
+                      key={link.name}
+                      href={link.path}
+                      onClick={() => setIsOpen(false)}
+                      className={cn(
+                        'flex flex-col items-center justify-center gap-2 p-5 rounded-2xl transition-all border',
+                        isActive 
+                          ? 'bg-white/10 border-white/20 text-white shadow-chrome' 
+                          : 'bg-white/5 border-transparent text-text-muted hover:bg-white/10'
+                      )}
+                    >
+                      <div className={isActive ? "text-white" : "text-text-muted"}>
+                        {link.icon}
+                      </div>
+                      <span className="text-[10px] font-bold uppercase tracking-[0.2em]">{link.name}</span>
+                    </Link>
+                  );
+                })}
+              </nav>
+              <div className="p-6 pt-0 text-center opacity-30">
+                 <span className="text-[9px] font-mono uppercase tracking-[0.5em] text-text-muted">Engineering Precision // V1.2</span>
+              </div>
             </MotionDiv>
           )}
         </AnimatePresence>
