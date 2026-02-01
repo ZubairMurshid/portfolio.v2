@@ -28,13 +28,14 @@ export default function Footer() {
           </div>
 
           {/* CV Button - Right */}
-          <Link 
-            href="/cv.pdf" 
+          <a 
+            href="https://drive.google.com/open?id=1XPoUEtnq1HKDNZ-_MHBxOTzoo4AvSjhX&usp=drive_fs" 
             target="_blank"
+            rel="noopener noreferrer"
             className="px-5 py-2 rounded-full bg-accent-blue/10 border border-accent-blue/30 text-accent-blue hover:bg-accent-blue hover:text-white transition-all text-xs font-semibold uppercase tracking-wider"
           >
-            Download CV
-          </Link>
+            View CV
+          </a>
         </div>
         
         <div className="text-center text-text-muted text-[10px] mt-6 opacity-60">

@@ -61,12 +61,14 @@ export default function Hero() {
               >
                 Explore Work
               </Link>
-              <Link 
-                href="/contact" 
-                className="px-10 py-3.5 min-w-[180px] text-xs uppercase tracking-widest border border-white/20 text-white rounded-full font-bold hover:bg-white/5 transition-all hover:scale-105 active:scale-95"
+              <a 
+                href="https://drive.google.com/open?id=1XPoUEtnq1HKDNZ-_MHBxOTzoo4AvSjhX&usp=drive_fs" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-10 py-3.5 min-w-[180px] text-xs uppercase tracking-widest border border-white/20 text-white rounded-full font-bold hover:bg-white/5 transition-all hover:scale-105 active:scale-95 text-center"
               >
-                Contact
-              </Link>
+                View CV
+              </a>
             </div>
             
             <Link 
