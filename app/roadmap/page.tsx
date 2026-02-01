@@ -3,7 +3,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, Circle, ChevronDown, Rocket, ShieldCheck, Cpu, Lock, Clock } from 'lucide-react';
+import { CheckCircle2, Circle, ChevronDown, Rocket, ShieldCheck, Cpu, Lock, Clock, Settings } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import RoadmapAuthModal from '@/components/RoadmapAuthModal';
 
@@ -58,7 +58,6 @@ export default function RoadmapPage() {
   });
 
   useEffect(() => {
-    // Fetch global state from persistent storage
     const fetchGlobalState = async () => {
       try {
         const response = await fetch('/api/roadmap');
@@ -83,7 +82,6 @@ export default function RoadmapPage() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // SVG Path parameters
   const heightPerNode = 220;
   const totalHeight = roadmapNodes.length * heightPerNode + 200;
   const curveWidth = 140;
@@ -103,16 +101,7 @@ export default function RoadmapPage() {
 
   return (
     <div className="bg-[#020204] min-h-screen text-[#F8F9FA] relative" ref={containerRef}>
-      {/* Admin Login Button - Adjusted to not overlap fixed navbar */}
-      <button 
-        onClick={() => setIsAuthOpen(true)}
-        className="fixed top-20 md:top-10 right-6 md:right-10 z-40 p-3 rounded-full bg-white/5 border border-white/10 text-white/40 hover:text-white hover:border-white/30 transition-all backdrop-blur-md shadow-2xl"
-        title="Admin Login"
-      >
-        <Lock size={18} />
-      </button>
-
-      {/* Auth Modal */}
+      {/* Auth Modal triggered via footer link */}
       <RoadmapAuthModal isOpen={isAuthOpen} onClose={() => setIsAuthOpen(false)} />
 
       {/* Spotlight Effect */}
@@ -143,7 +132,6 @@ export default function RoadmapPage() {
           </div>
         </div>
 
-        {/* Roadmap Path Container */}
         <div className="relative mx-auto max-w-4xl">
           <svg
             className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none overflow-visible"
@@ -167,7 +155,6 @@ export default function RoadmapPage() {
             />
           </svg>
 
-          {/* Nodes */}
           <div className="relative z-10">
             {roadmapNodes.map((node, i) => {
               const isCompleted = completedNodes.has(node.id);
@@ -233,10 +220,22 @@ export default function RoadmapPage() {
           </div>
         </div>
         
-        <div className="mt-40 text-center">
-          <ChevronDown className="mx-auto text-white/10 animate-bounce mb-8" size={32} />
-          <div className="inline-block px-12 py-6 bg-white/5 border border-white/10 text-white font-bold rounded-2xl shadow-chrome uppercase tracking-widest text-xs backdrop-blur-xl">
-            Continuously Synchronizing with Modern Tech
+        <div className="mt-40 text-center flex flex-col items-center gap-12">
+          <ChevronDown className="mx-auto text-white/10 animate-bounce" size={32} />
+          
+          <div className="flex flex-col items-center gap-6">
+            <div className="inline-block px-12 py-6 bg-white/5 border border-white/10 text-white font-bold rounded-2xl shadow-chrome uppercase tracking-widest text-xs backdrop-blur-xl">
+              Continuously Synchronizing with Modern Tech
+            </div>
+
+            {/* Discreet Admin Button */}
+            <button 
+              onClick={() => setIsAuthOpen(true)}
+              className="group flex items-center gap-2 px-6 py-3 rounded-xl border border-white/5 text-white/20 hover:text-white hover:border-white/20 transition-all duration-500"
+            >
+              <Settings size={14} className="group-hover:rotate-90 transition-transform duration-500" />
+              <span className="font-mono text-[10px] uppercase tracking-[0.3em]">Admin Access</span>
+            </button>
           </div>
         </div>
       </div>
