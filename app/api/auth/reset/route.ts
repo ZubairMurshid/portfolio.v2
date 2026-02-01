@@ -6,15 +6,30 @@ const KV_URL = process.env.KV_REST_API_URL;
 const KV_TOKEN = process.env.KV_REST_API_TOKEN;
 
 async function kvFetch(command: any[]) {
-  const response = await fetch(`${KV_URL}`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${KV_TOKEN}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(command),
-  });
-  return response.json();
+  if (!KV_URL || !KV_TOKEN) {
+    console.warn('KV Environment variables are missing. Falling back to defaults.');
+    return { result: null };
+  }
+  
+  try {
+    const response = await fetch(`${KV_URL}`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${KV_TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(command),
+    });
+    
+    if (!response.ok) {
+      throw new Error(`KV API Error: ${response.statusText}`);
+    }
+    
+    return response.json();
+  } catch (err) {
+    console.error('kvFetch failed:', err);
+    return { result: null };
+  }
 }
 
 const TARGET_EMAIL = 'zubairmurshid69@gmail.com';
@@ -22,8 +37,27 @@ const TARGET_EMAIL = 'zubairmurshid69@gmail.com';
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { action, username, password, email, code, newPassword } = body;
+    const { action, username, password, code, newPassword } = body;
 
+    // 1. LOGIN ACTION
+    if (action === 'login') {
+      let currentPassword = 'roadmapedit';
+      try {
+        const storedPass = await kvFetch(['GET', 'admin_password']);
+        if (storedPass && storedPass.result) {
+          currentPassword = storedPass.result;
+        }
+      } catch (e) {
+        console.warn('Using default fallback password');
+      }
+      
+      if (username === 'zubairmur' && password === currentPassword) {
+        return NextResponse.json({ success: true });
+      }
+      return NextResponse.json({ error: 'Invalid credentials. Use zubairmur/roadmapedit' }, { status: 401 });
+    }
+
+    // Email-based actions require Nodemailer
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -32,22 +66,15 @@ export async function POST(request: Request) {
       },
     });
 
-    // 1. LOGIN ACTION
-    if (action === 'login') {
-      const storedPass = await kvFetch(['GET', 'admin_password']);
-      const currentPassword = storedPass.result || 'roadmapedit';
-      
-      if (username === 'zubairmur' && password === currentPassword) {
-        return NextResponse.json({ success: true });
-      }
-      return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
-    }
-
     // 2. SEND VERIFICATION CODE
     if (action === 'send-code') {
+      if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+        return NextResponse.json({ error: 'Email provider not configured in .env' }, { status: 500 });
+      }
+
       const generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
       
-      // Store code in KV for 10 minutes
+      // Attempt to store in KV, if available
       await kvFetch(['SETEX', `reset_code_${TARGET_EMAIL}`, 600, generatedCode]);
 
       await transporter.sendMail({
@@ -72,7 +99,7 @@ export async function POST(request: Request) {
     // 3. VERIFY CODE
     if (action === 'verify-code') {
       const storedCode = await kvFetch(['GET', `reset_code_${TARGET_EMAIL}`]);
-      if (storedCode.result === code) {
+      if (storedCode && storedCode.result === code) {
         return NextResponse.json({ success: true });
       }
       return NextResponse.json({ error: 'Invalid or expired code' }, { status: 400 });
@@ -80,16 +107,13 @@ export async function POST(request: Request) {
 
     // 4. RESET PASSWORD
     if (action === 'reset-password') {
-      // Re-verify code to be safe
       const storedCode = await kvFetch(['GET', `reset_code_${TARGET_EMAIL}`]);
-      if (storedCode.result !== code) {
-        return NextResponse.json({ error: 'Verification expired' }, { status: 403 });
+      if (!storedCode || storedCode.result !== code) {
+        return NextResponse.json({ error: 'Verification session expired' }, { status: 403 });
       }
 
       // Update password in KV
       await kvFetch(['SET', 'admin_password', newPassword]);
-      
-      // Delete used code
       await kvFetch(['DEL', `reset_code_${TARGET_EMAIL}`]);
 
       // Send confirmation
@@ -110,8 +134,11 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json({ error: 'Unknown action' }, { status: 400 });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Auth API Error:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json({ 
+      error: 'Internal server error', 
+      details: error.message 
+    }, { status: 500 });
   }
 }
