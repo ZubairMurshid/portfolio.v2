@@ -8,9 +8,7 @@ export default function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
-  // We use raw motion values for X and Y to ensure 1:1 mapping with the hardware cursor.
-  // Using useSpring here, even with high stiffness, adds a physical "follow" delay.
-  // Passing raw motion values to the 'style' prop updates the transform directly without React re-renders.
+  // Raw motion values for zero-latency tracking (hardware sync)
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
@@ -19,7 +17,6 @@ export default function CustomCursor() {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
       
-      // Batch visibility check
       if (!isVisible) setIsVisible(true);
     };
 
@@ -68,30 +65,30 @@ export default function CustomCursor() {
     >
       <MotionDiv
         animate={{
-          scale: isHovering ? 1.25 : 1,
+          scale: isHovering ? 1.2 : 1,
         }}
         transition={{ 
           type: "spring", 
-          stiffness: 1000, 
-          damping: 40,
-          mass: 0.2
+          stiffness: 1200, 
+          damping: 50,
+          mass: 0.1
         }}
         className="relative -top-[1px] -left-[1px]"
       >
-        {/* Adjusted Pointer Shape: Vertical, sharp, and plain white as requested */}
+        {/* Refined Pointer: Smaller size (20x20) for better precision, plain white */}
         <svg 
-          width="28" 
-          height="28" 
+          width="20" 
+          height="20" 
           viewBox="0 0 24 24" 
           fill="none" 
           xmlns="http://www.w3.org/2000/svg"
-          className="drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]"
+          className="drop-shadow-[0_2px_3px_rgba(0,0,0,0.4)]"
         >
           <path 
-            d="M4 2 L4 21 L9.5 15.5 L17 15.5 L4 2 Z" 
+            d="M4 2 L4 20 L9 15 L16 15 L4 2 Z" 
             fill="white" 
             stroke="white" 
-            strokeWidth="1" 
+            strokeWidth="1.2" 
             strokeLinecap="round" 
             strokeLinejoin="round"
           />
