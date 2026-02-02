@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { motion, useMotionValue } from 'framer-motion';
 
 const MotionDiv = motion.div as any;
 
@@ -8,19 +8,18 @@ export default function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
-  // High-performance motion values bypass React's render loop for every pixel movement
+  // We use raw motion values for X and Y to ensure 1:1 mapping with the hardware cursor.
+  // Using useSpring here, even with high stiffness, adds a physical "follow" delay.
+  // Passing raw motion values to the 'style' prop updates the transform directly without React re-renders.
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
-
-  // "Ultra Snappy" spring settings: Even higher stiffness, minimal damping for 1:1 feel
-  const springConfig = { stiffness: 1500, damping: 60, mass: 0.05 };
-  const springX = useSpring(cursorX, springConfig);
-  const springY = useSpring(cursorY, springConfig);
 
   useEffect(() => {
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
+      
+      // Batch visibility check
       if (!isVisible) setIsVisible(true);
     };
 
@@ -31,7 +30,8 @@ export default function CustomCursor() {
         target.tagName === 'BUTTON' ||
         target.closest('button') || 
         target.closest('a') ||
-        target.classList.contains('cursor-pointer')
+        target.classList.contains('cursor-pointer') ||
+        target.getAttribute('role') === 'button'
       ) {
         setIsHovering(true);
       } else {
@@ -42,7 +42,7 @@ export default function CustomCursor() {
     const handleMouseLeave = () => setIsVisible(false);
     const handleMouseEnter = () => setIsVisible(true);
 
-    window.addEventListener("mousemove", moveCursor);
+    window.addEventListener("mousemove", moveCursor, { passive: true });
     window.addEventListener("mouseover", handleMouseOver);
     document.addEventListener("mouseleave", handleMouseLeave);
     document.addEventListener("mouseenter", handleMouseEnter);
@@ -53,7 +53,7 @@ export default function CustomCursor() {
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("mouseenter", handleMouseEnter);
     };
-  }, [cursorX, cursorY, isVisible]);
+  }, [isVisible, cursorX, cursorY]);
 
   if (typeof window === 'undefined') return null;
 
@@ -61,32 +61,37 @@ export default function CustomCursor() {
     <MotionDiv
       className="fixed top-0 left-0 z-[9999] pointer-events-none hidden md:block"
       style={{
-        x: springX,
-        y: springY,
+        x: cursorX,
+        y: cursorY,
         opacity: isVisible ? 1 : 0,
       }}
     >
       <MotionDiv
         animate={{
-          scale: isHovering ? 1.2 : 1,
+          scale: isHovering ? 1.25 : 1,
         }}
-        transition={{ type: "spring", stiffness: 600, damping: 40 }}
+        transition={{ 
+          type: "spring", 
+          stiffness: 1000, 
+          damping: 40,
+          mass: 0.2
+        }}
         className="relative -top-[1px] -left-[1px]"
       >
-        {/* Adjusted Pointer Shape: More vertical, refined for better ergonomics */}
+        {/* Adjusted Pointer Shape: Vertical, sharp, and plain white as requested */}
         <svg 
-          width="24" 
-          height="24" 
+          width="28" 
+          height="28" 
           viewBox="0 0 24 24" 
           fill="none" 
           xmlns="http://www.w3.org/2000/svg"
-          className="drop-shadow-[0_2px_5px_rgba(0,0,0,0.5)]"
+          className="drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]"
         >
           <path 
-            d="M3 3 L3 19 L7.5 14.5 L14 14.5 L3 3 Z" 
+            d="M4 2 L4 21 L9.5 15.5 L17 15.5 L4 2 Z" 
             fill="white" 
             stroke="white" 
-            strokeWidth="1.5" 
+            strokeWidth="1" 
             strokeLinecap="round" 
             strokeLinejoin="round"
           />
