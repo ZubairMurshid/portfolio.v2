@@ -5,170 +5,184 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, User, Book, Code, Briefcase, Mail, FileText, Menu, X, Map, Github, Linkedin } from 'lucide-react';
+import { Orbit, Menu, X, Github, Linkedin, Copy, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-// Fix: Using 'as any' to suppress motion property type errors
 const MotionDiv = motion.div as any;
-const MotionNav = motion.nav as any;
 
 const navLinks = [
-  { name: 'Home', path: '/', icon: <Home size={18} /> },
-  { name: 'About', path: '/about', icon: <User size={18} /> },
-  { name: 'Skills', path: '/skills', icon: <Book size={18} /> },
-  { name: 'Roadmap', path: '/roadmap', icon: <Map size={18} /> },
-  { name: 'Projects', path: '/projects', icon: <Code size={18} /> },
-  { name: 'Exp', path: '/experience', icon: <Briefcase size={18} /> },
-  { name: 'Blog', path: '/blog', icon: <FileText size={18} /> },
-  { name: 'Contact', path: '/contact', icon: <Mail size={18} /> },
+  { name: 'Work', path: '/projects' },
+  { name: 'About', path: '/about' },
+  { name: 'Roadmap', path: '/roadmap' },
+  { name: 'Blog', path: '/blog' },
 ];
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [copyState, setCopyState] = useState<'idle' | 'hover' | 'copied'>('idle');
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
+  const email = "zubairmurshid@icloud.com";
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  const handleCopy = () => {
+    navigator.clipboard.writeText(email);
+    setCopyState('copied');
+    setTimeout(() => setCopyState('idle'), 2000);
+  };
+
   if (!mounted) return null;
 
   return (
     <>
-      {/* Desktop NavBar */}
-      <div className="hidden md:flex fixed top-8 left-0 right-0 justify-center z-50 pointer-events-none">
-        <MotionNav
-          initial={{ y: -100, opacity: 0 }}
+      {/* Desktop NavBar - Pill Design */}
+      <div className="fixed top-8 left-0 right-0 hidden md:flex justify-center z-[100] px-4">
+        <MotionDiv
+          initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          className={cn(
-            "pointer-events-auto flex items-center gap-2 p-1.5 rounded-full border transition-all duration-500",
-            "bg-bg-secondary/40 backdrop-blur-2xl shadow-chrome border-white/10"
-          )}
+          className="flex items-center gap-2 p-1 bg-black border border-white/10 rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
         >
-          <Link 
-            href="/" 
-            className="pl-5 pr-3 flex items-center gap-1 font-sans font-black text-lg tracking-tighter hover:opacity-80 transition-opacity"
-          >
-            Z<span className="text-white">M</span>
+          {/* Logo Circle */}
+          <Link href="/">
+            <MotionDiv 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-11 h-11 bg-white rounded-full flex items-center justify-center text-black"
+            >
+              <Orbit size={20} />
+            </MotionDiv>
           </Link>
 
-          <div className="w-[1px] h-5 bg-white/10 mx-2" />
-
-          <ul className="flex items-center gap-1">
+          {/* Nav Items */}
+          <nav className="flex items-center px-4 gap-1">
             {navLinks.map((link) => {
               const isActive = pathname === link.path;
               return (
-                <li key={link.name}>
-                  <Link
-                    href={link.path}
-                    className={cn(
-                      "relative px-5 py-2 rounded-full text-[11px] uppercase tracking-widest font-bold transition-all",
-                      isActive ? "text-white" : "text-text-muted hover:text-white"
-                    )}
-                  >
-                    {isActive && (
-                      <MotionDiv
-                        layoutId="activePill"
-                        className="absolute inset-0 bg-white/10 shadow-chrome rounded-full"
-                        transition={{ type: "spring", bounce: 0.1, duration: 0.6 }}
-                      />
-                    )}
-                    <span className="relative z-10">{link.name}</span>
-                  </Link>
-                </li>
+                <Link
+                  key={link.name}
+                  href={link.path}
+                  className="relative px-5 py-2 group"
+                >
+                  <span className={cn(
+                    "text-[13px] font-medium transition-colors duration-300 relative z-10",
+                    isActive ? "text-white" : "text-white/60 group-hover:text-white"
+                  )}>
+                    {link.name}
+                  </span>
+                  {isActive && (
+                    <MotionDiv
+                      layoutId="navPill"
+                      className="absolute inset-0 bg-white/10 rounded-full"
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    />
+                  )}
+                </Link>
               );
             })}
-          </ul>
+          </nav>
 
-          <div className="w-[1px] h-5 bg-white/10 mx-2" />
-          
-          <div className="pr-4">
-            <span className="text-[10px] font-mono text-text-muted uppercase tracking-[0.2em] font-bold opacity-40">
-              V1.2
-            </span>
-          </div>
-        </MotionNav>
-      </div>
-
-      {/* Mobile NavBar - Premium Tech Style */}
-      <div className="md:hidden fixed top-0 left-0 right-0 z-50">
-        <div className="flex justify-between items-center h-14 px-6 bg-bg-primary/80 backdrop-blur-xl border-b border-white/5 shadow-lg">
-          {/* Logo Left */}
-          <Link 
-            href="/" 
-            className="text-lg font-sans font-black tracking-tighter"
-            onClick={() => setIsOpen(false)}
-          >
-            Z<span className="text-white">M</span>
-          </Link>
-
-          {/* Icons Right */}
-          <div className="flex items-center gap-6">
-            <a 
-              href="https://github.com/ZubairMurshid" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-text-muted hover:text-white transition-colors"
-            >
-              <Github size={20} />
-            </a>
-            <a 
-              href="https://linkedin.com/in/itszubairmurshid" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-text-muted hover:text-white transition-colors"
-            >
-              <Linkedin size={20} />
-            </a>
+          {/* Email Button */}
+          <div className="pl-2 pr-1">
             <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-white transition-all active:scale-90"
-              aria-label="Toggle Menu"
+              onClick={handleCopy}
+              onMouseEnter={() => copyState !== 'copied' && setCopyState('hover')}
+              onMouseLeave={() => copyState !== 'copied' && setCopyState('idle')}
+              className={cn(
+                "h-11 min-w-[180px] px-6 rounded-full font-medium text-[13px] transition-all duration-300 flex items-center justify-center gap-2",
+                copyState === 'copied' ? "bg-green-500 text-white" : "bg-white text-black hover:bg-white/90"
+              )}
             >
               <AnimatePresence mode="wait">
-                 {isOpen ? <X size={20} key="x"/> : <Menu size={20} key="m"/>}
+                {copyState === 'idle' && (
+                  <motion.span 
+                    key="email"
+                    initial={{ opacity: 0, y: 5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -5 }}
+                  >
+                    {email}
+                  </motion.span>
+                )}
+                {copyState === 'hover' && (
+                  <motion.span 
+                    key="copy"
+                    initial={{ opacity: 0, y: 5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -5 }}
+                    className="flex items-center gap-2"
+                  >
+                    <Copy size={14} /> Copy this email
+                  </motion.span>
+                )}
+                {copyState === 'copied' && (
+                  <motion.span 
+                    key="copied"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    className="flex items-center gap-2"
+                  >
+                    <Check size={14} /> Copied
+                  </motion.span>
+                )}
               </AnimatePresence>
+            </button>
+          </div>
+        </MotionDiv>
+      </div>
+
+      {/* Mobile NavBar */}
+      <div className="md:hidden fixed top-0 left-0 right-0 z-[100]">
+        <div className="flex justify-between items-center h-16 px-6 bg-black/90 backdrop-blur-xl border-b border-white/10">
+          <Link href="/" className="flex items-center gap-2">
+            <div className="w-9 h-9 bg-white rounded-full flex items-center justify-center text-black">
+              <Orbit size={18} />
+            </div>
+            <span className="font-bold text-white tracking-tighter">ZM</span>
+          </Link>
+
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="w-10 h-10 flex items-center justify-center text-white bg-white/10 rounded-full"
+            >
+              {isOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Menu Overlay */}
         <AnimatePresence>
           {isOpen && (
             <MotionDiv
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="bg-bg-secondary/95 backdrop-blur-3xl border-b border-white/10 overflow-hidden shadow-2xl"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="absolute top-16 left-0 right-0 bg-black border-b border-white/10 p-6 flex flex-col gap-4"
             >
-              <nav className="p-6 grid grid-cols-2 gap-3">
-                {navLinks.map((link) => {
-                  const isActive = pathname === link.path;
-                  return (
-                    <Link
-                      key={link.name}
-                      href={link.path}
-                      onClick={() => setIsOpen(false)}
-                      className={cn(
-                        'flex flex-col items-center justify-center gap-2 p-5 rounded-2xl transition-all border',
-                        isActive 
-                          ? 'bg-white/10 border-white/20 text-white shadow-chrome' 
-                          : 'bg-white/5 border-transparent text-text-muted hover:bg-white/10'
-                      )}
-                    >
-                      <div className={isActive ? "text-white" : "text-text-muted"}>
-                        {link.icon}
-                      </div>
-                      <span className="text-[10px] font-bold uppercase tracking-[0.2em]">{link.name}</span>
-                    </Link>
-                  );
-                })}
-              </nav>
-              <div className="p-6 pt-0 text-center opacity-30">
-                 <span className="text-[9px] font-mono uppercase tracking-[0.5em] text-text-muted">Engineering Precision // V1.2</span>
-              </div>
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.path}
+                  onClick={() => setIsOpen(false)}
+                  className={cn(
+                    "text-lg font-medium p-4 rounded-2xl transition-all",
+                    pathname === link.path ? "bg-white text-black" : "text-white/60 hover:text-white hover:bg-white/5"
+                  )}
+                >
+                  {link.name}
+                </Link>
+              ))}
+              <div className="h-px bg-white/10 my-2" />
+              <button
+                onClick={handleCopy}
+                className="w-full p-4 rounded-2xl bg-white text-black font-bold flex items-center justify-center gap-2"
+              >
+                {copyState === 'copied' ? <Check size={18} /> : <Copy size={18} />}
+                {copyState === 'copied' ? 'Copied' : email}
+              </button>
             </MotionDiv>
           )}
         </AnimatePresence>
