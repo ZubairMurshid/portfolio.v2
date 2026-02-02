@@ -12,8 +12,8 @@ export default function CustomCursor() {
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
-  // "Ultra Snappy" spring settings: High stiffness, low damping for instant but smooth following
-  const springConfig = { stiffness: 1000, damping: 50, mass: 0.1 };
+  // "Ultra Snappy" spring settings: Even higher stiffness, minimal damping for 1:1 feel
+  const springConfig = { stiffness: 1500, damping: 60, mass: 0.05 };
   const springX = useSpring(cursorX, springConfig);
   const springY = useSpring(cursorY, springConfig);
 
@@ -68,26 +68,25 @@ export default function CustomCursor() {
     >
       <MotionDiv
         animate={{
-          scale: isHovering ? 1.4 : 1,
-          rotate: isHovering ? -5 : 0,
+          scale: isHovering ? 1.2 : 1,
         }}
-        transition={{ type: "spring", stiffness: 400, damping: 30 }}
-        className="relative -top-1 -left-1"
+        transition={{ type: "spring", stiffness: 600, damping: 40 }}
+        className="relative -top-[1px] -left-[1px]"
       >
-        {/* Custom White Pointer Shape from Reference */}
+        {/* Adjusted Pointer Shape: More vertical, refined for better ergonomics */}
         <svg 
           width="24" 
           height="24" 
           viewBox="0 0 24 24" 
           fill="none" 
           xmlns="http://www.w3.org/2000/svg"
-          className="drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]"
+          className="drop-shadow-[0_2px_5px_rgba(0,0,0,0.5)]"
         >
           <path 
-            d="M3 3L21 11L13 13L11 21L3 3Z" 
+            d="M3 3 L3 19 L7.5 14.5 L14 14.5 L3 3 Z" 
             fill="white" 
             stroke="white" 
-            strokeWidth="2" 
+            strokeWidth="1.5" 
             strokeLinecap="round" 
             strokeLinejoin="round"
           />
