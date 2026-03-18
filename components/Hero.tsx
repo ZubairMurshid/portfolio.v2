@@ -24,16 +24,31 @@ export default function Hero() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="inline-block px-5 py-1.5 mb-4 lg:mb-8 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-accent-chrome text-[10px] font-mono tracking-[0.2em] uppercase"
+            className="inline-block px-6 py-2 mb-8 lg:mb-12 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-accent-chrome text-xs font-mono tracking-[0.2em] uppercase shadow-sm"
           >
             Engineering Precise Solutions
+          </MotionDiv>
+
+          <MotionDiv 
+            initial={{ opacity: 0, scale: 0.8, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.8, ease: "easeOut" }}
+            className="flex justify-center mb-8"
+          >
+            <div className="relative w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 rounded-full overflow-hidden border border-white/20 shadow-2xl">
+              <img 
+                src="/profilepic.JPG" 
+                alt="Zubair Murshid" 
+                className="w-full h-full object-cover"
+              />
+            </div>
           </MotionDiv>
 
           <MotionH1 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 1, ease: "easeOut" }}
-            className="font-sans text-5xl md:text-8xl lg:text-9xl font-extrabold leading-tight mb-8 tracking-tighter"
+            className="font-sans text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold leading-tight mb-10 tracking-tighter"
           >
             Zubair <span className="gradient-text">Murshid</span>
           </MotionH1>
@@ -42,22 +57,21 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 1 }}
-            className="text-text-secondary text-base md:text-lg max-w-xl mx-auto mb-12 font-medium tracking-tight"
+            className="text-text-secondary text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto mb-16 font-medium tracking-tight"
           >
-            Software Engineer & Cybersecurity Enthusiast. <br className="hidden md:block"/>
-            Crafting high-integrity digital architectures.
+            Software Engineer & Cybersecurity Enthusiast.
           </MotionP>
 
           <MotionDiv 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7 }}
-            className="flex flex-col gap-5 justify-center items-center"
+            className="flex flex-col gap-6 justify-center items-center"
           >
-            <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
               <Link 
                 href="/projects" 
-                className="px-10 py-3.5 min-w-[180px] text-xs uppercase tracking-widest bg-white text-black rounded-full font-bold hover:bg-accent-chrome transition-all hover:scale-105 active:scale-95 shadow-xl"
+                className="px-12 py-4 min-w-[200px] text-sm uppercase tracking-widest bg-white text-black rounded-full font-bold hover:bg-accent-chrome transition-all hover:scale-105 active:scale-95 shadow-xl"
               >
                 Explore Work
               </Link>
@@ -65,7 +79,7 @@ export default function Hero() {
                 href="https://drive.google.com/open?id=1XPoUEtnq1HKDNZ-_MHBxOTzoo4AvSjhX&usp=drive_fs" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-10 py-3.5 min-w-[180px] text-xs uppercase tracking-widest border border-white/20 text-white rounded-full font-bold hover:bg-white/5 transition-all hover:scale-105 active:scale-95 text-center"
+                className="px-12 py-4 min-w-[200px] text-sm uppercase tracking-widest border border-white/20 text-white rounded-full font-bold hover:bg-white/5 transition-all hover:scale-105 active:scale-95 text-center"
               >
                 View CV
               </a>
@@ -73,11 +87,11 @@ export default function Hero() {
             
             <Link 
               href="/roadmap" 
-              className="group relative px-8 py-3 rounded-full overflow-hidden flex items-center gap-3 transition-all hover:scale-105 active:scale-95"
+              className="group relative px-10 py-4 rounded-full overflow-hidden flex items-center gap-3 transition-all hover:scale-105 active:scale-95 mt-2"
             >
               <div className="absolute inset-0 bg-white/5 backdrop-blur-md border border-white/10 group-hover:bg-white/10 transition-colors" />
-              <Sparkles size={16} className="text-yellow-500 relative z-10" />
-              <span className="text-[10px] uppercase font-bold tracking-widest text-text-muted group-hover:text-white relative z-10">
+              <Sparkles size={18} className="text-yellow-500 relative z-10" />
+              <span className="text-xs uppercase font-bold tracking-widest text-text-muted group-hover:text-white relative z-10">
                 Look at how i'm levelling up for my internship
               </span>
             </Link>

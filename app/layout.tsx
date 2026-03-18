@@ -8,7 +8,6 @@ import Footer from '@/components/Footer';
 import CustomCursor from '@/components/CustomCursor';
 import ScrollProgress from '@/components/ScrollProgress';
 import CommandPalette from '@/components/CommandPalette';
-import { ReviewFloatingButton } from '@/components/ReviewSystem';
 import { cn } from '@/lib/utils';
 
 // Premium high-end sans-serif alternative to Google Sans
@@ -46,7 +45,6 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
-          <ReviewFloatingButton />
         </ThemeProvider>
       </body>
     </html>

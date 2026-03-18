@@ -8,6 +8,20 @@ const MotionDiv = motion.div as any;
 
 const projects = [
   {
+    slug: 'save-our-seas',
+    title: 'Save Our Seas - SDG Web Project',
+    category: ['web', 'html', 'css', 'js'],
+    desc: 'Marine ecosystem conservation initiative with volunteer portal and educational content.',
+    status: 'Completed'
+  },
+  {
+    slug: 'dynamic-book-finder',
+    title: 'Dynamic Book Finder',
+    category: ['react', 'web', 'api'],
+    desc: 'React app powered by Google Books API with Context API for local persistence.',
+    status: 'Completed'
+  },
+  {
     slug: 'eventlk',
     title: 'EventLK',
     category: ['ai', 'web'],
@@ -18,14 +32,7 @@ const projects = [
     slug: 'task-manager',
     title: 'Personal Task Manager',
     category: ['python', 'oop'],
-    desc: 'Multi-stage task management with CRUD and persistence',
-    status: 'Completed'
-  },
-  {
-    slug: 'sdg-web',
-    title: 'SDG Web Project',
-    category: ['web'],
-    desc: 'Collaborative multi-page website for Sustainable Development Goals',
+    desc: 'A four-stage Python application demonstrating progression from simple list manipulation to a full-featured Object-Oriented GUI.',
     status: 'Completed'
   }
 ];
@@ -42,7 +49,7 @@ export default function ProjectsPage() {
       <h1 className="text-5xl font-display font-bold mb-8">Projects</h1>
       
       <div className="flex flex-wrap gap-4 mb-12">
-        {['all', 'ai', 'web', 'python', 'oop'].map(f => (
+        {['all', 'ai', 'web', 'python', 'oop', 'react', 'api', 'html', 'css', 'js'].map(f => (
           <button
             key={f}
             onClick={() => setFilter(f)}

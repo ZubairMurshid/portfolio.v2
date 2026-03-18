@@ -1,65 +1,57 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Code, Shield, Globe } from 'lucide-react';
 
 const MotionDiv = motion.div as any;
 
-const nodes = [
+const services = [
   {
     id: 'dev',
     title: 'Software Dev',
-    icon: <Code size={32} />,
-    desc: 'Java, Python, OOP',
-    gradientClass: 'from-blue-500 to-cyan-500',
-    hoverBgClass: 'group-hover:opacity-10'
+    icon: <Code size={38} className="text-white/80" strokeWidth={1.5} />,
+    desc: 'Building robust, scalable applications with clean object-oriented design in Java and Python.',
   },
   {
     id: 'sec',
     title: 'Cybersecurity',
-    icon: <Shield size={32} />,
-    desc: 'Network Security, Ethical Hacking',
-    gradientClass: 'from-emerald-500 to-teal-500',
-    hoverBgClass: 'group-hover:opacity-10'
+    icon: <Shield size={38} className="text-white/80" strokeWidth={1.5} />,
+    desc: 'Implementing defensive architectures and ethical hacking strategies to secure modern infrastructure.',
   },
   {
     id: 'web',
     title: 'Web Engineering',
-    icon: <Globe size={32} />,
-    desc: 'Next.js, React, Tailwind',
-    gradientClass: 'from-violet-500 to-purple-500',
-    hoverBgClass: 'group-hover:opacity-10'
+    icon: <Globe size={38} className="text-white/80" strokeWidth={1.5} />,
+    desc: 'Crafting high-performance, responsive full-stack platforms using Next.js, React, and Tailwind.',
   },
 ];
 
 export default function VisualMap() {
-  const [activeNode, setActiveNode] = useState<string | null>(null);
-
   return (
-    <div className="py-12 relative">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {nodes.map((node) => (
+    <div className="w-full">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+        {services.map((service, i) => (
           <MotionDiv
-            key={node.id}
-            whileHover={{ scale: 1.05, y: -5 }}
-            className={`relative p-8 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm cursor-pointer overflow-hidden group`}
-            onMouseEnter={() => setActiveNode(node.id)}
-            onMouseLeave={() => setActiveNode(null)}
+            key={service.id}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.15, duration: 0.6 }}
+            viewport={{ once: true }}
+            className="flex flex-col items-center group cursor-default"
           >
-            {/* Explicitly using style for dynamic gradients if classes fail, but classes are preferred */}
-            <div className={`absolute inset-0 opacity-0 ${node.hoverBgClass} bg-gradient-to-br ${node.gradientClass} transition-opacity duration-300`} />
-            
-            <div className="flex flex-col items-center text-center relative z-10">
-              <div className={`p-4 rounded-full bg-gradient-to-br ${node.gradientClass} text-white mb-4 shadow-lg`}>
-                {node.icon}
-              </div>
-              <h3 className="text-xl font-bold font-display mb-2">{node.title}</h3>
-              <p className="text-text-secondary">{node.desc}</p>
+            {/* Minimalist Icon without background */}
+            <div className="mb-6 opacity-70 group-hover:opacity-100 transition-opacity duration-300">
+              {service.icon}
             </div>
-
-            {/* Connecting lines effect (visual only) */}
-            <div className="absolute top-1/2 -right-4 w-8 h-px bg-accent-blue/20 hidden md:block last:hidden" />
+            
+            <h3 className="text-lg md:text-xl font-display font-medium text-white mb-4 tracking-wide">
+              {service.title}
+            </h3>
+            
+            <p className="text-text-secondary text-sm leading-relaxed max-w-xs mx-auto opacity-70 group-hover:opacity-100 transition-opacity duration-300">
+              {service.desc}
+            </p>
           </MotionDiv>
         ))}
       </div>

@@ -9,6 +9,16 @@ module.exports = {
   ],
   darkMode: ['class', '[data-theme="dark"]'],
   theme: {
+    container: {
+      center: true,
+      screens: {
+        sm: '640px',
+        md: '768px',
+        lg: '896px',
+        xl: '896px',
+        '2xl': '896px',
+      },
+    },
     extend: {
       fontFamily: {
         sans: ['var(--font-sans)', 'sans-serif'],

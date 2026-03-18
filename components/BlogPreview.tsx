@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowRight, Calendar, Clock } from 'lucide-react';
+import { ArrowUpRight, Clock } from 'lucide-react';
 
 const MotionDiv = motion.div as any;
 
@@ -39,57 +39,57 @@ const posts = [
 
 export default function BlogPreview() {
   return (
-    <section className="py-20 border-t border-white/5">
-      <div className="flex justify-between items-end mb-12">
-        <div>
-          <span className="text-[10px] font-mono uppercase tracking-[0.4em] text-[#64748B]">Section 04 // Insights</span>
-          <h2 className="text-4xl font-sans font-extrabold mt-2 tracking-tighter">Latest Logs</h2>
+    <section className="py-20 mt-12 w-full max-w-4xl mx-auto">
+      {/* Top Pill Button */}
+      <div className="flex justify-start mb-12">
+        <div className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-text-muted text-[10px] font-mono tracking-widest uppercase shadow-sm">
+          Featured Blogs
         </div>
-        <Link href="/blog" className="hidden md:flex items-center gap-3 text-text-secondary hover:text-white transition-all group font-bold text-xs uppercase tracking-widest">
-          View All <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-        </Link>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-px bg-white/5 border border-white/10">
+      {/* Blogs List */}
+      <div className="flex flex-col border-t border-white/10">
         {posts.map((post, i) => (
           <MotionDiv
             key={post.slug}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1 }}
-            className="group bg-bg-primary p-8 hover:bg-white/[0.02] transition-colors"
+            viewport={{ once: true }}
           >
-            <div className="aspect-[16/10] mb-8 overflow-hidden border border-white/5 relative grayscale group-hover:grayscale-0 transition-all duration-700">
-              <img 
-                src={post.image} 
-                alt={post.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-bg-primary/20" />
-            </div>
-            
-            <div className="flex items-center gap-4 text-[9px] font-mono uppercase tracking-widest text-[#64748B] mb-4">
-              <span className="text-white border-b border-white/20 pb-0.5">{post.category}</span>
-              <span>{post.date}</span>
-            </div>
-
-            <h3 className="text-xl font-bold font-sans mb-4 tracking-tight group-hover:text-white transition-colors">
-              {post.title}
-            </h3>
-            <p className="text-text-secondary text-sm mb-6 line-clamp-2 leading-relaxed font-medium">
-              {post.excerpt}
-            </p>
-            
-            <Link href={`/blog/${post.slug}`} className="inline-flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-white/40 group-hover:text-white transition-colors">
-              READ LOG <ArrowRight size={12} />
+            <Link 
+              href={`/blog/${post.slug}`} 
+              className="group flex flex-col md:flex-row items-start md:items-center justify-between py-6 md:py-8 border-b border-white/10 hover:bg-white/[0.02] transition-colors relative"
+            >
+              <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-12 flex-grow">
+                {/* Date */}
+                <span className="text-[#A1A1AA] md:w-28 text-sm md:text-base font-mono tracking-tight group-hover:text-white transition-colors">
+                  {post.date}
+                </span>
+                
+                {/* Title */}
+                <h3 className="text-white font-bold text-lg md:text-xl tracking-tight group-hover:text-accent-blue transition-colors">
+                  {post.title}
+                </h3>
+              </div>
+              
+              {/* Read Time */}
+              <div className="flex items-center gap-2 text-[#A1A1AA] text-sm mt-4 md:mt-0 font-mono group-hover:text-white transition-colors whitespace-nowrap">
+                <Clock size={16} strokeWidth={1.5} />
+                <span>{post.readTime}</span>
+              </div>
             </Link>
           </MotionDiv>
         ))}
       </div>
       
-      <div className="mt-8 text-center md:hidden">
-        <Link href="/blog" className="inline-flex items-center gap-2 text-white font-bold text-xs uppercase tracking-widest">
-          View All <ArrowRight size={18} />
+      {/* Bottom Button */}
+      <div className="flex justify-center mt-12">
+        <Link 
+          href="/blog" 
+          className="px-6 py-2.5 rounded-full border border-white/10 bg-white/5 text-text-muted hover:text-white hover:bg-white/10 transition-all text-sm font-medium flex items-center gap-2"
+        >
+          View all blogs <ArrowUpRight size={16} />
         </Link>
       </div>
     </section>
