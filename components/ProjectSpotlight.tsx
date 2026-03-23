@@ -17,33 +17,35 @@ export default function ProjectSpotlight() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(59,130,246,0.15),transparent_50%)] pointer-events-none" />
       
       <div className="relative z-10 flex flex-col gap-8 lg:gap-10">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
-          <div className="max-w-2xl">
+        <div className="flex flex-col gap-8">
+          <div className="w-full">
             <div className="flex items-center gap-3 text-accent-blue mb-4 md:mb-6">
               <div className="w-8 h-[2px] bg-accent-blue/50" />
               <span className="text-[10px] font-bold uppercase tracking-[0.3em]">Signature Project</span>
             </div>
             <h2 className="text-4xl md:text-6xl font-sans font-extrabold mb-4 md:mb-6 tracking-tighter text-white">EventLK</h2>
-            <p className="text-text-secondary md:text-xl leading-relaxed font-medium mb-8">
+            <p className="text-text-secondary md:text-xl leading-relaxed font-medium mb-8  w-full">
               An AI-powered event management platform for universities. Built with a robust full-stack architecture, featuring a predictive machine learning microservice (Python/Scikit-Learn) that automates venue recommendations and budget planning.
             </p>
             
-            <div className="flex flex-wrap gap-3">
-              {['React', 'Python', 'Machine Learning', 'Full-Stack', 'PostgreSQL'].map(tag => (
-                <span key={tag} className="px-4 py-1.5 rounded-full bg-accent-blue/10 text-accent-blue text-[11px] font-bold uppercase tracking-widest border border-accent-blue/20">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
+            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+              <div className="flex flex-wrap gap-3">
+                {['React', 'Python', 'Machine Learning', 'Full-Stack', 'PostgreSQL'].map(tag => (
+                  <span key={tag} className="px-4 py-1.5 rounded-full bg-accent-blue/10 text-accent-blue text-[11px] font-bold uppercase tracking-widest border border-accent-blue/20">
+                    {tag}
+                  </span>
+                ))}
+              </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
-            <a href="https://www.eventlk.com" target="_blank" rel="noopener noreferrer" className="inline-flex justify-center items-center gap-3 px-8 py-4 rounded-full bg-transparent border border-white/20 text-white font-bold text-xs uppercase tracking-widest hover:bg-white/10 transition-all hover:scale-105 active:scale-95 whitespace-nowrap shadow-xl">
-              Live Demo <ExternalLink size={16} />
-            </a>
-            <Link href="/projects/eventlk" className="inline-flex justify-center items-center gap-3 px-8 py-4 rounded-full bg-white text-black font-bold text-xs uppercase tracking-widest hover:bg-accent-chrome transition-all hover:scale-105 active:scale-95 whitespace-nowrap shadow-xl">
-              Case Study <ArrowRight size={16} />
-            </Link>
+              <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+                <a href="https://www.eventlk.com" target="_blank" rel="noopener noreferrer" className="inline-flex justify-center items-center gap-3 px-8 py-4 rounded-full bg-transparent border border-white/20 text-white font-bold text-xs uppercase tracking-widest hover:bg-white/10 transition-all hover:scale-105 active:scale-95 whitespace-nowrap shadow-xl">
+                  Live Demo <ExternalLink size={16} />
+                </a>
+                <Link href="/projects/eventlk" className="inline-flex justify-center items-center gap-3 px-8 py-4 rounded-full bg-white text-black font-bold text-xs uppercase tracking-widest hover:bg-accent-chrome transition-all hover:scale-105 active:scale-95 whitespace-nowrap shadow-xl">
+                  Case Study <ArrowRight size={16} />
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
         
