@@ -24,7 +24,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata = {
-  title: 'Zubair Murshid | Cinematic Portfolio',
+  title: 'Zubair Murshid ',
   description: 'High-end Computer Science Undergraduate Portfolio with a cinematic spotlight aesthetic.',
 };
 
