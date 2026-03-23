@@ -29,7 +29,7 @@ export default function Footer() {
 
           {/* CV Button - Right */}
           <a 
-            href="https://drive.google.com/open?id=1XPoUEtnq1HKDNZ-_MHBxOTzoo4AvSjhX&usp=drive_fs" 
+            href="https://drive.google.com/file/d/1HyVApWaZHT9tpFgMpw7ez2xYnBFpRJGf/view?usp=sharing" 
             target="_blank"
             rel="noopener noreferrer"
             className="px-5 py-2 rounded-full bg-accent-blue/10 border border-accent-blue/30 text-accent-blue hover:bg-accent-blue hover:text-white transition-all text-xs font-semibold uppercase tracking-wider"
