@@ -7,18 +7,18 @@ import { useState } from 'react';
 const MotionDiv = motion.div as any;
 
 const skills = [
-  { name: 'Java', level: 85, category: 'Backend' },
-  { name: 'Python', level: 80, category: 'Backend' },
+  { name: 'Java (OOP)', level: 85, category: 'Backend' },
+  { name: 'JavaScript', level: 85, category: 'Frontend' },
   { name: 'React/Next.js', level: 85, category: 'Frontend' },
-  { name: 'TypeScript', level: 75, category: 'Frontend' },
-  { name: 'Tailwind CSS', level: 90, category: 'Frontend' },
-  { name: 'MySQL', level: 80, category: 'Database' },
-  { name: 'Git/GitHub', level: 85, category: 'Tools' },
+  { name: 'Node.js', level: 75, category: 'Backend' },
+  { name: 'Python (AI/ML)', level: 80, category: 'Backend' },
+  { name: 'MySQL / SQL', level: 80, category: 'Database' },
+  { name: 'Git/GitHub', level: 90, category: 'Version Control' },
+  { name: 'AWS', level: 65, category: 'Cloud' },
   { name: 'Docker', level: 60, category: 'DevOps' },
-  { name: 'Linux', level: 70, category: 'OS' },
-  { name: 'Cybersecurity', level: 75, category: 'Security' },
-  { name: 'Figma', level: 80, category: 'Design' },
-  { name: 'Node.js', level: 70, category: 'Backend' },
+  { name: 'Agile / Scrum', level: 85, category: 'Practices' },
+  { name: 'Software Testing', level: 70, category: 'Practices' },
+  { name: 'REST APIs', level: 85, category: 'Architecture' }
 ];
 
 export default function SkillsHeatmap() {

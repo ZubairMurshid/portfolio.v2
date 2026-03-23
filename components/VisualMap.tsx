@@ -2,29 +2,14 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code, Shield, Globe } from 'lucide-react';
+import { Code, Brain, Cloud } from 'lucide-react';
 
 const MotionDiv = motion.div as any;
 
 const services = [
-  {
-    id: 'dev',
-    title: 'Software Dev',
-    icon: <Code size={38} className="text-white/80" strokeWidth={1.5} />,
-    desc: 'Building robust, scalable applications with clean object-oriented design in Java and Python.',
-  },
-  {
-    id: 'sec',
-    title: 'Cybersecurity',
-    icon: <Shield size={38} className="text-white/80" strokeWidth={1.5} />,
-    desc: 'Implementing defensive architectures and ethical hacking strategies to secure modern infrastructure.',
-  },
-  {
-    id: 'web',
-    title: 'Web Engineering',
-    icon: <Globe size={38} className="text-white/80" strokeWidth={1.5} />,
-    desc: 'Crafting high-performance, responsive full-stack platforms using Next.js, React, and Tailwind.',
-  },
+  { id: 'fullstack', title: 'Full-Stack Engineering', icon: <Code size={38} className="text-white/80" strokeWidth={1.5} />, desc: 'Building robust, scalable applications with clean object-oriented design using Java, JavaScript, React, and Node.js.' },
+  { id: 'ai', title: 'AI & Data Pipelines', icon: <Brain size={38} className="text-white/80" strokeWidth={1.5} />, desc: 'Designing and implementing intelligent microservices and predictive modeling pipelines using Python.' },
+  { id: 'cloud', title: 'Cloud & Infrastructure', icon: <Cloud size={38} className="text-white/80" strokeWidth={1.5} />, desc: 'Architecting reliable client-server databases with SQL and exploring modern cloud containerization (AWS/Docker).' }
 ];
 
 export default function VisualMap() {

@@ -6,10 +6,10 @@ import { motion } from 'framer-motion';
 const MotionDiv = motion.div as any;
 
 const cards = [
-  { title: "Current Role", content: "CS Undergrad" },
-  { title: "Building", content: "EventLK Platform" },
-  { title: "Specialization", content: "Software & Security" },
-  { title: "Availability", content: "Open to Work" }
+  { title: "Current Target", content: "Software Eng Intern" },
+  { title: "Building", content: "EventLK (AI Platform)" },
+  { title: "Specialization", content: "Full-Stack & Cloud" },
+  { title: "Core Stack", content: "Java & React/Node" }
 ];
 
 export default function AboutSnapshot() {

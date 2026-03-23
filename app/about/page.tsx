@@ -8,24 +8,23 @@ export default function AboutPage() {
         
         <div className="prose prose-lg dark:prose-invert">
           <p className="lead text-2xl text-accent-blue font-light mb-8">
-            Passionate Computer Science undergraduate with strong skills in programming, databases, and system design.
+            Passionate Computer Science undergraduate specializing in full-stack development and AI-driven solutions.
           </p>
           
           <p className="text-text-secondary text-lg leading-relaxed mb-6">
             I am currently pursuing my Bachelor of Science in Computer Science at the Informatics Institute of Technology. 
-            My academic journey has equipped me with a solid foundation in software development, web technologies, and security principles.
+            My academic journey has equipped me with a solid foundation in Object-Oriented Programming (Java, Python), modern full-stack web technologies (JavaScript, React, Node.js), and relational database design.
           </p>
 
           <p className="text-text-secondary text-lg leading-relaxed mb-12">
             I excel at working in collaborative environments and delivering solutions in team settings. 
-            Currently, I am expanding my expertise in cybersecurity while seeking an industry placement to apply my technical abilities 
-            to real-world projects.
+            Currently, I am getting hands-on experience designing predictive modeling pipelines and expanding my expertise in cloud computing infrastructure (AWS) and containerization while seeking a Software Engineering Internship.
           </p>
 
           <div className="grid md:grid-cols-3 gap-6 not-prose">
-            <HighlightBox icon="🎓" title="Academic Excellence" desc="Strong foundation in CS fundamentals" />
-            <HighlightBox icon="🔒" title="Security Focus" desc="Expanding cybersecurity expertise" />
-            <HighlightBox icon="👥" title="Team Player" desc="Collaborative problem solver" />
+            <HighlightBox icon="💻" title="Full-Stack Engineering" desc="Java, React, and Node.js architectures" />
+            <HighlightBox icon="🧠" title="AI Integration" desc="Building predictive modeling pipelines" />
+            <HighlightBox icon="🔄" title="Agile Collaboration" desc="Team leadership and testing principles" />
           </div>
         </div>
       </div>

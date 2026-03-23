@@ -13,8 +13,9 @@ const MotionDiv = motion.div as any;
 const navLinks = [
   { name: 'Work', path: '/projects' },
   { name: 'About', path: '/about' },
-  { name: 'Roadmap', path: '/roadmap' },
+  { name: 'Skills', path: '/skills' },
   { name: 'Blog', path: '/blog' },
+  { name: 'Contact', path: '/contact' },
 ];
 
 export default function NavBar() {

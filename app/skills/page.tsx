@@ -2,20 +2,9 @@
 'use client';
 
 import React from 'react';
-import RadarChart from '@/components/RadarChart';
-import SkillsHeatmap from '@/components/SkillsHeatmap';
 import { motion } from 'framer-motion';
 
 const MotionDiv = motion.div as any;
-
-const radarSkills = [
-  { name: 'Programming', value: 85 },
-  { name: 'Web Dev', value: 80 },
-  { name: 'Database', value: 80 },
-  { name: 'Security', value: 75 },
-  { name: 'Problem Solving', value: 85 },
-  { name: 'Team Work', value: 90 }
-];
 
 export default function SkillsPage() {
   return (
@@ -34,56 +23,37 @@ export default function SkillsPage() {
         </p>
       </header>
 
-      <div className="grid lg:grid-cols-12 gap-12 mb-32 items-start">
-        <div className="lg:col-span-7">
-          <div className="flex items-center gap-3 mb-10">
-            <span className="font-mono text-[11px] uppercase tracking-widest text-[#64748B]">01 // Proficiency Matrix</span>
-            <div className="h-[1px] flex-grow bg-white/5" />
-          </div>
-          
-          <div className="space-y-12">
-            <SkillBar name="Java & Python" level={85} category="Languages" />
-            <SkillBar name="Web Tech (React/TS)" level={80} category="Frontend" />
-            <SkillBar name="Database (MySQL)" level={80} category="Infra" />
-            <SkillBar name="Cybersecurity" level={75} category="Security" />
-            <SkillBar name="Software Arch" level={75} category="Design" />
-          </div>
-        </div>
-
-        <MotionDiv 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="lg:col-span-5 p-8 border border-white/10 relative group"
-        >
-          {/* Blueprint Corner Marks */}
-          <div className="absolute -top-[1px] -left-[1px] w-4 h-4 border-l border-t border-white/40" />
-          <div className="absolute -bottom-[1px] -right-[1px] w-4 h-4 border-r border-b border-white/40" />
-          
-          <div className="w-full">
-             <h3 className="text-center font-mono font-bold mb-8 text-[#64748B] uppercase tracking-[0.3em] text-[10px]">Vector Analysis</h3>
-             <RadarChart skills={radarSkills} />
-          </div>
-        </MotionDiv>
-      </div>
-
       <div className="mb-32">
         <div className="flex items-center gap-3 mb-10">
-          <span className="font-mono text-[11px] uppercase tracking-widest text-[#64748B]">02 // Detailed Inventory</span>
+          <span className="font-mono text-[11px] uppercase tracking-widest text-[#64748B]">01 // Core Technologies</span>
           <div className="h-[1px] flex-grow bg-white/5" />
         </div>
-        <SkillsHeatmap />
+        
+        <div className="grid md:grid-cols-2 border-t border-white/10">
+          <SkillCategory 
+            title="Core Stack" 
+            items={['Java', 'JavaScript', 'Python', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'MySQL', 'Git', 'Postman', 'GitHub', 'VS Code', 'IntelliJ IDEA']} 
+            index="01A"
+          />
+          <SkillCategory 
+            title="Currently Learning" 
+            items={['Next.js', 'Node.js', 'PostgreSQL', 'AWS', 'Docker']} 
+            index="01B"
+            className="md:border-l md:border-white/10"
+          />
+        </div>
       </div>
 
       <div className="grid md:grid-cols-2 border-t border-white/10">
         <SkillCategory 
           title="Tools & Software" 
-          items={['IntelliJ', 'VS Code', 'GitHub', 'Figma', 'XAMPP', 'Notion', 'ClickUp', 'WordPress']} 
-          index="03"
+          items={['Figma', 'XAMPP', 'Notion', 'ClickUp', 'WordPress']} 
+          index="02"
         />
         <SkillCategory 
           title="Soft Skills" 
           items={['Team Leadership', 'Collaboration', 'Technical Communication', 'Time Management', 'Detail-Oriented', 'Creative Thinking']} 
-          index="04"
+          index="03"
           className="md:border-l md:border-white/10"
         />
       </div>
@@ -91,30 +61,7 @@ export default function SkillsPage() {
   );
 }
 
-function SkillBar({ name, level, category }: { name: string; level: number; category: string }) {
-  return (
-    <div className="group">
-      <div className="flex justify-between items-end mb-3">
-        <div>
-          <span className="block font-mono text-[9px] uppercase tracking-tighter text-[#64748B] mb-1">{category}</span>
-          <span className="font-bold text-lg text-[#F8F9FA] tracking-tight">{name}</span>
-        </div>
-        <span className="font-mono text-xs text-text-muted">{level}%</span>
-      </div>
-      <div className="h-[2px] bg-white/5 w-full relative overflow-hidden">
-        {/* Shimmer Effect */}
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite]" />
-        
-        <MotionDiv 
-          initial={{ width: 0 }}
-          whileInView={{ width: `${level}%` }}
-          transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-          className="h-full bg-white/40"
-        />
-      </div>
-    </div>
-  );
-}
+
 
 function SkillCategory({ title, items, index, className = "" }: { title: string; items: string[]; index: string; className?: string }) {
   return (

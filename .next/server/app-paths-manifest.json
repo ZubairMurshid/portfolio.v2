@@ -1,8 +1,7 @@
 {
-  "/projects/page": "app/projects/page.js",
-  "/projects/dynamic-book-finder/page": "app/projects/dynamic-book-finder/page.js",
-  "/projects/[slug]/page": "app/projects/[slug]/page.js",
-  "/projects/save-our-seas/page": "app/projects/save-our-seas/page.js",
   "/page": "app/page.js",
-  "/projects/task-manager/page": "app/projects/task-manager/page.js"
+  "/about/page": "app/about/page.js",
+  "/blog/page": "app/blog/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/blog/[slug]/page": "app/blog/[slug]/page.js"
 }

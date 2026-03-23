@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail, Globe, Sparkles } from 'lucide-react';
+import { Github, Linkedin, Mail, Globe, Sparkles, BadgeCheck } from 'lucide-react';
 import ParticleCanvas from './ParticleCanvas';
 
 const MotionDiv = motion.div as any;
@@ -18,7 +18,7 @@ export default function Hero() {
       <ParticleCanvas />
       
       <div className="container mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center h-full">
-        <div className="lg:col-span-10 lg:col-start-2 text-center pt-10 lg:pt-20">
+        <div className="lg:col-span-10 lg:col-start-2 text-center pb-12 lg:pb-32">
           
           <MotionDiv 
             initial={{ opacity: 0, y: 10 }}
@@ -48,9 +48,10 @@ export default function Hero() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 1, ease: "easeOut" }}
-            className="font-sans text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold leading-tight mb-10 tracking-tighter"
+            className="font-sans text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold leading-tight mb-10 tracking-tighter flex items-center justify-center gap-2 md:gap-4"
           >
-            Zubair <span className="gradient-text">Murshid</span>
+            <span>Zubair <span className="gradient-text">Murshid</span></span>
+            
           </MotionH1>
 
           <MotionP 
@@ -76,7 +77,7 @@ export default function Hero() {
                 Explore Work
               </Link>
               <a 
-                href="https://drive.google.com/open?id=1XPoUEtnq1HKDNZ-_MHBxOTzoo4AvSjhX&usp=drive_fs" 
+                href="https://drive.google.com/file/d/1HyVApWaZHT9tpFgMpw7ez2xYnBFpRJGf/view?usp=sharing" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-12 py-4 min-w-[200px] text-sm uppercase tracking-widest border border-white/20 text-white rounded-full font-bold hover:bg-white/5 transition-all hover:scale-105 active:scale-95 text-center"
@@ -85,16 +86,7 @@ export default function Hero() {
               </a>
             </div>
             
-            <Link 
-              href="/roadmap" 
-              className="group relative px-10 py-4 rounded-full overflow-hidden flex items-center gap-3 transition-all hover:scale-105 active:scale-95 mt-2"
-            >
-              <div className="absolute inset-0 bg-white/5 backdrop-blur-md border border-white/10 group-hover:bg-white/10 transition-colors" />
-              <Sparkles size={18} className="text-yellow-500 relative z-10" />
-              <span className="text-xs uppercase font-bold tracking-widest text-text-muted group-hover:text-white relative z-10">
-                Look at how i'm levelling up for my internship
-              </span>
-            </Link>
+
           </MotionDiv>
         </div>
 
