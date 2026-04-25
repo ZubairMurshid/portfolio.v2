@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, ArrowRight } from "lucide-react";
 
 const MotionDiv = motion.div as any;
 
@@ -76,10 +76,10 @@ export default function ProjectsPage() {
       : projects.filter((p) => p.category.includes(filter));
 
   return (
-    <div className="container mx-auto px-6 pt-32 min-h-screen">
-      <h1 className="text-5xl font-display font-bold mb-8">Projects</h1>
+    <div className="container mx-auto px-6 pt-32 min-h-screen max-w-4xl">
+      <h1 className="text-5xl font-display font-bold mb-12">Projects</h1>
 
-      <div className="flex flex-wrap gap-4 mb-12">
+      <div className="flex flex-wrap gap-2 mb-16">
         {[
           "all",
           "fullstack",
@@ -97,10 +97,10 @@ export default function ProjectsPage() {
           <button
             key={f}
             onClick={() => setFilter(f)}
-            className={`px-6 py-2 rounded-full border transition-all uppercase text-sm font-semibold tracking-wide ${
+            className={`px-3 py-1 rounded transition-colors uppercase text-xs tracking-wider ${
               filter === f
-                ? "bg-accent-blue text-white border-accent-blue"
-                : "border-accent-blue/30 text-text-secondary hover:border-accent-blue"
+                ? "bg-white/10 text-white font-bold"
+                : "text-text-muted hover:text-text-secondary hover:bg-white/5"
             }`}
           >
             {f}
@@ -108,79 +108,58 @@ export default function ProjectsPage() {
         ))}
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 pb-32">
+      <div className="flex flex-col border-t border-white/10 pb-32">
         {filteredProjects.map((project, i) => (
           <MotionDiv
             key={project.slug}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.1 }}
-            className={`glass-panel p-8 rounded-2xl hover:-translate-y-2 transition-transform duration-300 flex flex-col ${
-              i === 0 && filter === "all"
-                ? "md:col-span-2 lg:col-span-3 border-accent-blue/30 bg-accent-blue/5"
-                : ""
-            }`}
+            transition={{ delay: i * 0.05 }}
+            className="group flex flex-col sm:flex-row sm:items-start justify-between gap-4 py-6 border-b border-white/10 hover:bg-white/[0.02] transition-colors"
           >
-            <div className="flex justify-between items-start mb-4">
-              <span className="text-4xl">
-                {project.category.includes("ai")
-                  ? "🤖"
-                  : project.category.includes("react")
-                    ? "⚛️"
-                    : project.category.includes("python")
-                      ? "🐍"
-                      : project.category.includes("java")
-                        ? "☕"
-                        : project.category.includes("backend")
-                          ? "🛠️"
-                          : project.category.includes("cli")
-                            ? "⌘"
-                            : project.category.includes("algorithm")
-                              ? "🧮"
-                              : "🌐"}
+            <div className="flex gap-4 sm:gap-6 items-start max-w-3xl">
+              <span className="text-text-muted/50 font-mono text-sm mt-1 flex-shrink-0 w-6 text-right">
+                {String(i + 1).padStart(2, "0")}
               </span>
-              <span
-                className={`px-3 py-1 rounded-full text-xs font-bold uppercase border ${
-                  project.status === "Live"
-                    ? "bg-green-500/10 text-green-500 border-green-500/20 shadow-[0_0_10px_rgba(34,197,94,0.2)]"
-                    : project.status === "Completed"
-                      ? "bg-accent-blue/10 text-accent-blue border-accent-blue/20"
-                      : project.status === "In Progress"
-                        ? "bg-amber-500/10 text-amber-400 border-amber-500/20"
-                        : "bg-white/10 text-white border-white/20"
-                }`}
-              >
-                {project.status}
-              </span>
+              
+              <div className="flex flex-col">
+                <div className="flex flex-wrap items-center gap-3 mb-1">
+                  <Link 
+                    href={`/projects/${project.slug}`} 
+                    className="text-lg md:text-xl font-bold group-hover:text-accent-blue transition-colors"
+                  >
+                    {project.title}
+                  </Link>
+                  <span className="text-[10px] text-text-muted font-mono uppercase tracking-widest">
+                    {project.status}
+                  </span>
+                </div>
+                
+                <p className="text-sm text-text-secondary leading-relaxed">
+                  {project.desc}
+                </p>
+              </div>
             </div>
-            <h3
-              className={`${i === 0 && filter === "all" ? "text-4xl" : "text-2xl"} font-bold font-display mb-4`}
-            >
-              {project.title}
-            </h3>
-            <p
-              className={`text-text-secondary mb-8 flex-grow ${i === 0 && filter === "all" ? "text-lg max-w-3xl" : ""}`}
-            >
-              {project.desc}
-            </p>
 
-            <div className="flex flex-wrap items-center gap-4 mt-auto">
-              <Link
-                href={`/projects/${project.slug}`}
-                className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-white text-black text-xs font-bold uppercase tracking-widest hover:bg-gray-200 transition-colors"
-              >
-                View Case Study
-              </Link>
-              {project.liveUrl && (
+            <div className="flex items-center gap-2 ml-10 sm:ml-0 sm:opacity-50 group-hover:opacity-100 transition-opacity flex-shrink-0">
+              {project.liveUrl && project.slug !== "eventlk" && (
                 <a
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/20 text-white text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-colors"
+                  className="p-2 text-text-muted hover:text-white hover:bg-white/10 rounded transition-colors"
+                  aria-label="Live Demo"
                 >
-                  Live Demo <ExternalLink size={14} />
+                  <ExternalLink size={18} />
                 </a>
               )}
+              <Link
+                href={`/projects/${project.slug}`}
+                className="p-2 text-text-muted hover:text-white hover:bg-white/10 rounded transition-colors"
+                aria-label="View Project"
+              >
+                <ArrowRight size={18} />
+              </Link>
             </div>
           </MotionDiv>
         ))}
