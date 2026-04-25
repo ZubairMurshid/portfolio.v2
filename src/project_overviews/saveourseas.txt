@@ -1,0 +1,5 @@
+github: https://github.com/ZubairMurshid/Save-Our-Seas
+
+executive summary: https://docs.google.com/document/d/1H46oIE6dOQqmAg3CpN6kHQqcySosrVBLDH5D20dLa5A/edit?usp=sharing&usp=embed_facebook
+
+live demo: https://save-our-seas.vercel.app/

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Github, Terminal, Database, Layout, Code2, GraduationCap } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Github, Terminal, Database, Layout, Code2, GraduationCap } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const MotionDiv = motion.div as any;
@@ -44,13 +44,21 @@ export default function TaskManagerPage() {
 
         {/* Feature Action Buttons */}
         <div className="flex flex-wrap gap-4 mb-16">
-          <a 
-            href="https://github.com/ZubairMurshid/Personal-Task-Manager" 
-            target="_blank" 
+          <a
+            href="https://github.com/ZubairMurshid/Personal-Task-Manager"
+            target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white/5 text-white font-bold tracking-wide border border-white/10 hover:bg-white/10 transition-colors"
           >
             <Github size={20} /> GitHub Repository
+          </a>
+          <a
+            href="https://docs.google.com/document/d/1AEnu4m2Cj-cteGmjTJtIxzlEwSo107woDhMrb280Dyw/edit?usp=sharing&usp=embed_facebook"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white/5 text-white font-bold tracking-wide border border-white/10 hover:bg-white/10 transition-colors"
+          >
+            <ExternalLink size={20} /> Executive Summary
           </a>
         </div>
       </div>

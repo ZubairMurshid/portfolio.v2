@@ -1,0 +1,39 @@
+Executive Summary: AI-Powered Interview Agent Platform
+Project Status: In Progress
+
+1. Product Vision & Overview
+The AI Interview Platform is an advanced, real-time simulation application designed to bridge the gap between static resume screening and live technical/behavioral interviews.
+Unlike standard pre-recorded interview tools, this platform ingests a user’s Curriculum Vitae (CV) and utilizes generative AI to dynamically construct a personalized interview protocol. Through a real-time conversational voice agent, the platform conducts fluid, human-like interviews—adapting its follow-up questions dynamically based on the user's spoken responses, specific background, and listed technical proficiencies.
+The application is built to demonstrate production-ready full-stack engineering, robust file processing, AI orchestration, and real-time state management.
+2. Core User Journey
+The platform orchestrates a seamless, low-friction experience for the user:
+Intelligent Onboarding: The user uploads their CV (PDF) via a responsive, drag-and-drop frontend interface.
+Context Extraction: The backend securely ingests the file, parses the text, and utilizes an AI model to extract key career milestones, skills, and project context.
+Dynamic Question Generation: The system formulates a tailored interview strategy, bypassing generic questions in favor of highly targeted inquiries based on the user's specific experience.
+Live Voice Interaction: The user engages in a real-time, bi-directional voice conversation. The AI acts as the interviewer, parsing the user's audio responses and generating intelligent, contextual follow-up questions on the fly.
+3. Key System Capabilities
+Context-Aware AI Orchestration: Employs advanced prompt engineering and abstracted AI model integration layers to ensure the AI agent remains in character, asks relevant questions, and adapts to user input dynamically without hallucinating.
+Robust Document Processing: Features a secure middleware pipeline capable of handling multipart/form-data PDF uploads, temporarily staging files, extracting readable text, and feeding it seamlessly into the AI context window.
+Real-Time Interactivity: Delivers a frictionless frontend experience utilizing optimized UI components and asynchronous state handling to maintain low latency between the user's answers and the AI's verbal responses.
+Data Persistence & Scalability: Integrated with Cloud Firestore for fast, scalable NoSQL data storage, ensuring interview sessions, parsed CV data, and user profiles are reliably maintained.
+4. Technical Architecture & Stack
+The platform is architected as a decoupled, modern web application prioritizing strict type safety, modularity, and scalability.
+Frontend (Client)
+Framework: React 18 powered by Vite for rapid Hot Module Replacement (HMR) and highly optimized production builds.
+Language: Strict TypeScript for predictable data flow and prop validation.
+Styling: Tailwind CSS integrated with custom, reusable UI components (e.g., custom loaders, file uploaders) to deliver a modern, cinematic user interface.
+Backend (Server)
+Environment: Node.js with the Express.js framework.
+Architecture: Domain-Driven Design (DDD) principles, utilizing a highly modular folder structure (strict separation of Routes, Controllers, Services, and AI logic).
+Language: TypeScript with centralized type definitions shared across the data pipeline.
+Database: Firebase / Cloud Firestore.
+Key Modules: Custom error handling middleware, file stream management, and dedicated AI parsing services.
+5. Engineering & Development Practices
+Modular Separation of Concerns: The backend isolates the parsing logic, AI communication, and HTTP routing into distinct layers. This ensures the AI model can be swapped or upgraded without rewriting the core business logic.
+Secure File Handling: Implements a temporary storage architecture for PDF uploads paired with automated parsing and cleanup, ensuring large files do not block the event loop and memory is managed efficiently.
+End-to-End Type Safety: By utilizing TypeScript across both the client and server ecosystems, the platform minimizes runtime errors and ensures data contracts (like CV data structures and AI prompt schemas) are strictly enforced.
+6. Strategic Value
+This platform serves as a complex technical achievement. It moves beyond standard CRUD operations to tackle high-level software engineering challenges: handling unstructured file data, orchestrating real-time AI responses, managing asynchronous voice interactions, and maintaining stateful conversations. It provides a highly scalable foundation built on modern best practices for cloud-native web applications.
+
+
+Executive Summary: https://docs.google.com/document/d/1__U_CETnQ5JgqBSiyGqTDJfsG_ScaER6CifEqEAc5Ew/edit?tab=t.0&usp=embed_facebook

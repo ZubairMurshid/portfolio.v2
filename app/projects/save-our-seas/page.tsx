@@ -44,21 +44,29 @@ export default function SaveOurSeasPage() {
 
         {/* Feature Action Buttons */}
         <div className="flex flex-wrap gap-4 mb-16">
-          <a 
-            href="https://save-our-seas.vercel.app" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-accent-blue text-white font-bold tracking-wide hover:bg-blue-600 transition-colors shadow-lg shadow-blue-500/20"
-          >
-            <ExternalLink size={20} /> Live Demo
-          </a>
-          <a 
-            href="https://github.com/ZubairMurshid/Save-Our-Seas" 
-            target="_blank" 
+          <a
+            href="https://github.com/ZubairMurshid/Save-Our-Seas"
+            target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white/5 text-white font-bold tracking-wide border border-white/10 hover:bg-white/10 transition-colors"
           >
             <Github size={20} /> GitHub Repository
+          </a>
+          <a
+            href="https://docs.google.com/document/d/1H46oIE6dOQqmAg3CpN6kHQqcySosrVBLDH5D20dLa5A/edit?usp=sharing&usp=embed_facebook"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white/5 text-white font-bold tracking-wide border border-white/10 hover:bg-white/10 transition-colors"
+          >
+            <ExternalLink size={20} /> Executive Summary
+          </a>
+          <a
+            href="https://save-our-seas.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white/5 text-white font-bold tracking-wide border border-white/10 hover:bg-white/10 transition-colors"
+          >
+            <ExternalLink size={20} /> Live Demo
           </a>
         </div>
       </div>

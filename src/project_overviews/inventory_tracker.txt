@@ -1,0 +1,35 @@
+Executive Summary: Modern Inventory Tracking Platform
+Project Status: In Progress
+1. Product Vision & Overview
+The Modern Inventory Tracking Platform is a full-stack, real-time supply chain and stock management application. Designed to replace error-prone manual tracking methods, the platform provides businesses with a highly responsive dashboard to monitor product levels, manage supplier relationships, and log stock transactions (inbound/outbound) seamlessly.
+Engineered from the ground up, the system features a robust, enterprise-grade Java backend paired with a sleek, cinematic React-based frontend that was custom-designed using Stitch. It is built to ensure data integrity through ledger-based transaction logging and features automated alerting systems for low-stock scenarios, empowering businesses to make proactive inventory decisions.
+2. Core User Experience & Workflows
+The platform is designed to minimize friction for warehouse staff and inventory managers through intuitive interfaces and automated workflows:
+Centralized Dashboard: Users are greeted with a comprehensive AllProductsStatus view, providing real-time visibility into current stock levels, associated suppliers, and product categorization.
+Fast-Entry Transaction Engine: A dedicated FastEntry module allows operators to quickly register inbound shipments or outbound sales, instantly updating the underlying database without requiring page reloads.
+Automated Low-Stock Alerting: The system actively monitors inventory thresholds. When stock dips below predefined minimums, the system automatically triggers alerts (via an Observer pattern architecture), notifying administrators immediately.
+Supplier Management: Seamlessly links products to specific suppliers, creating a unified ecosystem where procurement data is always just a click away.
+3. Key Architectural Capabilities
+The platform moves beyond basic CRUD (Create, Read, Update, Delete) operations by implementing complex software design patterns and immutable data structures:
+Immutable Stock Ledger: Instead of simply overwriting current stock numbers, the system utilizes a StockLedgerEntry model. Every addition or deduction is logged as an immutable transaction, ensuring a perfect, auditable history of all inventory movements.
+Event-Driven Observer Pattern: The Java backend natively implements the Observer software design pattern (StockObserver, ConsoleAlertObserver). This decouples the stock updating logic from the notification logic, allowing the system to scale easily (e.g., adding email or SMS alerts in the future without changing core business logic).
+Data Access Object (DAO) Abstraction: Employs a strict DAO layer (ProductDAO, SupplierDAO) to isolate database interactions, ensuring the application remains database-agnostic and highly testable.
+4. Technical Architecture & Stack
+The project demonstrates a high degree of proficiency in both modern frontend development and strict, object-oriented backend engineering.
+Frontend (Client)
+Framework: React 18 powered by Vite for lightning-fast Hot Module Replacement (HMR) and optimized build rendering.
+Language: Strict TypeScript, enforcing data models and preventing runtime errors.
+Design & Styling: The frontend UI was originally conceptualized and designed using Stitch (Stitch Modern UI redesign), and translated into a pixel-perfect implementation using Tailwind CSS. This design-to-code approach delivered a highly polished, responsive aesthetic without relying on bloated component libraries.
+Backend (Server)
+Environment: Java (JDK standard) managed via Maven (pom.xml) for robust dependency resolution and build lifecycle management.
+Architecture: Model-View-Controller (MVC) architecture with strict separation of logic (Controllers, Services, Models, and DAOs).
+Database: SQL-based relational database initialized via custom schema.sql scripts, ensuring referential integrity between Products, Suppliers, and Ledger Entries.
+Quality Assurance: Comprehensive unit testing strategy implemented using JUnit/Surefire (InventoryServiceTest.java), utilizing mocking to isolate and verify business logic.
+5. Strategic Value & Engineering Prowess
+This application represents a complete, production-ready software lifecycle. It highlights the ability to design an intelligent, normalized SQL database, build a secure Java backend utilizing advanced OOP design patterns, and connect it all to a highly responsive, type-safe React frontend. By focusing on design-driven development (via Stitch), data immutability (the ledger system), and extensible architecture (the observer pattern), the platform proves a deep understanding of how to build scalable, enterprise-level software systems that solve real-world business problems.
+
+Executive Summary: https://docs.google.com/document/d/11RmNCaBQUVhnwi-33mLN_CbELoRY6OIt74ioLCRheyU/edit?usp=sharing&usp=embed_facebook 
+
+GitHub: https://github.com/ZubairMurshid/InventoryTrackingApplication
+
+Stich Design: https://stitch.withgoogle.com/projects/12262308517687355631 

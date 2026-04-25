@@ -8,7 +8,7 @@ const MotionDiv = motion.div as any;
 const cards = [
   { title: "Current Target", content: "Software Eng Intern" },
   { title: "Building", content: "EventLK (AI Platform)" },
-  { title: "Specialization", content: "Full-Stack & Cloud" },
+  { title: "Specialization", content: "Full-Stack & AI" },
   { title: "Core Stack", content: "Java & React/Node" }
 ];
 

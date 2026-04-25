@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import {ArrowLeft, Terminal, CheckCircle2, CopyCheck, GitMerge, Rocket, BrainCircuit, Database, FileSpreadsheet, AppWindow, Layout, Server, Cloud } from 'lucide-react';
+import {ArrowLeft, Terminal, CheckCircle2, CopyCheck, GitMerge, Rocket, BrainCircuit, Database, FileSpreadsheet, AppWindow, Layout, Server, Cloud, ExternalLink, Github } from 'lucide-react';
 
 const MotionDiv = motion.div as any;
 const MotionH1 = motion.h1 as any;
@@ -95,6 +95,38 @@ export default function EventLKCaseStudyV2() {
           >
             EventLK is a full-stack SaaS platform built by a 6-person Agile team. I spearheaded the machine learning microservice, bridging predictive AI with a modern JavaScript ecosystem to automate event planning and real-time budget distribution.
           </MotionP>
+
+          <MotionDiv
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7 }}
+            className="flex flex-wrap gap-3 mt-8"
+          >
+            <a
+              href="https://eventlk.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white text-black font-bold text-xs uppercase tracking-widest hover:bg-zinc-200 transition-colors"
+            >
+              <ExternalLink size={14} /> Live Site
+            </a>
+            <a
+              href="https://github.com/Rism583/Project-Eventlk-1"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/5 text-white font-bold text-xs uppercase tracking-widest border border-white/10 hover:bg-white/10 transition-colors"
+            >
+              <Github size={14} /> GitHub
+            </a>
+            <a
+              href="https://docs.google.com/document/d/1XYWVZA1mm1WVX611Ls1EHq7k01uj3pDke-OBEVf9yOE/edit?usp=embed_facebook"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/5 text-white font-bold text-xs uppercase tracking-widest border border-white/10 hover:bg-white/10 transition-colors"
+            >
+              <ExternalLink size={14} /> Executive Summary
+            </a>
+          </MotionDiv>
         </div>
       </div>
 

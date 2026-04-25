@@ -1,0 +1,36 @@
+Executive Summary: Directed Graph Acyclicity Checker
+Product Overview
+The Directed Graph Acyclicity Checker is a high-performance, Java-based algorithmic tool designed to analyze complex network structures and determine the presence of cyclic dependencies.
+At its core, the application ingests directed graph data—either by parsing structured text files or generating randomized network topologies—and processes them using an optimized Depth-First Search (DFS) algorithm. If a cycle (a closed loop within the network) is detected, the system does not merely flag its existence; it accurately traces and extracts the exact path of the cycle.
+This project demonstrates a rigorous application of computer science fundamentals, focusing on algorithmic efficiency, custom data structure design, and clean Object-Oriented Programming (OOP) principles. The concepts applied here are foundational to real-world applications such as package dependency resolution, deadlock detection in operating systems, and automated task scheduling.
+Key Features & Capabilities
+Advanced Cycle Detection:
+Implements a highly efficient Depth-First Search (DFS) algorithm to traverse nodes and edges, identifying back-edges that indicate a cycle.
+Operates with an optimal time complexity of O(V + E) (where V is Vertices and E is Edges).
+Precise Cycle Path Extraction:
+In the event of a cyclic dependency, the engine reconstructs the exact sequence of nodes forming the loop (e.g., 1 -> 2 -> 3 -> 1), providing actionable diagnostic output rather than a simple boolean response.
+Robust Data Ingestion & Parsing:
+Features a custom GraphParser capable of translating structured .txt files into fully initialized graph objects in memory.
+Handles varied input formats gracefully, ensuring robust error handling during the initialization phase.
+Dynamic Network Generation:
+Includes a GraphGenerator utility that algorithmically builds random directed graphs based on user-defined parameters (number of nodes and probability of edge creation).
+This feature is critical for stress-testing the algorithm and conducting empirical performance benchmarking under heavy loads.
+Performance Benchmarking:
+Features an integrated execution timer that profiles the algorithmic performance, calculating the precise millisecond latency of the cycle-checking process.
+Technical Architecture & Stack
+The system is architected with a strict separation of concerns, ensuring that data representation, parsing, and algorithmic logic remain modular and highly maintainable.
+Core Technologies
+Language: Java (JDK standard)
+Build/Dependency Management: Maven (pom.xml)
+Interface: Command-Line Interface (CLI)
+Engineering Highlights
+Custom Data Structures: Rather than relying heavily on pre-built generic libraries, the project features a custom DirectedGraph class built around an Adjacency List pattern. This ensures a highly memory-efficient representation of sparse networks.
+State Management via Recursion: The AcyclicityChecker maintains complex traversal states (using boolean arrays for visited and recursionStack nodes) to safely navigate networks without infinite looping.
+Clean OOP Design: The system is divided into highly cohesive classes (GraphParser, GraphGenerator, DirectedGraph, AcyclicityChecker, Main), making the codebase scalable, testable, and easy to extend.
+Strategic Value
+This project serves as a strong technical showcase of backend engineering capabilities. It highlights a deep understanding of algorithmic theory, raw data manipulation, and performance optimization. By successfully implementing and benchmarking classic graph theory algorithms from scratch, it demonstrates the analytical problem-solving skills required to tackle complex, data-heavy software engineering challenges.
+
+github: https://github.com/ZubairMurshid/Directed-Graph-Acyclicity-Checker
+
+Executive Summary: https://docs.google.com/document/d/1FmuUKjtFmz8tNsaqztfl9GinCzkgjLO87_sWSpsOAWk/edit?usp=sharing&usp=embed_facebook
+

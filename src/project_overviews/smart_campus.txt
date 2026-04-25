@@ -1,0 +1,34 @@
+Product Overview: Smart Campus IoT Management API
+Platform Category: RESTful Backend Web Service / IoT Infrastructure Management
+Architecture: Pure JAX-RS (Jersey) deployed via Apache Tomcat
+Executive Summary
+The Smart Campus API is a high-performance, lightweight backend web service designed to manage and monitor a large-scale university campus infrastructure. The platform provides a centralized RESTful interface for building managers and automated systems to track physical spaces (Rooms), deploy IoT hardware (Sensors), and process continuous streams of environmental telemetry (Temperature, CO2, Occupancy).
+Engineered with a strict focus on raw performance, API observability, and memory management, the system was deliberately built without heavy enterprise frameworks (like Spring Boot) or traditional relational databases. Instead, it relies on a highly optimized, thread-safe in-memory architecture to handle concurrent data streams with zero locking contention.
+Core Engineering Philosophy & Architecture
+1. High-Concurrency In-Memory State Management
+To maximize throughput and minimize latency, the application bypasses traditional disk-based I/O. State management is handled entirely in-memory using deeply nested, synchronized ConcurrentHashMap collections. This architectural decision guarantees strict thread safety and prevents data corruption or race conditions during highly concurrent HTTP request spikes, demonstrating a deep understanding of Java memory management and thread lifecycles.
+2. Deep Resource Nesting via Sub-Resource Locators
+The API handles complex, hierarchical data without bloating the primary controller classes. By leveraging the Sub-Resource Locator design pattern, traffic targeting nested entities (e.g., routing historical data payloads to /sensors/{id}/readings) is dynamically delegated to specialized controllers. This enforces strict adherence to the Single Responsibility Principle, resulting in a highly modular, maintainable, and testable codebase.
+3. The "Leak-Proof" Security Net (Advanced Error Handling)
+The system prioritizes cybersecurity and deterministic client feedback through a robust suite of custom ExceptionMapper providers:
+Semantic Error Routing: Business-logic violations immediately trigger precise HTTP statuses (e.g., 422 Unprocessable Entity for invalid foreign keys, 409 Conflict for unsafe deletions, 403 Forbidden for hardware maintenance locks).
+Stack Trace Shielding: A global, catch-all exception mapper intercepts unexpected runtime crashes. It securely logs the error internally for developer review while returning a sanitized 500 Internal Server Error to the client, effectively neutralizing the risk of exposing internal directory structures or library versions to malicious actors.
+4. Comprehensive API Observability
+Rather than relying on manual, error-prone method logging, the API implements cross-cutting JAX-RS ContainerRequestFilter and ContainerResponseFilter interfaces. This creates a centralized, globally applied observability layer that tracks every incoming HTTP request and outgoing status code, ensuring 100% auditability across the entire service ecosystem.
+Key Product Features & Business Logic
+Dynamic Hypermedia Discovery (HATEOAS): The root endpoint serves self-documenting hypermedia links, allowing client applications to dynamically navigate the API's state machine without relying on hardcoded, brittle URL structures.
+Smart Deletion Safeguards: Implements strict referential integrity checks. The system automatically blocks the deletion of any physical room that currently houses active IoT sensors, preventing orphaned hardware data.
+Hardware State Validation: Sensors placed into MAINTENANCE mode automatically reject incoming telemetry readings, preventing corrupted or uncalibrated data from polluting the historical dataset.
+Optimized Data Retrieval: Features query-string parameter filtering (e.g., ?type=CO2), allowing clients to isolate specific hardware types and drastically reduce network payload sizes.
+Technical Stack
+Language: Java (JDK 8)
+Framework: JAX-RS (Jersey 2.40)
+Data Serialization: Jackson (JSON)
+Deployment: Apache Tomcat (Servlet Container) / .war artifact packaging
+Build Tool: Apache Maven
+Version Control: Git / GitHub
+
+
+Executive Summary: https://docs.google.com/document/d/1PmcKxO_oto5T3S4mnqUdss-LFtgw6mDI74_8fkKihe0/edit?usp=sharing&usp=embed_facebook
+
+github: https://github.com/ZubairMurshid/smart-campus-api 

@@ -1,64 +1,106 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { ExternalLink } from 'lucide-react';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { ExternalLink } from "lucide-react";
 
 const MotionDiv = motion.div as any;
 
 const projects = [
   {
-    slug: 'eventlk',
-    title: 'EventLK - AI Event Platform',
-    category: ['ai', 'web', 'react', 'python', 'fullstack'],
-    desc: 'An intelligent event management system harnessing predictive analytics to automate venue recommendations and budget planning. Built with a modern full-stack architecture.',
-    status: 'Live',
-    liveUrl: 'https://www.eventlk.com'
+    slug: "ai-interviewer",
+    title: "AI-Powered Interview Agent Platform",
+    category: ["ai", "react", "web", "fullstack"],
+    desc: "A real-time interview simulator that ingests CVs, generates tailored questions, and adapts follow-ups through live voice interaction.",
+    status: "In Progress",
   },
   {
-    slug: 'dynamic-book-finder',
-    title: 'Dynamic Book Finder',
-    category: ['react', 'web', 'api', 'fullstack'],
-    desc: 'React SPA powered by Google Books API, featuring global state management (Context API) and persistent local storage.',
-    status: 'Completed'
+    slug: "inventory-tracker",
+    title: "Modern Inventory Tracking Platform",
+    category: ["react", "web", "java", "fullstack"],
+    desc: "A full-stack inventory dashboard for stock levels, supplier management, transaction logging, and automated low-stock alerts.",
+    status: "In Progress",
   },
   {
-    slug: 'task-manager',
-    title: 'Personal Task Manager',
-    category: ['python', 'oop'],
-    desc: 'A robust Python application demonstrating progression from data structure manipulation to a full Object-Oriented GUI.',
-    status: 'Completed'
+    slug: "eventlk",
+    title: "EventLK - AI Event Platform",
+    category: ["ai", "web", "react", "python", "fullstack"],
+    desc: "An intelligent event management system harnessing predictive analytics to automate venue recommendations and budget planning. Built with a modern full-stack architecture.",
+    status: "Live",
+    liveUrl: "https://www.eventlk.com",
   },
   {
-    slug: 'save-our-seas',
-    title: 'Save Our Seas - SDG Web Project',
-    category: ['web', 'html', 'css', 'js'],
-    desc: 'Marine ecosystem conservation initiative with volunteer portal and responsive UI design.',
-    status: 'Completed'
-  }
+    slug: "smart-campus",
+    title: "Smart Campus IoT Management API",
+    category: ["java", "api", "backend"],
+    desc: "A lightweight JAX-RS backend for campus rooms, sensors, and telemetry with in-memory state management and observability filters.",
+    status: "Completed",
+  },
+  {
+    slug: "algo-project",
+    title: "Directed Graph Acyclicity Checker",
+    category: ["java", "cli", "algorithm"],
+    desc: "A Java CLI utility that detects graph cycles, reconstructs cycle paths, and benchmarks DFS traversal performance.",
+    status: "Completed",
+  },
+  {
+    slug: "dynamic-book-finder",
+    title: "Dynamic Book Finder",
+    category: ["react", "web", "api", "fullstack"],
+    desc: "React SPA powered by Google Books API, featuring global state management (Context API) and persistent local storage.",
+    status: "Completed",
+  },
+  {
+    slug: "task-manager",
+    title: "Personal Task Manager",
+    category: ["python", "oop"],
+    desc: "A robust Python application demonstrating progression from data structure manipulation to a full Object-Oriented GUI.",
+    status: "Completed",
+  },
+  {
+    slug: "save-our-seas",
+    title: "Save Our Seas - SDG Web Project",
+    category: ["web", "html", "css", "js"],
+    desc: "Marine ecosystem conservation initiative with volunteer portal and responsive UI design.",
+    status: "Completed",
+  },
 ];
 
 export default function ProjectsPage() {
-  const [filter, setFilter] = useState('all');
+  const [filter, setFilter] = useState("all");
 
-  const filteredProjects = filter === 'all' 
-    ? projects 
-    : projects.filter(p => p.category.includes(filter));
+  const filteredProjects =
+    filter === "all"
+      ? projects
+      : projects.filter((p) => p.category.includes(filter));
 
   return (
     <div className="container mx-auto px-6 pt-32 min-h-screen">
       <h1 className="text-5xl font-display font-bold mb-8">Projects</h1>
-      
+
       <div className="flex flex-wrap gap-4 mb-12">
-        {['all', 'fullstack', 'react', 'python', 'ai', 'api', 'web', 'oop'].map(f => (
+        {[
+          "all",
+          "fullstack",
+          "react",
+          "python",
+          "ai",
+          "api",
+          "web",
+          "oop",
+          "java",
+          "backend",
+          "cli",
+          "algorithm",
+        ].map((f) => (
           <button
             key={f}
             onClick={() => setFilter(f)}
             className={`px-6 py-2 rounded-full border transition-all uppercase text-sm font-semibold tracking-wide ${
-              filter === f 
-                ? 'bg-accent-blue text-white border-accent-blue' 
-                : 'border-accent-blue/30 text-text-secondary hover:border-accent-blue'
+              filter === f
+                ? "bg-accent-blue text-white border-accent-blue"
+                : "border-accent-blue/30 text-text-secondary hover:border-accent-blue"
             }`}
           >
             {f}
@@ -74,39 +116,63 @@ export default function ProjectsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1 }}
             className={`glass-panel p-8 rounded-2xl hover:-translate-y-2 transition-transform duration-300 flex flex-col ${
-              i === 0 && filter === 'all' ? 'md:col-span-2 lg:col-span-3 border-accent-blue/30 bg-accent-blue/5' : ''
+              i === 0 && filter === "all"
+                ? "md:col-span-2 lg:col-span-3 border-accent-blue/30 bg-accent-blue/5"
+                : ""
             }`}
           >
             <div className="flex justify-between items-start mb-4">
               <span className="text-4xl">
-                {project.category.includes('ai') ? '🤖' : project.category.includes('react') ? '⚛️' : project.category.includes('python') ? '🐍' : '🌐'}
+                {project.category.includes("ai")
+                  ? "🤖"
+                  : project.category.includes("react")
+                    ? "⚛️"
+                    : project.category.includes("python")
+                      ? "🐍"
+                      : project.category.includes("java")
+                        ? "☕"
+                        : project.category.includes("backend")
+                          ? "🛠️"
+                          : project.category.includes("cli")
+                            ? "⌘"
+                            : project.category.includes("algorithm")
+                              ? "🧮"
+                              : "🌐"}
               </span>
-              <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase border ${
-                project.status === 'Live' 
-                  ? 'bg-green-500/10 text-green-500 border-green-500/20 shadow-[0_0_10px_rgba(34,197,94,0.2)]'
-                  : project.status === 'Completed' 
-                    ? 'bg-accent-blue/10 text-accent-blue border-accent-blue/20' 
-                    : 'bg-white/10 text-white border-white/20'
-              }`}>
+              <span
+                className={`px-3 py-1 rounded-full text-xs font-bold uppercase border ${
+                  project.status === "Live"
+                    ? "bg-green-500/10 text-green-500 border-green-500/20 shadow-[0_0_10px_rgba(34,197,94,0.2)]"
+                    : project.status === "Completed"
+                      ? "bg-accent-blue/10 text-accent-blue border-accent-blue/20"
+                      : project.status === "In Progress"
+                        ? "bg-amber-500/10 text-amber-400 border-amber-500/20"
+                        : "bg-white/10 text-white border-white/20"
+                }`}
+              >
                 {project.status}
               </span>
             </div>
-            <h3 className={`${i === 0 && filter === 'all' ? 'text-4xl' : 'text-2xl'} font-bold font-display mb-4`}>
+            <h3
+              className={`${i === 0 && filter === "all" ? "text-4xl" : "text-2xl"} font-bold font-display mb-4`}
+            >
               {project.title}
             </h3>
-            <p className={`text-text-secondary mb-8 flex-grow ${i === 0 && filter === 'all' ? 'text-lg max-w-3xl' : ''}`}>
+            <p
+              className={`text-text-secondary mb-8 flex-grow ${i === 0 && filter === "all" ? "text-lg max-w-3xl" : ""}`}
+            >
               {project.desc}
             </p>
-            
+
             <div className="flex flex-wrap items-center gap-4 mt-auto">
-              <Link 
+              <Link
                 href={`/projects/${project.slug}`}
                 className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-white text-black text-xs font-bold uppercase tracking-widest hover:bg-gray-200 transition-colors"
               >
                 View Case Study
               </Link>
               {project.liveUrl && (
-                <a 
+                <a
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"

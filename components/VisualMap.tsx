@@ -7,9 +7,9 @@ import { Code, Brain, Cloud } from 'lucide-react';
 const MotionDiv = motion.div as any;
 
 const services = [
-  { id: 'fullstack', title: 'Full-Stack Engineering', icon: <Code size={38} className="text-white/80" strokeWidth={1.5} />, desc: 'Building robust, scalable applications with clean object-oriented design using Java, JavaScript, React, and Node.js.' },
-  { id: 'ai', title: 'AI & Data Pipelines', icon: <Brain size={38} className="text-white/80" strokeWidth={1.5} />, desc: 'Designing and implementing intelligent microservices and predictive modeling pipelines using Python.' },
-  { id: 'cloud', title: 'Cloud & Infrastructure', icon: <Cloud size={38} className="text-white/80" strokeWidth={1.5} />, desc: 'Architecting reliable client-server databases with SQL and exploring modern cloud containerization (AWS/Docker).' }
+  { id: 'fullstack', title: 'Full-Stack Engineering', icon: <Code size={38} className="text-white/80" strokeWidth={1.5} /> },
+  { id: 'ai', title: 'AI & Data Pipelines', icon: <Brain size={38} className="text-white/80" strokeWidth={1.5} />},
+  { id: 'cloud', title: 'Cloud & Infrastructure', icon: <Cloud size={38} className="text-white/80" strokeWidth={1.5} /> }
 ];
 
 export default function VisualMap() {
@@ -33,10 +33,6 @@ export default function VisualMap() {
             <h3 className="text-lg md:text-xl font-display font-medium text-white mb-4 tracking-wide">
               {service.title}
             </h3>
-            
-            <p className="text-text-secondary text-sm leading-relaxed max-w-xs mx-auto opacity-70 group-hover:opacity-100 transition-opacity duration-300">
-              {service.desc}
-            </p>
           </MotionDiv>
         ))}
       </div>

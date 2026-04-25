@@ -42,6 +42,25 @@ export default function DynamicBookFinderPage() {
             A modern, responsive web application exploring the vast library of the Google Books API with a seamless search experience and persistent personalized favorites.
           </p>
         </header>
+
+        <div className="flex flex-wrap gap-4 mb-16">
+          <a
+            href="https://github.com/ZubairMurshid/ReactProject-DynamicBookFinder"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white/5 text-white font-bold tracking-wide border border-white/10 hover:bg-white/10 transition-colors"
+          >
+            <Github size={20} /> GitHub Repository
+          </a>
+          <a
+            href="https://docs.google.com/document/d/1dk_c7dhMYL9IYqM6Xy_PLHU9qFm8E1mW1iK_fmrieZs/edit?usp=sharing&usp=embed_facebook"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white/5 text-white font-bold tracking-wide border border-white/10 hover:bg-white/10 transition-colors"
+          >
+            <ExternalLink size={20} /> Executive Summary
+          </a>
+        </div>
       </div>
 
       {/* Interactive Showcase Demo */}
