@@ -37,7 +37,7 @@ export default function TaskManagerPage() {
             Personal Task Manager
           </h1>
           
-          <p className="text-xl md:text-2xl text-text-secondary max-w-3xl leading-relaxed">
+          <p className="text-xl text-md md:text-lg text-text-secondary max-w-3xl leading-relaxed">
             A comprehensive four-stage Python coursework project demonstrating a progression from fundamental programming concepts to advanced graphical user interface (GUI) development.
           </p>
         </header>

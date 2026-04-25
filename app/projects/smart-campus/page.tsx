@@ -31,11 +31,11 @@ export default function SmartCampusPage() {
             </span>
           </div>
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-extrabold mb-6 tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400 leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-4xl font-display font-extrabold mb-6 tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400 leading-tight">
             Smart Campus IoT Management API
           </h1>
 
-          <p className="text-xl md:text-2xl text-text-secondary max-w-3xl leading-relaxed">
+          <p className="text-xl text-md md:text-lg text-text-secondary max-w-3xl leading-relaxed">
             A lightweight RESTful backend for campus infrastructure that manages
             rooms, sensors, and environmental telemetry through in-memory state,
             observability filters, and strict resource safeguards.
@@ -71,7 +71,7 @@ export default function SmartCampusPage() {
           <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-4">
             Centralized Telemetry for Smart Buildings
           </h2>
-          <p className="text-text-muted text-lg max-w-2xl mx-auto">
+          <p className="text-text-muted text-md max-w-2xl mx-auto">
             The API exposes a secure, hierarchical interface for rooms, sensors,
             and readings so campus operators can monitor environmental state
             without heavy framework overhead.

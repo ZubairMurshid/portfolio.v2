@@ -34,11 +34,11 @@ export default function DynamicBookFinderPage() {
             </span>
           </div>
           
-          <h1 className="text-4xl md:text-6xl font-display font-extrabold mb-6 tracking-tighter">
+          <h1 className="text-3xl md:text-5xl font-display font-extrabold mb-6 tracking-tighter">
             Dynamic Book Finder
           </h1>
           
-          <p className="text-xl md:text-2xl text-text-secondary max-w-3xl leading-relaxed">
+          <p className="text-md md:text-lg text-text-secondary max-w-3xl leading-relaxed">
             A modern, responsive web application exploring the vast library of the Google Books API with a seamless search experience and persistent personalized favorites.
           </p>
         </header>

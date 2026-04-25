@@ -51,9 +51,9 @@ export default function NavBar() {
             <MotionDiv 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="w-11 h-11 bg-white rounded-full flex items-center justify-center text-black"
+              className="w-11 h-11 bg-white rounded-full flex items-center justify-center text-black overflow-hidden"
             >
-              <Orbit size={20} />
+              <img src="/logo.png" alt="ZM Logo" className="w-7 h-7 object-contain" />
             </MotionDiv>
           </Link>
 
@@ -139,8 +139,8 @@ export default function NavBar() {
       <div className="md:hidden fixed top-0 left-0 right-0 z-[100]">
         <div className="flex justify-between items-center h-16 px-6 bg-black/90 backdrop-blur-xl border-b border-white/10">
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-9 h-9 bg-white rounded-full flex items-center justify-center text-black">
-              <Orbit size={18} />
+            <div className="w-9 h-9 bg-white rounded-full flex items-center justify-center text-black overflow-hidden">
+              <img src="/logo.png" alt="ZM Logo" className="w-6 h-6 object-contain" />
             </div>
             <span className="font-bold text-white tracking-tighter">ZM</span>
           </Link>

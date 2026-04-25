@@ -33,11 +33,11 @@ export default function SaveOurSeasPage() {
             </span>
           </div>
           
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-extrabold mb-6 tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-4xl font-display font-extrabold mb-6 tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 leading-tight">
             Save Our Seas - SDG Web Project
           </h1>
           
-          <p className="text-xl md:text-2xl text-text-secondary max-w-3xl leading-relaxed">
+          <p className="text-xl text-md md:text-lg text-text-secondary max-w-3xl leading-relaxed">
             A web initiative dedicated to protecting marine ecosystems, featuring an interactive splash screen, educational content on ocean conservation, and a volunteer signup portal for local beach cleanups.
           </p>
         </header>

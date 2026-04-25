@@ -30,10 +30,7 @@ export default function Home() {
           <h2 className="text-center font-display text-4xl md:text-5xl font-bold mb-6 tracking-tight">
             What I Do
           </h2>
-          <p className="text-text-secondary text-center max-w-2xl mx-auto mb-16 text-lg px-4">
-            I architect scalable client-server systems and build predictive machine learning pipelines. 
-            From robust Java and Python backends to dynamic React frontends, I write clean, object-oriented code to deliver complete software solutions.
-          </p>
+          
           <div className="w-full">
             <VisualMap />
           </div>

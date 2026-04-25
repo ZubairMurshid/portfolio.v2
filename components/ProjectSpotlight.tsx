@@ -8,16 +8,16 @@ const MotionDiv = motion.div as any;
 
 export default function ProjectSpotlight() {
   return (
-    <MotionDiv 
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-      className="relative rounded-[2.5rem] overflow-hidden border border-accent-blue/20 bg-gradient-to-br from-bg-secondary/80 to-bg-tertiary/50 backdrop-blur-2xl p-6 md:p-10 lg:p-12 my-20 md:my-24 group shadow-[0_0_40px_rgba(59,130,246,0.1)]"
-    >
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(59,130,246,0.15),transparent_50%)] pointer-events-none" />
-      
-      <div className="relative z-10 flex flex-col gap-8 lg:gap-10">
-        <div className="flex flex-col gap-8">
+    <>
+      <hr className="border-white/10 mt-16 md:mt-24 mb-16 md:mb-20" />
+      <MotionDiv 
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="relative group mb-20 md:mb-24"
+      >
+        <div className="relative z-10 flex flex-col gap-8 lg:gap-10">
+          <div className="flex flex-col gap-8">
           <div className="w-full">
             <div className="flex items-center gap-3 text-accent-blue mb-4 md:mb-6">
               <div className="w-8 h-[2px] bg-accent-blue/50" />
@@ -52,5 +52,6 @@ export default function ProjectSpotlight() {
         </div>
       </div>
     </MotionDiv>
+    </>
   );
 }

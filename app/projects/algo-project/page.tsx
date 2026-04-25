@@ -41,11 +41,11 @@ export default function AlgoProjectPage() {
             </span>
           </div>
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-extrabold mb-6 tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400 leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-4xl font-display font-extrabold mb-6 tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400 leading-tight">
             Directed Graph Acyclicity Checker
           </h1>
 
-          <p className="text-xl md:text-2xl text-text-secondary max-w-3xl leading-relaxed">
+          <p className="text-md md:text-lg text-text-secondary max-w-3xl leading-relaxed">
             A Java-based command-line tool that analyzes directed graphs,
             detects cyclic dependencies with DFS, reconstructs the exact cycle
             path, and benchmarks traversal performance.

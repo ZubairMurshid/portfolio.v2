@@ -7,9 +7,24 @@ import { Code, Brain, Cloud } from 'lucide-react';
 const MotionDiv = motion.div as any;
 
 const services = [
-  { id: 'fullstack', title: 'Full-Stack Engineering', icon: <Code size={38} className="text-white/80" strokeWidth={1.5} /> },
-  { id: 'ai', title: 'AI & Data Pipelines', icon: <Brain size={38} className="text-white/80" strokeWidth={1.5} />},
-  { id: 'cloud', title: 'Cloud & Infrastructure', icon: <Cloud size={38} className="text-white/80" strokeWidth={1.5} /> }
+  { 
+    id: 'fullstack', 
+    title: 'Full-Stack Development', 
+    desc: 'Building end-to-end web applications',
+    icon: <Code size={38} className="text-white/80" strokeWidth={1.5} /> 
+  },
+  { 
+    id: 'ai', 
+    title: 'AI & ML Integration', 
+    desc: 'Deploying predictive & generative models',
+    icon: <Brain size={38} className="text-white/80" strokeWidth={1.5} />
+  },
+  { 
+    id: 'system', 
+    title: 'System Design', 
+    desc: 'Clean, scalable, maintainable architectures',
+    icon: <Cloud size={38} className="text-white/80" strokeWidth={1.5} /> 
+  }
 ];
 
 export default function VisualMap() {
@@ -30,9 +45,13 @@ export default function VisualMap() {
               {service.icon}
             </div>
             
-            <h3 className="text-lg md:text-xl font-display font-medium text-white mb-4 tracking-wide">
+            <h3 className="text-lg md:text-xl font-display font-medium text-white mb-3 tracking-wide">
               {service.title}
             </h3>
+            
+            <p className="text-sm text-text-secondary leading-relaxed max-w-[250px]">
+              {service.desc}
+            </p>
           </MotionDiv>
         ))}
       </div>

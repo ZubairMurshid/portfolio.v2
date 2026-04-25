@@ -46,11 +46,11 @@ export default function AiInterviewerPage() {
             </span>
           </div>
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-extrabold mb-6 tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400 leading-tight">
+          <h1 className="text-3xl md:text-4xl lg:text-4xl font-display font-extrabold mb-6 tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400 leading-tight">
             AI-Powered Interview Agent Platform
           </h1>
 
-          <p className="text-xl md:text-2xl text-text-secondary max-w-3xl leading-relaxed">
+          <p className="text-md md:text-lg text-text-secondary max-w-3xl leading-relaxed">
             A real-time interview simulator that ingests a CV, builds a
             personalized interview strategy with generative AI, and conducts
             adaptive voice conversations with context-aware follow-up questions.
@@ -78,7 +78,7 @@ export default function AiInterviewerPage() {
             size={64}
             className="mx-auto text-cyan-400 mb-6 opacity-80"
           />
-          <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-4">
+          <h2 className="text-2xl md:text-4xl font-display font-bold text-white mb-4">
             Interviews That Adapt in Real Time
           </h2>
           <p className="text-text-muted text-lg max-w-2xl mx-auto">
