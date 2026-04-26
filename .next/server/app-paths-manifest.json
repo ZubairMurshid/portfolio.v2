@@ -1,9 +1,17 @@
 {
-  "/blog/page": "app/blog/page.js",
-  "/projects/ai-interviewer/page": "app/projects/ai-interviewer/page.js",
   "/page": "app/page.js",
+  "/icon.png/route": "app/icon.png/route.js",
+  "/about/page": "app/about/page.js",
   "/skills/page": "app/skills/page.js",
-  "/icon/[[...__metadata_id__]]/route": "app/icon/[[...__metadata_id__]]/route.js",
+  "/blog/page": "app/blog/page.js",
   "/contact/page": "app/contact/page.js",
-  "/projects/page": "app/projects/page.js"
+  "/projects/inventory-tracker/page": "app/projects/inventory-tracker/page.js",
+  "/projects/ai-interviewer/page": "app/projects/ai-interviewer/page.js",
+  "/projects/smart-campus/page": "app/projects/smart-campus/page.js",
+  "/projects/page": "app/projects/page.js",
+  "/projects/algo-project/page": "app/projects/algo-project/page.js",
+  "/projects/task-manager/page": "app/projects/task-manager/page.js",
+  "/projects/save-our-seas/page": "app/projects/save-our-seas/page.js",
+  "/projects/eventlk/page": "app/projects/eventlk/page.js",
+  "/projects/dynamic-book-finder/page": "app/projects/dynamic-book-finder/page.js"
 }
