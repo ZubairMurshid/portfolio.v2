@@ -128,7 +128,7 @@ export default function RoadmapPage() {
         </div>
 
         {/* Roadmap Content */}
-        <div className="relative max-w-6xl mx-auto px-6" style={{ height: totalHeight }}>
+        <div className="relative max-w-6xl mx-auto px-6 h-[4160px]">
           <svg
             className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none overflow-visible"
             viewBox={`0 0 100 ${totalHeight}`}
@@ -214,7 +214,8 @@ export default function RoadmapPage() {
               );
             })}
           </div>
-        
+        </div>
+
         <div className="mt-40 text-center flex flex-col items-center gap-12">
           <ChevronDown className="mx-auto text-white/10 animate-bounce" size={32} />
           
