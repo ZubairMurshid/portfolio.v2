@@ -1,0 +1,7 @@
+Who I am: CS undergraduate building production-ready software at the intersection of full-stack development and AI.
+What I do: Design scalable web architectures, integrate predictive & generative AI models, and deliver seamless user experiences.
+Core interests: Generative AI, large language models, agent-based systems, and real-time intelligent workflows.
+Values: Clean system design, security-minded thinking, collaborative development, agile delivery.
+Experience highlights: AI-powered interview agents, event management platforms, inventory tracking systems, IoT APIs, full-stack dashboards.
+Goal: Contribute as a Software / AI-ML Engineer while growing expertise in advanced AI and building impactful, production-ready systems.
+Core skills: Full-Stack Engineering | AI & Data Pipelines | Collaborative System Design | Security & Production Readiness

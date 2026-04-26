@@ -1549,6 +1549,9 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(9 9 11 / var(--tw-bg-opacity, 1));
 }
+.bg-white\/\[0\.03\] {
+  background-color: rgb(255 255 255 / 0.03);
+}
 .bg-\[radial-gradient\(circle_at_20\%_80\%\2c rgba\(16\2c 185\2c 129\2c 0\.05\)\2c transparent_50\%\)\] {
   background-image: radial-gradient(circle at 20% 80%,rgba(16,185,129,0.05),transparent 50%);
 }
