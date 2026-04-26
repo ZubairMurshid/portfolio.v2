@@ -1,4 +1,3 @@
-
 'use client';
 
 import React from 'react';
@@ -6,6 +5,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Calendar, Clock, Share2, ArrowRight } from 'lucide-react';
 import { useParams } from 'next/navigation';
+import CascadeText from '@/components/CascadeText';
 
 const MotionDiv = motion.div as any;
 
@@ -146,8 +146,8 @@ export default function BlogPostDetail() {
             <div className="flex items-center gap-2"><Calendar size={12} /> {post.date}</div>
             <div className="flex items-center gap-2"><Clock size={12} /> {post.readTime}</div>
           </div>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-sans font-extrabold tracking-tighter text-[#F8F9FA] leading-[0.9]">
-            {post.title}
+          <h1 className="text-4xl md:text-6xl font-sans font-extrabold mb-6 tracking-tighter text-[#F8F9FA]">
+            <CascadeText>{post.title}</CascadeText>
           </h1>
         </header>
 

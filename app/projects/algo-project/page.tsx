@@ -13,6 +13,7 @@ import {
   TimerReset,
   Workflow,
 } from "lucide-react";
+import CascadeText from "@/components/CascadeText";
 
 export default function AlgoProjectPage() {
   return (
@@ -42,13 +43,15 @@ export default function AlgoProjectPage() {
           </div>
 
           <h1 className="text-4xl md:text-5xl lg:text-4xl font-display font-extrabold mb-6 tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400 leading-tight">
-            Directed Graph Acyclicity Checker
+            <CascadeText>Directed Graph Acyclicity Checker</CascadeText>
           </h1>
 
           <p className="text-md md:text-lg text-text-secondary max-w-3xl leading-relaxed">
-            A Java-based command-line tool that analyzes directed graphs,
-            detects cyclic dependencies with DFS, reconstructs the exact cycle
-            path, and benchmarks traversal performance.
+            <CascadeText delay={0.3}>
+              A Java-based command-line tool that analyzes directed graphs,
+              detects cyclic dependencies with DFS, reconstructs the exact cycle
+              path, and benchmarks traversal performance.
+            </CascadeText>
           </p>
         </header>
 
@@ -82,12 +85,14 @@ export default function AlgoProjectPage() {
             className="mx-auto text-cyan-400 mb-6 opacity-80"
           />
           <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-4">
-            Cycle Detection With Exact Path Recovery
+            <CascadeText>Cycle Detection With Exact Path Recovery</CascadeText>
           </h2>
           <p className="text-text-muted text-lg max-w-2xl mx-auto">
-            The checker does more than return true or false. It pinpoints the
-            cycle, extracts the node sequence, and measures the algorithm so the
-            output is useful for debugging and analysis.
+            <CascadeText delay={0.3}>
+              The checker does more than return true or false. It pinpoints the
+              cycle, extracts the node sequence, and measures the algorithm so the
+              output is useful for debugging and analysis.
+            </CascadeText>
           </p>
         </div>
       </div>

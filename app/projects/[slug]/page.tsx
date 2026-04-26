@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
+import CascadeText from "@/components/CascadeText";
 
 export default function ProjectDetail({ params }: { params: { slug: string } }) {
   // In a real app, fetch data based on slug. Mocking for now.
@@ -13,7 +14,9 @@ export default function ProjectDetail({ params }: { params: { slug: string } }) 
 
       <div className="glass-panel p-8 md:p-12 rounded-3xl">
         <h1 className="text-4xl md:text-6xl font-display font-bold mb-6">
-          {isEventLK ? 'EventLK' : 'Project Detail'}
+          <CascadeText>
+            {isEventLK ? 'EventLK' : 'Project Detail'}
+          </CascadeText>
         </h1>
         
         <div className="flex flex-wrap gap-4 mb-8">
@@ -26,9 +29,11 @@ export default function ProjectDetail({ params }: { params: { slug: string } }) 
         </div>
 
         <p className="text-xl leading-relaxed text-text-secondary mb-12 max-w-3xl">
-          {isEventLK 
-            ? "Comprehensive intelligent event management system designed specifically for university clubs and societies, featuring AI-driven recommendations and automated workflows."
-            : "Project description placeholder."}
+          <CascadeText delay={0.3}>
+            {isEventLK 
+              ? "Comprehensive intelligent event management system designed specifically for university clubs and societies, featuring AI-driven recommendations and automated workflows."
+              : "Project description placeholder."}
+          </CascadeText>
         </p>
 
         <div className="grid md:grid-cols-2 gap-12">

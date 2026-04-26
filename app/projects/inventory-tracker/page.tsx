@@ -14,6 +14,7 @@ import {
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
+import CascadeText from "@/components/CascadeText";
 
 export default function InventoryTrackerPage() {
   return (
@@ -43,13 +44,15 @@ export default function InventoryTrackerPage() {
           </div>
 
           <h1 className="text-4xl md:text-5xl lg:text-4xl font-display font-extrabold mb-6 tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400 leading-tight">
-            Modern Inventory Tracking Platform
+            <CascadeText>Modern Inventory Tracking Platform</CascadeText>
           </h1>
 
           <p className="text-md md:text-lg text-text-secondary max-w-3xl leading-relaxed">
-            A real-time supply chain and stock management system built to
-            replace manual tracking with a responsive dashboard, immutable
-            transaction history, supplier management, and low-stock alerting.
+            <CascadeText delay={0.3}>
+              A real-time supply chain and stock management system built to
+              replace manual tracking with a responsive dashboard, immutable
+              transaction history, supplier management, and low-stock alerting.
+            </CascadeText>
           </p>
         </header>
 
@@ -91,12 +94,14 @@ export default function InventoryTrackerPage() {
             className="mx-auto text-cyan-400 mb-6 opacity-80"
           />
           <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-4">
-            Inventory Control Without Manual Drift
+            <CascadeText>Inventory Control Without Manual Drift</CascadeText>
           </h2>
           <p className="text-text-muted text-lg max-w-2xl mx-auto">
-            The platform keeps stock data current through fast-entry workflows,
-            transaction-ledger updates, supplier relationships, and proactive
-            alerting when inventory drops below defined thresholds.
+            <CascadeText delay={0.3}>
+              The platform keeps stock data current through fast-entry workflows,
+              transaction-ledger updates, supplier relationships, and proactive
+              alerting when inventory drops below defined thresholds.
+            </CascadeText>
           </p>
         </div>
       </div>

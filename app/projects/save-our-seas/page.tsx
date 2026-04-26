@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { ArrowLeft, ExternalLink, Github, Droplets, BookOpen, Users, Layout } from 'lucide-react';
 import { motion } from 'framer-motion';
+import CascadeText from "@/components/CascadeText";
 
 const MotionDiv = motion.div as any;
 
@@ -34,11 +35,13 @@ export default function SaveOurSeasPage() {
           </div>
           
           <h1 className="text-4xl md:text-5xl lg:text-4xl font-display font-extrabold mb-6 tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 leading-tight">
-            Save Our Seas - SDG Web Project
+            <CascadeText>Save Our Seas - SDG Web Project</CascadeText>
           </h1>
           
           <p className="text-xl text-md md:text-lg text-text-secondary max-w-3xl leading-relaxed">
-            A web initiative dedicated to protecting marine ecosystems, featuring an interactive splash screen, educational content on ocean conservation, and a volunteer signup portal for local beach cleanups.
+            <CascadeText delay={0.3}>
+              A web initiative dedicated to protecting marine ecosystems, featuring an interactive splash screen, educational content on ocean conservation, and a volunteer signup portal for local beach cleanups.
+            </CascadeText>
           </p>
         </header>
 
@@ -79,8 +82,14 @@ export default function SaveOurSeasPage() {
         
         <div className="container mx-auto px-6 max-w-5xl relative z-10 text-center">
           <Droplets size={64} className="mx-auto text-cyan-400 mb-6 opacity-80" />
-          <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-4">Protecting Marine Life</h2>
-          <p className="text-text-muted text-lg max-w-2xl mx-auto">An actionable platform to raise awareness about ocean conservation and promote sustainable practices for a healthier ocean.</p>
+          <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-4">
+            <CascadeText>Protecting Marine Life</CascadeText>
+          </h2>
+          <p className="text-text-muted text-lg max-w-2xl mx-auto">
+            <CascadeText delay={0.3}>
+              An actionable platform to raise awareness about ocean conservation and promote sustainable practices for a healthier ocean.
+            </CascadeText>
+          </p>
         </div>
       </div>
 

@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowLeft, Cloud, Cpu, ExternalLink, Gauge, Github, Radio, Server, ShieldCheck, Sparkles } from "lucide-react";
+import CascadeText from "@/components/CascadeText";
 
 export default function SmartCampusPage() {
   return (
@@ -32,13 +33,15 @@ export default function SmartCampusPage() {
           </div>
 
           <h1 className="text-4xl md:text-5xl lg:text-4xl font-display font-extrabold mb-6 tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400 leading-tight">
-            Smart Campus IoT Management API
+            <CascadeText>Smart Campus IoT Management API</CascadeText>
           </h1>
 
           <p className="text-xl text-md md:text-lg text-text-secondary max-w-3xl leading-relaxed">
-            A lightweight RESTful backend for campus infrastructure that manages
-            rooms, sensors, and environmental telemetry through in-memory state,
-            observability filters, and strict resource safeguards.
+            <CascadeText delay={0.3}>
+              A lightweight RESTful backend for campus infrastructure that manages
+              rooms, sensors, and environmental telemetry through in-memory state,
+              observability filters, and strict resource safeguards.
+            </CascadeText>
           </p>
         </header>
 
@@ -69,12 +72,14 @@ export default function SmartCampusPage() {
         <div className="container mx-auto px-6 max-w-5xl relative z-10 text-center">
           <Cloud size={64} className="mx-auto text-cyan-400 mb-6 opacity-80" />
           <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-4">
-            Centralized Telemetry for Smart Buildings
+            <CascadeText>Centralized Telemetry for Smart Buildings</CascadeText>
           </h2>
           <p className="text-text-muted text-md max-w-2xl mx-auto">
-            The API exposes a secure, hierarchical interface for rooms, sensors,
-            and readings so campus operators can monitor environmental state
-            without heavy framework overhead.
+            <CascadeText delay={0.3}>
+              The API exposes a secure, hierarchical interface for rooms, sensors,
+              and readings so campus operators can monitor environmental state
+              without heavy framework overhead.
+            </CascadeText>
           </p>
         </div>
       </div>

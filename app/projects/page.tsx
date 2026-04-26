@@ -8,6 +8,7 @@ import { ExternalLink, ArrowRight } from "lucide-react";
 const MotionDiv = motion.div as any;
 
 import { projects } from "@/lib/projects";
+import CascadeText from "@/components/CascadeText";
 
 export default function ProjectsPage() {
   const [filter, setFilter] = useState("all");
@@ -19,7 +20,9 @@ export default function ProjectsPage() {
 
   return (
     <div className="container mx-auto px-6 pt-32 min-h-screen max-w-4xl">
-      <h1 className="text-5xl font-display font-bold mb-12">Projects</h1>
+      <h1 className="text-5xl font-display font-bold mb-12">
+        <CascadeText>Projects</CascadeText>
+      </h1>
 
       <div className="flex flex-wrap gap-2 mb-16">
         {[

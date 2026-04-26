@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { ArrowLeft, ExternalLink, Github, Terminal, Database, Layout, Code2, GraduationCap } from 'lucide-react';
 import { motion } from 'framer-motion';
+import CascadeText from "@/components/CascadeText";
 
 const MotionDiv = motion.div as any;
 
@@ -34,11 +35,13 @@ export default function TaskManagerPage() {
           </div>
           
           <h1 className="text-4xl md:text-6xl font-display font-extrabold mb-6 tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500">
-            Personal Task Manager
+            <CascadeText>Personal Task Manager</CascadeText>
           </h1>
           
           <p className="text-xl text-md md:text-lg text-text-secondary max-w-3xl leading-relaxed">
-            A comprehensive four-stage Python coursework project demonstrating a progression from fundamental programming concepts to advanced graphical user interface (GUI) development.
+            <CascadeText delay={0.3}>
+              A comprehensive four-stage Python coursework project demonstrating a progression from fundamental programming concepts to advanced graphical user interface (GUI) development.
+            </CascadeText>
           </p>
         </header>
 
@@ -69,8 +72,14 @@ export default function TaskManagerPage() {
         
         <div className="container mx-auto px-6 max-w-5xl relative z-10 text-center">
           <Terminal size={64} className="mx-auto text-orange-400 mb-6 opacity-80" />
-          <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-4">Software Development I</h2>
-          <p className="text-text-muted text-lg max-w-2xl mx-auto">Demonstrating core programming principles, data persistence, and OOP through a scalable task management solution.</p>
+          <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-4">
+            <CascadeText>Software Development I</CascadeText>
+          </h2>
+          <p className="text-text-muted text-lg max-w-2xl mx-auto">
+            <CascadeText delay={0.3}>
+              Demonstrating core programming principles, data persistence, and OOP through a scalable task management solution.
+            </CascadeText>
+          </p>
         </div>
       </div>
 

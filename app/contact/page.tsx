@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import CascadeText from "@/components/CascadeText";
 
 const MotionDiv = motion.div as any;
 
@@ -41,7 +42,9 @@ export default function ContactPage() {
 
   return (
     <div className="container mx-auto px-6 pt-32 pb-20">
-      <h1 className="text-5xl font-display font-bold mb-12">Get In Touch</h1>
+      <h1 className="text-5xl font-display font-bold mb-12">
+        <CascadeText>Get In Touch</CascadeText>
+      </h1>
 
       <div className="grid lg:grid-cols-2 gap-16">
         <MotionDiv 
@@ -50,7 +53,9 @@ export default function ContactPage() {
           transition={{ duration: 0.5 }}
         >
           <p className="text-xl text-text-secondary mb-12 leading-relaxed">
-            I'm always open to discussing new opportunities, collaborations, or just having a chat about technology and innovation.
+            <CascadeText delay={0.2}>
+              I'm always open to discussing new opportunities, collaborations, or just having a chat about technology and innovation.
+            </CascadeText>
           </p>
 
           <div className="space-y-6">

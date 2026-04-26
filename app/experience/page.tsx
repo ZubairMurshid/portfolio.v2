@@ -1,9 +1,12 @@
 import React from 'react';
+import CascadeText from "@/components/CascadeText";
 
 export default function ExperiencePage() {
   return (
     <div className="container mx-auto px-6 pt-32 pb-20">
-      <h1 className="text-5xl font-display font-bold mb-16">Experience & Education</h1>
+      <h1 className="text-5xl font-display font-bold mb-16">
+        <CascadeText>Experience & Education</CascadeText>
+      </h1>
 
       <div className="grid md:grid-cols-2 gap-16">
         {/* Education Column */}

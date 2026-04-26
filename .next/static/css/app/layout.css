@@ -1688,6 +1688,9 @@ video {
 .to-zinc-900\/20 {
   --tw-gradient-to: rgb(24 24 27 / 0.2) var(--tw-gradient-to-position);
 }
+.to-zinc-400 {
+  --tw-gradient-to: #a1a1aa var(--tw-gradient-to-position);
+}
 .bg-clip-text {
   -webkit-background-clip: text;
           background-clip: text;
@@ -1894,6 +1897,9 @@ video {
 }
 .pt-\[20vh\] {
   padding-top: 20vh;
+}
+.pb-16 {
+  padding-bottom: 4rem;
 }
 .text-left {
   text-align: left;

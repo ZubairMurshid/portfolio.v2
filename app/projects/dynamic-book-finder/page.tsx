@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ArrowLeft, ExternalLink, Github, Layers, Zap, Smartphone, Database } from 'lucide-react';
 import { motion } from 'framer-motion';
 import BookFinderDemo from '@/components/BookFinderDemo';
+import CascadeText from "@/components/CascadeText";
 
 const MotionDiv = motion.div as any;
 
@@ -35,11 +36,13 @@ export default function DynamicBookFinderPage() {
           </div>
           
           <h1 className="text-3xl md:text-5xl font-display font-extrabold mb-6 tracking-tighter">
-            Dynamic Book Finder
+            <CascadeText>Dynamic Book Finder</CascadeText>
           </h1>
           
           <p className="text-md md:text-lg text-text-secondary max-w-3xl leading-relaxed">
-            A modern, responsive web application exploring the vast library of the Google Books API with a seamless search experience and persistent personalized favorites.
+            <CascadeText delay={0.3}>
+              A modern, responsive web application exploring the vast library of the Google Books API with a seamless search experience and persistent personalized favorites.
+            </CascadeText>
           </p>
         </header>
 
@@ -69,8 +72,14 @@ export default function DynamicBookFinderPage() {
         <div className="container mx-auto px-6 max-w-6xl relative z-10">
           <div className="text-center mb-10">
             <span className="text-[10px] font-mono uppercase tracking-[0.4em] text-accent-red mb-3 block">Live Showcase</span>
-            <h2 className="text-3xl font-display font-bold">Try the Demo</h2>
-            <p className="text-text-muted mt-2 max-w-md mx-auto">This embedded demo connects directly to Google Books API and utilizes your browser's localStorage for state persistence.</p>
+            <h2 className="text-3xl font-display font-bold">
+              <CascadeText>Try the Demo</CascadeText>
+            </h2>
+            <p className="text-text-muted mt-2 max-w-md mx-auto">
+              <CascadeText delay={0.2}>
+                This embedded demo connects directly to Google Books API and utilizes your browser's localStorage for state persistence.
+              </CascadeText>
+            </p>
           </div>
           
           <BookFinderDemo />

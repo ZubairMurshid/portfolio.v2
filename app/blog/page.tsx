@@ -1,7 +1,7 @@
-
 import React from 'react';
 import Link from 'next/link';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
+import CascadeText from "@/components/CascadeText";
 
 const blogPosts = [
   {
@@ -40,10 +40,12 @@ export default function BlogPage() {
           <div className="w-8 h-[1px] bg-white/20" />
         </div>
         <h1 className="text-5xl md:text-7xl font-sans font-extrabold mb-6 tracking-tighter text-[#F8F9FA]">
-          Technical Logs
+          <CascadeText>Technical Logs</CascadeText>
         </h1>
         <p className="text-xl text-text-secondary font-medium">
-          Documenting the intersection of architecture, security, and growth.
+          <CascadeText delay={0.3}>
+            Documenting the intersection of architecture, security, and growth.
+          </CascadeText>
         </p>
       </div>
 

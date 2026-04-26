@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
@@ -6,6 +5,7 @@ import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion';
 import { CheckCircle2, Circle, ChevronDown, Rocket, ShieldCheck, Cpu, Lock, Clock, Settings } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import RoadmapAuthModal from '@/components/RoadmapAuthModal';
+import CascadeText from "@/components/CascadeText";
 
 const MotionDiv = motion.div as any;
 const MotionPath = motion.path as any;
@@ -100,39 +100,35 @@ export default function RoadmapPage() {
   };
 
   return (
-    <div className="bg-[#020204] min-h-screen text-[#F8F9FA] relative" ref={containerRef}>
-      {/* Auth Modal triggered via footer link */}
-      <RoadmapAuthModal isOpen={isAuthOpen} onClose={() => setIsAuthOpen(false)} />
-
-      {/* Spotlight Effect */}
-      <div 
-        className="fixed inset-0 pointer-events-none z-10 transition-opacity duration-500"
-        style={{
-          background: `radial-gradient(800px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255,255,255,0.04), transparent 80%)`
-        }}
-      />
-
-      <div className="container mx-auto px-6 pt-32 pb-40 relative z-20">
-        <div className="max-w-4xl mx-auto text-center mb-32">
-          <div className="flex justify-center items-center gap-4 mb-4">
-            <div className="w-12 h-[1px] bg-white/20" />
-            <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-[#64748B]">Execution Path v1.2</span>
-            <div className="w-12 h-[1px] bg-white/20" />
-          </div>
-          <h1 className="text-5xl md:text-8xl font-sans font-extrabold mb-8 tracking-tighter">
-            Internship <span className="text-white/40">Roadmap</span>
-          </h1>
-          <p className="text-lg text-text-secondary leading-relaxed max-w-2xl mx-auto">
-            A visual breakdown of my technical evolution. Every node represents a milestone achieved or an objective targeted.
-          </p>
-          
-          <div className="mt-12 flex justify-center gap-12">
-            <Stat label="Completed" value={completedNodes.size} total={roadmapNodes.length} />
-            <Stat label="Status" value={`${Math.round((completedNodes.size / roadmapNodes.length) * 100)}%`} subtitle="Mastery" />
-          </div>
+    <>
+      <div ref={containerRef} className="relative bg-zinc-950 text-white selection:bg-violet-500/30 font-sans overflow-hidden">
+        
+        {/* Background Ambience */}
+        <div className="fixed inset-0 pointer-events-none z-0">
+          <div className="absolute top-0 right-0 w-[80vw] h-[80vh] bg-[radial-gradient(circle_at_80%_20%,rgba(139,92,246,0.08),transparent_50%)]" />
+          <div className="absolute bottom-0 left-0 w-[60vw] h-[60vh] bg-[radial-gradient(circle_at_20%_80%,rgba(16,185,129,0.05),transparent_50%)]" />
         </div>
 
-        <div className="relative mx-auto max-w-4xl">
+        {/* Header */}
+        <div className="relative z-20 container mx-auto px-6 pt-32 pb-16 text-center">
+          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter mb-4 bg-clip-text text-transparent bg-gradient-to-b from-white to-zinc-400">
+            <CascadeText>My Learning Roadmap</CascadeText>
+          </h1>
+          <p className="text-lg md:text-xl text-zinc-400 max-w-3xl mx-auto font-medium">
+            <CascadeText delay={0.4}>
+              A dynamic visualization of my ongoing journey through the world of software engineering. This map is updated in real-time via a secure admin dashboard.
+            </CascadeText>
+          </p>
+          <button 
+            onClick={() => setIsAuthOpen(true)}
+            className="mt-8 inline-flex items-center gap-2 px-4 py-2 text-xs font-mono uppercase tracking-widest border border-white/20 rounded-full hover:bg-white/5 transition-colors"
+          >
+            <Lock size={12} /> Admin Login
+          </button>
+        </div>
+
+        {/* Roadmap Content */}
+        <div className="relative max-w-6xl mx-auto px-6" style={{ height: totalHeight }}>
           <svg
             className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none overflow-visible"
             viewBox={`0 0 100 ${totalHeight}`}
@@ -218,7 +214,6 @@ export default function RoadmapPage() {
               );
             })}
           </div>
-        </div>
         
         <div className="mt-40 text-center flex flex-col items-center gap-12">
           <ChevronDown className="mx-auto text-white/10 animate-bounce" size={32} />
@@ -239,7 +234,7 @@ export default function RoadmapPage() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

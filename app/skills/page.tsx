@@ -1,8 +1,8 @@
-
 'use client';
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import CascadeText from "@/components/CascadeText";
 
 const MotionDiv = motion.div as any;
 
@@ -15,11 +15,14 @@ export default function SkillsPage() {
           <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-[#64748B]">Schematic v2.5</span>
         </div>
         <h1 className="text-5xl md:text-7xl font-sans font-extrabold mb-8 tracking-tighter text-[#F8F9FA]">
-          Technical <br/>Blueprint
+          <CascadeText>Technical</CascadeText>
+          <CascadeText>Blueprint</CascadeText>
         </h1>
         <p className="text-lg text-text-secondary leading-relaxed font-medium">
-          Structural breakdown of my technical architecture. 
-          Built on a foundation of clean code and precise engineering.
+          <CascadeText delay={0.4}>
+            Structural breakdown of my technical architecture. 
+            Built on a foundation of clean code and precise engineering.
+          </CascadeText>
         </p>
       </header>
 

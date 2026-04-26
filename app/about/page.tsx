@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Code2, BrainCircuit, Users, Terminal } from 'lucide-react';
+import CascadeText from "@/components/CascadeText";
 
 const MotionDiv = motion.div as any;
 
@@ -17,7 +18,7 @@ export default function AboutPage() {
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 mb-20">
           <div className="lg:w-1/3">
             <h1 className="text-5xl lg:text-6xl font-display font-extrabold mb-6 tracking-tighter text-white">
-              About Me.
+              <CascadeText>About Me.</CascadeText>
             </h1>
             <div className="h-1 w-20 bg-accent-blue rounded-full mb-8" />
             <div className="flex flex-col gap-4">

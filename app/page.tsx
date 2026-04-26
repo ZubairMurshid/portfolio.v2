@@ -9,6 +9,7 @@ import ProjectSpotlight from "@/components/ProjectSpotlight";
 import GithubPulse from "@/components/GithubPulse";
 import BlogPreview from "@/components/BlogPreview";
 import TechStackGrid from "@/components/TechStackGrid";
+import CascadeText from "@/components/CascadeText";
 
 // Fix: Using 'as any' to suppress motion property type errors
 const MotionDiv = motion.div as any;
@@ -28,7 +29,7 @@ export default function Home() {
             Full-Stack Engineering & AI Integration
           </div>
           <h2 className="text-center font-display text-4xl md:text-5xl font-bold mb-6 tracking-tight">
-            What I Do
+            <CascadeText>What I Do</CascadeText>
           </h2>
           
           <div className="w-full">
@@ -40,7 +41,7 @@ export default function Home() {
 
         <section className="py-20 flex flex-col items-center text-center max-w-4xl mx-auto">
           <h2 className="font-display text-4xl font-bold mb-12">
-            Tech Stack
+            <CascadeText>Tech Stack</CascadeText>
           </h2>
           <TechStackGrid />
         </section>
