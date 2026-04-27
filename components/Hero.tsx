@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail, Globe, Sparkles, BadgeCheck } from 'lucide-react';
+import { Github, Linkedin, Mail } from 'lucide-react';
 import ParticleCanvas from './ParticleCanvas';
 
 const MotionDiv = motion.div as any;
@@ -20,15 +20,6 @@ export default function Hero() {
       <div className="container mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center h-full">
         <div className="lg:col-span-10 lg:col-start-2 text-center pb-12 lg:pb-32">
           
-          <MotionDiv 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="inline-block px-6 py-2 mb-8 lg:mb-12 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-accent-chrome text-xs font-mono tracking-[0.2em] uppercase shadow-sm"
-          >
-            Engineering Precise Solutions
-          </MotionDiv>
-
           <MotionDiv 
             initial={{ opacity: 0, scale: 0.8, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -90,18 +81,16 @@ export default function Hero() {
           </MotionDiv>
         </div>
 
-        {/* Social Bar - Silver Style */}
+        {/* Social Bar */}
         <MotionDiv 
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.9 }}
-          className="hidden lg:flex flex-col gap-6 absolute right-12 top-1/2 -translate-y-1/2"
+          className="hidden lg:flex flex-col gap-7 absolute right-12 top-[38%] -translate-y-1/2"
         >
-          <div className="flex flex-col gap-8 items-center py-8 px-4 rounded-full bg-white/5 backdrop-blur-md border border-white/10">
-            <SocialLink href="https://github.com/ZubairMurshid" icon={<Github size={18} />} />
-            <SocialLink href="https://linkedin.com/in/itszubairmurshid" icon={<Linkedin size={18} />} />
-            <SocialLink href="mailto:zubairmurshid@icloud.com" icon={<Mail size={18} />} />
-          </div>
+          <SocialLink href="https://github.com/ZubairMurshid" icon={<Github size={18} />} />
+          <SocialLink href="https://linkedin.com/in/itszubairmurshid" icon={<Linkedin size={18} />} />
+          <SocialLink href="mailto:zubairmurshid@icloud.com" icon={<Mail size={18} />} />
         </MotionDiv>
       </div>
 
@@ -124,7 +113,7 @@ function SocialLink({ href, icon }: { href: string; icon: React.ReactNode }) {
       href={href} 
       target="_blank" 
       rel="noopener noreferrer"
-      className="text-text-muted hover:text-white transition-all transform hover:scale-110"
+      className="flex items-center justify-center text-white transition-transform duration-300 hover:scale-110 hover:opacity-80"
     >
       {icon}
     </a>
