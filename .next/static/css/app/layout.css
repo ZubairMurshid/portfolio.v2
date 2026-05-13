@@ -993,9 +993,6 @@ video {
 .w-full {
   width: 100%;
 }
-.w-px {
-  width: 1px;
-}
 .min-w-\[180px\] {
   min-width: 180px;
 }
@@ -1180,17 +1177,14 @@ video {
 .gap-6 {
   gap: 1.5rem;
 }
+.gap-7 {
+  gap: 1.75rem;
+}
 .gap-8 {
   gap: 2rem;
 }
 .gap-px {
   gap: 1px;
-}
-.gap-5 {
-  gap: 1.25rem;
-}
-.gap-7 {
-  gap: 1.75rem;
 }
 .space-y-1 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
@@ -1564,12 +1558,6 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(9 9 11 / var(--tw-bg-opacity, 1));
 }
-.bg-bg-secondary\/70 {
-  background-color: rgb(var(--bg-secondary) / 0.7);
-}
-.bg-white\/\[0\.03\] {
-  background-color: rgb(255 255 255 / 0.03);
-}
 .bg-\[radial-gradient\(circle_at_20\%_80\%\2c rgba\(16\2c 185\2c 129\2c 0\.05\)\2c transparent_50\%\)\] {
   background-image: radial-gradient(circle at 20% 80%,rgba(16,185,129,0.05),transparent 50%);
 }
@@ -1681,10 +1669,6 @@ video {
 .via-zinc-800 {
   --tw-gradient-to: rgb(39 39 42 / 0)  var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), #27272a var(--tw-gradient-via-position), var(--tw-gradient-to);
-}
-.via-white\/15 {
-  --tw-gradient-to: rgb(255 255 255 / 0)  var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), rgb(255 255 255 / 0.15) var(--tw-gradient-via-position), var(--tw-gradient-to);
 }
 .to-accent-silver {
   --tw-gradient-to: #9BA1A6 var(--tw-gradient-to-position);
@@ -2066,10 +2050,6 @@ video {
   --tw-text-opacity: 1;
   color: rgb(255 71 87 / var(--tw-text-opacity, 1));
 }
-.text-accent-chrome {
-  --tw-text-opacity: 1;
-  color: rgb(248 249 250 / var(--tw-text-opacity, 1));
-}
 .text-amber-400 {
   --tw-text-opacity: 1;
   color: rgb(251 191 36 / var(--tw-text-opacity, 1));
@@ -2296,11 +2276,6 @@ video {
 .shadow-xl {
   --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-.shadow-\[0_0_40px_rgba\(255\2c 255\2c 255\2c 0\.04\)\] {
-  --tw-shadow: 0 0 40px rgba(255,255,255,0.04);
-  --tw-shadow-colored: 0 0 40px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 .outline-none {
@@ -2983,10 +2958,6 @@ video {
 
   .lg\:col-start-2 {
     grid-column-start: 2;
-  }
-
-  .lg\:mb-12 {
-    margin-bottom: 3rem;
   }
 
   .lg\:mb-24 {

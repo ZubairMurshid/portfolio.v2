@@ -79,7 +79,7 @@ export default function InventoryTrackerPage() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white/5 text-white font-bold tracking-wide border border-white/10 hover:bg-white/10 transition-colors"
           >
-            <ExternalLink size={20} /> Executive Summary
+            <ExternalLink size={20} /> Google Stitch Design Files
           </a>
         </div>
       </div>
@@ -98,9 +98,9 @@ export default function InventoryTrackerPage() {
           </h2>
           <p className="text-text-muted text-lg max-w-2xl mx-auto">
             <CascadeText delay={0.3}>
-              The platform keeps stock data current through fast-entry workflows,
-              transaction-ledger updates, supplier relationships, and proactive
-              alerting when inventory drops below defined thresholds.
+              The platform keeps stock data current through fast-entry
+              workflows, transaction-ledger updates, supplier relationships, and
+              proactive alerting when inventory drops below defined thresholds.
             </CascadeText>
           </p>
         </div>
