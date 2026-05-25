@@ -1,6 +1,6 @@
 I’m a Computer Science undergraduate with a strong foundation in software engineering and a growing focus on AI-driven systems. My work sits at the intersection of full-stack development and machine learning, where I enjoy building intelligent, end-to-end applications that solve real-world problems.
 
-I’ve developed projects that combine predictive AI with scalable web architectures—designing data pipelines, integrating machine learning models into backend systems, and delivering seamless user experiences through modern frontend technologies. I’m particularly interested in the evolving space of Generative AI, large language models, and agent-based systems, and I’m actively working toward building expertise in these areas.
+I’ve developed projects that combine predictive AI with scalable web architectures-designing data pipelines, integrating machine learning models into backend systems, and delivering seamless user experiences through modern frontend technologies. I’m particularly interested in the evolving space of Generative AI, large language models, and agent-based systems, and I’m actively working toward building expertise in these areas.
 
 Beyond technical skills, I value clean system design, collaborative development, and clear communication. I’ve worked in team environments using agile practices, contributing to both development and deployment workflows, and I’m always looking for opportunities to learn, iterate, and improve.
 

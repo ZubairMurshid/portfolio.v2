@@ -1,7 +1,7 @@
 Executive Summary: Directed Graph Acyclicity Checker
 Product Overview
 The Directed Graph Acyclicity Checker is a high-performance, Java-based algorithmic tool designed to analyze complex network structures and determine the presence of cyclic dependencies.
-At its core, the application ingests directed graph data—either by parsing structured text files or generating randomized network topologies—and processes them using an optimized Depth-First Search (DFS) algorithm. If a cycle (a closed loop within the network) is detected, the system does not merely flag its existence; it accurately traces and extracts the exact path of the cycle.
+At its core, the application ingests directed graph data-either by parsing structured text files or generating randomized network topologies-and processes them using an optimized Depth-First Search (DFS) algorithm. If a cycle (a closed loop within the network) is detected, the system does not merely flag its existence; it accurately traces and extracts the exact path of the cycle.
 This project demonstrates a rigorous application of computer science fundamentals, focusing on algorithmic efficiency, custom data structure design, and clean Object-Oriented Programming (OOP) principles. The concepts applied here are foundational to real-world applications such as package dependency resolution, deadlock detection in operating systems, and automated task scheduling.
 Key Features & Capabilities
 Advanced Cycle Detection:

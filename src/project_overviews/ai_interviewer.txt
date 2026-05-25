@@ -3,7 +3,7 @@ Project Status: In Progress
 
 1. Product Vision & Overview
 The AI Interview Platform is an advanced, real-time simulation application designed to bridge the gap between static resume screening and live technical/behavioral interviews.
-Unlike standard pre-recorded interview tools, this platform ingests a user’s Curriculum Vitae (CV) and utilizes generative AI to dynamically construct a personalized interview protocol. Through a real-time conversational voice agent, the platform conducts fluid, human-like interviews—adapting its follow-up questions dynamically based on the user's spoken responses, specific background, and listed technical proficiencies.
+Unlike standard pre-recorded interview tools, this platform ingests a user’s Curriculum Vitae (CV) and utilizes generative AI to dynamically construct a personalized interview protocol. Through a real-time conversational voice agent, the platform conducts fluid, human-like interviews-adapting its follow-up questions dynamically based on the user's spoken responses, specific background, and listed technical proficiencies.
 The application is built to demonstrate production-ready full-stack engineering, robust file processing, AI orchestration, and real-time state management.
 2. Core User Journey
 The platform orchestrates a seamless, low-friction experience for the user:

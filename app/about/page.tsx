@@ -109,7 +109,7 @@ export default function AboutPage() {
                 </p>
                 <p>
                   I’ve developed projects that combine predictive AI with
-                  scalable web architectures—designing data pipelines,
+                  scalable web architectures-designing data pipelines,
                   integrating machine learning models into backend systems, and
                   delivering seamless user experiences through modern frontend
                   technologies. I’m particularly interested in the evolving
